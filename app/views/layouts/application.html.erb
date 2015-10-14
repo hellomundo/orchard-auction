@@ -36,13 +36,13 @@
         <li class="has-dropdown">
           <a href="#"><%= current_user.first_name %></a>
           <ul class="dropdown">
-            <li><%= link_to "Log out", destroy_user_session_path %></li>
+            <li><%= link_to "Log out", destroy_user_session_path, :method => :delete %></li>
             <li><%= link_to "Edit Profile", edit_user_password_path %></li>
           </ul>
         </li>
           
         <% else %>
-        <li><%= link_to "log in", log_in_path %></li>
+        <li><%= link_to "log in", new_user_session_path %></li>
         <% end %>
       </ul>
     </section>
