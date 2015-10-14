@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+<div class="orchard-panel">
+
+<div class="panel-header">
+  <h1>Donors</h1>
+  <ul>
+    <li><%= link_to 'New Donor', new_donor_path %></li>
+    <li><%= link_to 'Test Button', new_donor_path %></li>
+  </ul>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Company</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @donors.each do |donor| %>
+      <tr>
+        <td><%= icon_link edit_donor_path(donor), "wrench" %></td>
+        <td><%= link_to donor.company, donor %></td>
+        <td><%= donor.first_name %> <%= donor.last_name %></td>
+        <td><%= donor.email %></td>
+        <td><%= donor.phone %></td>
+        <td><%= donor.status.humanize %></td>
+        <td><%= link_to '<i class="fi-x"></i>'.html_safe, donor, method: :delete, data: { confirm: 'Are you sure? This will also delete all the items donated by this donor.' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+</div>

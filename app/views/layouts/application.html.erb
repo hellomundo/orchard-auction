@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "Orchard Auction" %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <script src="https://use.typekit.net/fli3tfm.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+  <nav class="top-bar" data-topbar role="navigation">
+    <ul class="title-area">
+      <li class="name">
+        <h1><a href="#">Orchard Auction</a></h1>
+      </li>
+       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    </ul>
+
+    <section class="top-bar-section">
+      <!-- Right Nav Section -->
+      <ul class="right">
+        <li><%= link_to "Donors", donors_path %></li>
+        <li><%= link_to "Items", items_path %></li>
+        <li><%= link_to "Lots", lots_path %></li>
+        <li><%= link_to "Sales", "#" %></li>
+        <li><%= link_to "Buyers", "#" %></li>
+        <% if current_user %>
+        <li class="has-dropdown">
+          <a href="#"><%= current_user.first_name %></a>
+          <ul class="dropdown">
+            <li><%= link_to "Log out", destroy_user_session_path %></li>
+            <li><%= link_to "Edit Profile", edit_user_password_path %></li>
+          </ul>
+        </li>
+          
+        <% else %>
+        <li><%= link_to "log in", log_in_path %></li>
+        <% end %>
+      </ul>
+    </section>
+  </nav>
+    <div class="container">
+      <%= yield %>
+    </div>
+
+  </body>
+</html>

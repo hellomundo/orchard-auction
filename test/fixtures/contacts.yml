@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  donor_id: 
+  note: MyText
+  channel: 1
+  contacted_on: 2015-10-05
+
+two:
+  donor_id: 
+  note: MyText
+  channel: 1
+  contacted_on: 2015-10-05

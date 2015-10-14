@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+<div class="orchard-panel">
+<div class="panel-header">
+  <h1>Auction Lots</h1>
+  <ul>
+    <li><%= link_to 'New Lot', new_lot_path %></li>
+  </ul>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Description</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lots.each do |lot| %>
+      <tr>
+        <td><%= icon_link edit_lot_path(lot), "wrench" %></td>
+        <td><%= link_to lot.name, lot %></td>
+        <td><%= lot.description %></td>
+        <td><%= icon_delete_link lot, "Deleting this lot will NOT delete the items inside of it." %></td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Lot', new_lot_path %>
+</div>

@@ -1,0 +1,32 @@
+<%= simple_form_for(@lot) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :description %>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>FMV</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @items.each do |item| %>
+        <tr>
+          <td><%= check_box_tag "item_ids[]", item.id, false, :id => "item_id_#{item.id}" %><label for="item_id_<%= item.id %>"></label></td>
+          <td><%= item.name %></td>
+          <td><%= item.fmv %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

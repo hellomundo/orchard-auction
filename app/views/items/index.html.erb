@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<div class="orchard-panel">
+<div class="panel-header">
+  <h1>Items</h1>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Donor</th>
+      <th>FMV</th>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= item.name %></td>
+        <td><%= truncate(item.description, {length: 15}) %></td>
+        <td><%= link_to item.donor.company, donor_path(item.donor) %></td>
+        <td><%= item.fmv %></td>
+        <td><%#= link_to 'Show', item %></td>
+        <td><%#= link_to 'Edit', edit_item_path(donor) %></td>
+        <td><%= icon_delete_link item, "Are you sure?" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

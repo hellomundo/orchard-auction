@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+<div class="orchard-panel">
+<div class="panel-header">
+  <h1><%= @lot.name %></h1>
+  <ul>
+    <li><%= link_to 'Back', lots_path %></li>
+    <li><%= link_to 'Edit', edit_lot_path(@lot) %></li>
+    
+  </ul>
+</div>
+
+<p>
+  <strong>Description:</strong>
+  <%= @lot.description %>
+</p>
+</div>
+
+<div class="orchard-panel">
+<h4>Items in this Lot</h4>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Donor</th>
+      <th>FMV</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lot.items.each do |item| %>
+      <tr>
+        <td><%= item.name %></td>
+        <td><%= link_to item.donor.company, donor_path(item.donor) %></td>
+        <td><%= item.fmv %></td>
+        <td>Remove<%#= link_to 'Remove', remove_lot_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+

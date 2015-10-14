@@ -1,0 +1,80 @@
+// override header sizes
+// Header Styles
+
+// Layout Styles
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.orchard-panel {
+  width: 100%;
+  margin: 2em 0;
+  background-color: $white;
+  padding: 2em 4em;
+}
+
+h1 {
+  font-family: "abril-fatface",serif;
+  font-style: italic;
+  font-size: 2em;
+}
+
+// Table Styles
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+
+  thead {
+    background-color: $white;
+    border-bottom: 1px solid $steel;
+  }
+  
+  tbody {
+    tr {
+      td {
+        border-bottom: 1px solid $smoke;
+        line-height: 2.25em;
+      }
+    }
+    
+  }
+}
+
+// Panel Styles
+
+.panel-header {
+  
+  height: 3em;
+  border-bottom: 2px solid $steel;
+  margin-bottom: 1em;
+  @include clearfix();
+  
+  h1 {
+    float: left;
+
+  }
+  
+  ul {
+    @include inline-list;
+    float:right;
+    
+    li {
+      margin-left: .375rem;
+      
+      a {
+        @include button(rem-calc(6), $primary-color, 5px);
+        font-size: .7em;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin: .6rem 0 2.25rem;
+      }
+    }
+    
+  }
+  
+}
+
+

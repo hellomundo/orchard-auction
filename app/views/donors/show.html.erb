@@ -1,0 +1,98 @@
+<p id="notice"><%= notice %></p>
+
+<div class="orchard-panel">
+<div class="panel-header">
+  <h1><%= @donor.company %></h1>
+  <ul>
+    <li><%= link_to 'Back', donors_path %></li>
+    <li><%= link_to 'Edit', edit_donor_path(@donor) %></li>
+  </ul>
+</div>
+<p><%= @donor.company %></p>
+<p><%= @donor.first_name %> <%= @donor.last_name %></p>
+  <p><%= @donor.email %></p>
+  <p><%= @donor.phone %></p>
+  <p><%= @donor.address1 %></p>
+  <p><%= @donor.address2 %></p>
+  <p><%= @donor.city %>, <%= @donor.state %> <%= @donor.zip %></p>
+  <p><%= @donor.status.humanize %></p>
+<%= link_to 'Edit', edit_donor_path(@donor) %> |
+<%= link_to 'Back', donors_path %>
+ </div>
+ 
+ <div class="orchard-panel">
+<div class="panel-header">
+  <h1>Donations</h1>
+  <ul>
+    <li><%= link_to 'Add', "#" %></li>
+  </ul>
+</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Value</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @donor.items.each do |item| %>
+      <tr>
+        <td><%= item.name %></td>
+        <td><%= item.fmv %></td>
+        <td><%= link_to 'Show', donor_item_path(@donor, item) %></td>
+        <td><%= link_to 'Edit', edit_donor_item_path(@donor, item) %></td>
+        <td><%= link_to 'Destroy', donor_item_path(@donor, item), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <h4>Add Item</h4>
+  <%= simple_form_for([@donor, @donor.items.build]) do |f| %>
+  <p><%= f.input :name %></p>
+  <p><%= f.input :description, input_html: { class: 'materialize-textarea' } %></p>
+  <p><%= f.input :fmv %></p>
+  <p>
+    <%= f.button :submit, class: "btn" %>
+  </p>
+<% end %>
+</div>
+
+<div class="orchard-panel">
+<div class="panel-header">
+  <h1>Communication History</h1>
+  <ul>
+    <li><%= link_to 'Add', "#" %></li>
+  </ul>
+</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Type</th>
+        <th>By</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @donor.contacts.each do |contact| %>
+      <tr>
+        <td><%= contact.contacted_on %></td>
+        <td><%= contact.channel.humanize %></td>
+        <td><%= contact.user.first_name %></td>
+        <td><%= contact.note %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  
+  <h4>Add Contact</h4>
+  <%= simple_form_for([@donor, @donor.contacts.build]) do |f| %>
+  <p><%= f.label :contacted_on %> <%= f.date_field :contacted_on, :value => Time.now.strftime('%Y-%m-%d'), class: 'datepicker' %></p>
+  <p><%= f.input :channel %></p>
+  <p><%= f.input :note, input_html: { class: 'materialize-textarea' } %></p>
+  <p>
+    <%= f.button :submit, class: "btn" %>
+  </p>
+<% end %>
+</div>
