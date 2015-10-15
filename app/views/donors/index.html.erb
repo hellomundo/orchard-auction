@@ -38,5 +38,11 @@
 </table>
 
 <br>
-
+  <div class="panel-header">
+  <h3>Import Donors</h3>
+  </div>
+  <%= form_tag import_donors_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>
 </div>

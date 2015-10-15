@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :donors do
     resources :contacts
     resources :items
+    collection { post :import }
   end
   
   resources :items, only: [:index, :destroy]

@@ -5,6 +5,11 @@ class DonorsController < ApplicationController
   # GET /donors.json
   def index
     @donors = Donor.all
+    
+    respond_to do |format|
+      format.html
+      format.csv { render text: @donors.to_csv }
+    end
   end
 
   # GET /donors/1
@@ -21,6 +26,12 @@ class DonorsController < ApplicationController
   def edit
   end
 
+  # POST /donors/import
+  def import
+    Donor.import(params[:file])
+    redirect_to root_url, notice: "Donors imported."
+  end
+  
   # POST /donors
   # POST /donors.json
   def create
