@@ -15,7 +15,8 @@
   <p><%= @donor.address1 %></p>
   <p><%= @donor.address2 %></p>
   <p><%= @donor.city %>, <%= @donor.state %> <%= @donor.zip %></p>
-  <p><%= @donor.status.humanize %></p>
+  <p>This donor HAS <% if !@donor.has_donated %>NOT<% end %> donated before.</p>
+  <p>Status: <%= @donor.status.humanize %></p>
 <%= link_to 'Edit', edit_donor_path(@donor) %> |
 <%= link_to 'Back', donors_path %>
  </div>
@@ -55,7 +56,7 @@
   <p>
     <%= f.button :submit, class: "btn" %>
   </p>
-<% end %>
+  <% end %>
 </div>
 
 <div class="orchard-panel">
