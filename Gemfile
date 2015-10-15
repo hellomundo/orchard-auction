@@ -66,6 +66,7 @@ group :development do
 end
 
 group :production do
+  gem 'puma'
   gem 'pg'
   gem 'rails_12factor'
 end
