@@ -16,7 +16,21 @@ class Donor < ActiveRecord::Base
   
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
-      d = Donor.new row.to_hash
+      # only fill certain rows
+      d = Donor.new ({  :company => row['company'],
+                        :address1 => row['address'],
+                        :city => row['city'],
+                        :state => row['state'],
+                        :zip => row['zip'],
+                        :phone => row['phone'],
+                        :website => row['website']
+        })
+      # check to see if donor has donated before
+      if row['donated2013'] == 'x' or row['donated214'] == 'x'
+        d.has_donated = true;
+      end
+      
+      #set the status to 0 - fix this in the validations
       d.status = 0;
       d.save
     end

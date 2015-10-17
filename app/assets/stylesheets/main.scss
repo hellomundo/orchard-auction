@@ -49,6 +49,11 @@ table {
   }
 }
 
+// for buttons
+.btn {
+  @include button();
+}
+
 // Panel Styles
 
 .panel-header {

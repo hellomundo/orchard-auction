@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151015044731) do
+ActiveRecord::Schema.define(version: 20151015194940) do
 
   create_table "contacts", force: :cascade do |t|
     t.integer  "donor_id"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20151015044731) do
     t.string   "email"
     t.string   "phone"
     t.boolean  "has_donated"
+    t.string   "website"
   end
 
   create_table "items", force: :cascade do |t|

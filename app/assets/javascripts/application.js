@@ -16,6 +16,7 @@
 //= require turbolinks
 //= require sweet-alert
 //= require sweet-alert-confirm
-//= require_tree .
 
-$(function(){ $(document).foundation(); });
+$(function() { $(document).foundation(); });
+
+//= require_tree .
