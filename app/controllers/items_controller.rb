@@ -16,8 +16,10 @@ class ItemsController < ApplicationController
     @item = Donor.new
   end
 
-  # GET /items/1/edit
+  # GET /donor/1/items/1/edit
   def edit
+    @donor = Donor.find(params[:donor_id])
+    @item = @donor.items.find(params[:id])
   end
 
   # POST /donor/1/items/1
@@ -27,12 +29,13 @@ class ItemsController < ApplicationController
     redirect_to donor_path(@donor)
   end
 
-  # PATCH/PUT /items/1
+  # PATCH/PUT /donor/1/items/1
   # PATCH/PUT /items/1.json
   def update
+    @donor = Donor.find(params[:donor_id])
     respond_to do |format|
       if @item.update(item_params)
-        format.html { redirect_to @item, notice: 'Item was successfully updated.' }
+        format.html { redirect_to @donor, notice: 'Item was successfully updated.' }
         format.json { render :show, status: :ok, location: @item }
       else
         format.html { render :edit }
@@ -59,6 +62,6 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:name, :description, :fmv)
+      params.require(:item).permit(:name, :description, :fmv, :restrictions, :format, :opening_price)
     end
 end

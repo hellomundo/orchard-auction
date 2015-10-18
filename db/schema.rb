@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151015194940) do
+ActiveRecord::Schema.define(version: 20151018025629) do
 
   create_table "contacts", force: :cascade do |t|
     t.integer  "donor_id"
@@ -47,11 +47,14 @@ ActiveRecord::Schema.define(version: 20151015194940) do
   create_table "items", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.decimal  "fmv",         precision: 8, scale: 2
+    t.decimal  "fmv",           precision: 8, scale: 2
     t.integer  "donor_id"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
     t.integer  "lot_id"
+    t.text     "restrictions"
+    t.integer  "format",                                default: 0
+    t.float    "opening_price"
   end
 
   add_index "items", ["donor_id"], name: "index_items_on_donor_id"
@@ -60,8 +63,11 @@ ActiveRecord::Schema.define(version: 20151015194940) do
   create_table "lots", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.float    "opening_price"
+    t.float    "bid_increment"
+    t.float    "buy_now_price"
   end
 
   create_table "users", force: :cascade do |t|
