@@ -10,20 +10,48 @@ class LotsController < ApplicationController
   # GET /lots/1
   # GET /lots/1.json
   def show
+    @available_items = Item.where("lot_id IS NULL")
   end
 
   # GET /lots/new
   def new
     @lot = Lot.new
+    # remove this later
     @items = Item.where("lot_id IS NULL")
   end
 
   # GET /lots/1/edit
   def edit
-    #deal with this
+    #remove this later
     @items = Item.where("lot_id IS NULL")
   end
 
+  # to add/remove items from the lot
+  def toggle 
+    @msg = ""
+    @added = false;
+    @lot = Lot.find(params[:id])
+    @item = Item.find(params[:item_id])
+    @available_items = Item.where("lot_id IS NULL")
+    
+    if(@lot.items.exists?(@item.id))
+      # add the association
+      @msg = "I found the record, deleting it"
+      @lot.items.delete(@item)
+      @lot.save
+    else
+      # delete the association
+      @added = true;
+      @msg = "Didn't find it, need to add it"
+      @lot.items << @item
+      @lot.save
+    end
+    
+    respond_to do |format|
+      format.js {}
+    end
+  end
+  
   # POST /lots
   # POST /lots.json
   def create

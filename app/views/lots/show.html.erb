@@ -3,40 +3,94 @@
 <div class="panel-header">
   <h1><%= @lot.name %></h1>
   <ul>
-    <li><%= link_to 'Back', lots_path %></li>
     <li><%= link_to 'Edit', edit_lot_path(@lot) %></li>
     
   </ul>
 </div>
+<div class="row">
+  <div class="large-12 columns">
+    <div class="lede"><%= @lot.description %></div>
+  </div>
+</div>
+<div class="row">
+  <div class="large-3 columns">
+    <div class="stat">
+      <p>Calculated FMV</p>
+      <strong id="fmv-price"><%= number_to_currency(@lot.calculated_fmv) %></strong>
+    </div>
+  </div>
+  <div class="large-3 columns">
+    <div class="stat">
+      <p>Opening Price</p>
+      <strong><%= number_to_currency(@lot.opening_price) %></strong>
+    </div>
+  </div>
+  <div class="large-3 columns">
+    <div class="stat">
+      <p>Buy It Now Price</p>
+      <strong><%= number_to_currency(@lot.buy_now_price) %></strong>
+    </div>
+  </div>
+  <div class="large-3 columns">
+    <div class="stat">
+      <p>Bid Increment</p>
+      <strong><%= number_to_currency(@lot.bid_increment) %></strong>
+    </div>
+  </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @lot.description %>
-</p>
+</div>
 </div>
 
 <div class="orchard-panel">
-<h4>Items in this Lot</h4>
-<table>
+  <div class="panel-header">
+    <h4>Items in this Lot</h4>
+  </div>
+  <p id="no-items-message" style="display:<%= @lot.items.empty? ? 'block' : 'none' %>">This lot has no items. To add an item to the lot, click the up arrow on one of the available items listed below.</p>
+<table id="contained-items"  style="display:<%= @lot.items.empty? ? 'none' : 'table' %>">
   <thead>
     <tr>
+      <th></th>
       <th>Name</th>
       <th>Donor</th>
       <th>FMV</th>
-      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @lot.items.each do |item| %>
-      <tr>
+    <tr id="item-<%= item.id %>">
+        <td><%= icon_link(toggle_lot_path(@lot, item_id: item), "arrow-down", true) %></td>
         <td><%= item.name %></td>
         <td><%= link_to item.donor.company, donor_path(item.donor) %></td>
         <td><%= item.fmv %></td>
-        <td>Remove<%#= link_to 'Remove', remove_lot_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+  <br/>
+<div class="panel-header">
+    <h4>Available Items to Add</h4>
+  </div>
+  <p id="no-available-message" style="display:<%= @available_items.empty? ? 'block' : 'none' %>">All items are already in other lots. To move an item from another lot to this one, remove the item from that lot and it will show up here as available. To create a new item, go to its Donor page and add the item.</p>
+  <table id="available-items" style="display:<%= @available_items.empty? ? 'none' : 'table' %>">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Donor</th>
+      <th>FMV</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @available_items.each do |item| %>
+      <tr id="item-<%= item.id %>">
+        <td><%= icon_link(toggle_lot_path(@lot, item_id: item), "arrow-up", true) %></td>
+        <td><%= item.name %></td>
+        <td><%= link_to item.donor.company, donor_path(item.donor) %></td>
+        <td><%= item.fmv %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 </div>
-

@@ -1,0 +1,38 @@
+// first check to see that available_items table is visible
+<% if @lot.items.size > 0 %>
+  $('#contained-items').show();
+  $('#no-items-message').hide();
+<% else %>
+  $('#contained-items').hide();
+  $('#no-items-message').show();
+<% end %>
+
+<% if @available_items.size > 0 %>
+  $('#available-items').show();
+  $('#no-available-message').hide();
+<% else %>
+  $('#available-items').hide();
+  $('#no-available-message').show();
+<% end %>
+
+
+// find the icon so we can toggle it up/down
+// and move the row from the included items to the available items
+var targ = $('#item-<%= @item.id %> > td > a > i');
+
+<% if @added %>
+  targ.removeClass('fi-arrow-up');
+  targ.addClass('fi-arrow-down');
+  $('#item-<%= @item.id %>').appendTo('#contained-items > tbody');
+  // check to see if available is empty, if so, show empty message
+<% else %>
+  // check to see if empty message is showing, if so, show table
+  targ.removeClass('fi-arrow-down');
+  targ.addClass('fi-arrow-up');
+  $('#item-<%= @item.id %>').appendTo('#available-items > tbody');
+<% end %>
+  
+// update the fmv price
+$('#fmv-price').text("<%= number_to_currency(@lot.calculated_fmv) %>");
+
+// window.alert("<%= @msg %>");

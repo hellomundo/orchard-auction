@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
-  resources :lots
+  resources :lots do
+    resources :items, only: [:update, :destroy]
+    
+    member do
+      get :toggle
+    end
+  end
+  
   devise_for :users, :controllers => { registrations: 'registrations' }
   
   root 'application#index'

@@ -1,6 +1,15 @@
 class Lot < ActiveRecord::Base
   has_many :items
   
+  #should do this on save
+  def calculated_fmv
+    if(self.items.size > 0)
+      self.items.sum(:fmv)
+    else
+      0
+    end
+  end
+  
   def name 
     if read_attribute(:name).blank?
       if self.items.blank?

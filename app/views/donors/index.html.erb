@@ -5,7 +5,6 @@
   <h1>Donors</h1>
   <ul>
     <li><%= link_to 'New Donor', new_donor_path %></li>
-    <li><%= link_to 'Test Button', new_donor_path %></li>
   </ul>
 </div>
 
@@ -39,7 +38,7 @@
 
 <br>
   <div class="panel-header">
-  <h3>Import Donors</h3>
+    <h3>Import Donors</h3>
   </div>
   <%= form_tag import_donors_path, multipart: true do %>
   <%= file_field_tag :file %>
