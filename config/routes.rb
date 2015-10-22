@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     collection { post :import }
   end
   
+  resources :buyers
+  
   resources :items, only: [:index, :destroy]
   
   # The priority is based upon order of creation: first created -> highest priority.

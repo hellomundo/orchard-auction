@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 <div class="orchard-panel">
 <div class="panel-header">
-  <h1><%= @lot.name %></h1>
+  <h1>#<%= @lot.lot_number %> <%= @lot.name %></h1>
   <ul>
     <li><%= link_to 'Edit', edit_lot_path(@lot) %></li>
     
@@ -15,25 +15,25 @@
 <div class="row">
   <div class="large-3 columns">
     <div class="stat">
-      <p>Calculated FMV</p>
+      <em>Calculated FMV</em>
       <strong id="fmv-price"><%= number_to_currency(@lot.calculated_fmv) %></strong>
     </div>
   </div>
   <div class="large-3 columns">
     <div class="stat">
-      <p>Opening Price</p>
+      <em>Opening Price</em>
       <strong><%= number_to_currency(@lot.opening_price) %></strong>
     </div>
   </div>
   <div class="large-3 columns">
     <div class="stat">
-      <p>Buy It Now Price</p>
+      <em>Buy It Now Price</em>
       <strong><%= number_to_currency(@lot.buy_now_price) %></strong>
     </div>
   </div>
   <div class="large-3 columns">
     <div class="stat">
-      <p>Bid Increment</p>
+      <em>Bid Increment</em>
       <strong><%= number_to_currency(@lot.bid_increment) %></strong>
     </div>
   </div>
@@ -52,7 +52,7 @@
       <th></th>
       <th>Name</th>
       <th>Donor</th>
-      <th>FMV</th>
+      <th class="numeric">FMV</th>
     </tr>
   </thead>
 
@@ -62,7 +62,7 @@
         <td><%= icon_link(toggle_lot_path(@lot, item_id: item), "arrow-down", true) %></td>
         <td><%= item.name %></td>
         <td><%= link_to item.donor.company, donor_path(item.donor) %></td>
-        <td><%= item.fmv %></td>
+        <td class="numeric"><%= item.fmv %></td>
       </tr>
     <% end %>
   </tbody>
@@ -78,7 +78,7 @@
       <th></th>
       <th>Name</th>
       <th>Donor</th>
-      <th>FMV</th>
+      <th class="numeric">FMV</th>
     </tr>
   </thead>
 
@@ -88,7 +88,7 @@
         <td><%= icon_link(toggle_lot_path(@lot, item_id: item), "arrow-up", true) %></td>
         <td><%= item.name %></td>
         <td><%= link_to item.donor.company, donor_path(item.donor) %></td>
-        <td><%= item.fmv %></td>
+        <td class="numeric"><%= item.fmv %></td>
       </tr>
     <% end %>
   </tbody>

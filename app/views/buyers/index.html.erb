@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+<div class="orchard-panel">
+
+<div class="panel-header">
+  <h1>Buyers</h1>
+  <ul>
+    <li><%= link_to 'New Buyer', new_buyer_path %></li>
+  </ul>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Buyer Number</th>
+      <th>Last Name</th>
+      <th>First Name</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @buyers.each do |buyer| %>
+      <tr>
+        <td><%= icon_link edit_buyer_path(buyer), "wrench" %></td>
+        <td><%= buyer.buyer_number %></td>
+        <td><%= buyer.last_name %></td>
+        <td><%= buyer.first_name %></td>
+        <td><%= link_to '<i class="fi-x"></i>'.html_safe, buyer, method: :delete, data: { confirm: 'Are you sure? This will also delete all sales records to this buyer.' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

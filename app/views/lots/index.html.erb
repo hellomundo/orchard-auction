@@ -11,6 +11,7 @@
   <thead>
     <tr>
       <th></th>
+      <th>No.</th>
       <th>Name</th>
       <th>Description</th>
       <th></th>
@@ -21,6 +22,7 @@
     <% @lots.each do |lot| %>
       <tr>
         <td><%= icon_link edit_lot_path(lot), "wrench" %></td>
+        <td><%= lot.lot_number %></td>
         <td><%= link_to lot.name, lot %></td>
         <td><%= lot.description %></td>
         <td><%= icon_delete_link lot, "Deleting this lot will NOT delete the items inside of it." %></td>

@@ -16,33 +16,6 @@
   </div>
 
   <br>
-  <div class="panel-header">
-    <h3>Items Available to Add</h3>
-  </div>
-<% if @items.empty? %>
-  <p>All items are already in other lots. To create another item, go to the Donor that donated it. To move an item from another lot to this one, delete the item from that lot and it will show up here as available.</p>
-<% else %>
-  <table>
-    <thead>
-      <tr>
-        <th></th>
-        <th>Name</th>
-        <th>FMV</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @items.each do |item| %>
-        <tr>
-          <td><%= check_box_tag "item_ids[]", item.id, false, :id => "item_id_#{item.id}" %><label for="item_id_<%= item.id %>"></label></td>
-          <td><%= item.name %></td>
-          <td><%= item.fmv %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
 
   <div class="form-actions">
     <%= f.button :submit %>

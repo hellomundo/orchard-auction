@@ -8,10 +8,11 @@
 <table>
   <thead>
     <tr>
+      <th></th>
       <th>Name</th>
       <th>Description</th>
       <th>Donor</th>
-      <th>FMV</th>
+      <th class="numeric">FMV</th>
       <th colspan="4"></th>
     </tr>
   </thead>
@@ -19,10 +20,11 @@
   <tbody>
     <% @items.each do |item| %>
       <tr>
-        <td><%= item.name %></td>
+        <td><%= icon_link edit_donor_item_path(item.donor, item), "wrench" %></td>
+        <td><%= link_to item.name, donor_item_path(item.donor, item) %></td>
         <td><%= truncate(item.description, {length: 15}) %></td>
         <td><%= link_to item.donor.company, donor_path(item.donor) %></td>
-        <td><%= item.fmv %></td>
+        <td class="numeric"><%= number_to_currency(item.fmv) %></td>
         <td><%#= link_to 'Show', item %></td>
         <td><%#= link_to 'Edit', edit_item_path(donor) %></td>
         <td><%= icon_delete_link item, "Are you sure?" %></td>

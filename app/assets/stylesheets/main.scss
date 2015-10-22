@@ -33,6 +33,13 @@ h3 { font-size: 1.5em; }
 h4 { font-size: 1.25em; }
 h5 { font-size: 1em; }
 
+#notice {
+  padding: .5em 0 .5em 3em;
+  margin-top: 1em;
+  margin-bottom: 0em;
+  background-color: #95E4D6;
+}
+
 // Table Styles
 
 table {
@@ -62,19 +69,31 @@ table {
 
 // Stats
 .stat {
+  margin-bottom: 1em;
   
-  
-  p {
+  em {
     font-size: 75%;
+    font-style: normal;
     color: $steel;
     margin-bottom: 0;
     border-bottom: 1px solid $steel;
-
+    display: block;
+  }
+  
+  p {
+    margin-top: .5em;
   }
   
   strong {
     font-size: 2em;
     color: $charcoal;
+  }
+}
+
+// Table Styles
+table {
+  .numeric {
+    text-align: right;
   }
 }
 
@@ -84,7 +103,7 @@ table {
   
   height: 3em;
   border-bottom: 2px solid $steel;
-  margin-bottom: 1em;
+  margin-bottom: 2.5em;
   @include clearfix();
   
   h1 {

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<div class="orchard-panel">
+<div class="panel-header">
+  <h1>#<%= @buyer.buyer_number %></h1>
+  <ul>
+    <li><%= link_to 'Add Another', new_buyer_path %></li>
+    <li><%= link_to 'Edit', edit_buyer_path(@buyer) %></li>
+  </ul>
+</div>
+<div class="row">
+  <div class="large-12 columns"><h3><%= @buyer.first_name %> <%= @buyer.last_name %></h3></div>
+</div>
+</div>

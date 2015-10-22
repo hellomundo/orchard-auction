@@ -10,6 +10,10 @@ class Lot < ActiveRecord::Base
     end
   end
   
+  def lot_number
+    self.id + 100
+  end
+  
   def name 
     if read_attribute(:name).blank?
       if self.items.blank?
