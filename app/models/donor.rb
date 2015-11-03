@@ -18,6 +18,8 @@ class Donor < ActiveRecord::Base
     CSV.foreach(file.path, headers: true) do |row|
       # only fill certain rows
       d = Donor.new ({  :company => row['company'],
+                        :first_name => row['first_name'],
+                        :last_name => row['last_name'],
                         :address1 => row['address'],
                         :city => row['city'],
                         :state => row['state'],
@@ -29,7 +31,9 @@ class Donor < ActiveRecord::Base
       if row['donated2013'] == 'x' or row['donated214'] == 'x'
         d.has_donated = true;
       end
-
+      if row['has_donated' == "TRUE"]
+        d.has_donated = true;
+      end
       #set the status to 0 - fix this in the validations
       d.status = 0;
       d.save
