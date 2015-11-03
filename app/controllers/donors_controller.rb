@@ -5,7 +5,7 @@ class DonorsController < ApplicationController
   # GET /donors.json
   def index
     @donors = Donor.all
-    
+
     respond_to do |format|
       format.html
       format.csv { render text: @donors.to_csv }
@@ -31,7 +31,7 @@ class DonorsController < ApplicationController
     Donor.import(params[:file])
     redirect_to root_url, notice: "Donors imported."
   end
-  
+
   # POST /donors
   # POST /donors.json
   def create
@@ -71,6 +71,12 @@ class DonorsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+ def destroy_all
+   Donor.destroy_all
+   redirect_to donors_url
+
+ end
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -1,26 +1,30 @@
 Rails.application.routes.draw do
   resources :lots do
     resources :items, only: [:update, :destroy]
-    
+
     member do
       get :toggle
     end
   end
-  
+
   devise_for :users, :controllers => { registrations: 'registrations' }
-  
+
   root 'application#index'
-  
+
   resources :donors do
     resources :contacts
     resources :items
-    collection { post :import }
+
+    collection do
+      get 'destroy_all'
+      post 'import'
+    end
   end
-  
+
   resources :buyers
-  
+
   resources :items, only: [:index, :destroy]
-  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
