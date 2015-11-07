@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+<div class="orchard-panel">
+<div class="panel-header">
+  <h1>Hello!</h1>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    <div class="lede">This is the Orchard School 2016 Auction Admin Site.</div>
+  </div>
+</div>
+<div class="row">
+  <div class="large-3 columns">
+    <div class="stat">
+      <em>Donors Needing Follow-up</em>
+      <strong><%= @uncommitted_donors %></strong>
+    </div>
+  </div>
+  <div class="large-3 columns">
+    <div class="stat">
+      <em>Committed Donors</em>
+      <strong><%= @committed_donors %></strong>
+    </div>
+  </div>
+  <div class="large-3 columns">
+    <div class="stat">
+      <em>Items Donated</em>
+      <strong><%= @items_donated %></strong>
+    </div>
+  </div>
+  <div class="large-3 columns">
+    <div class="stat">
+      <em>Total Donations Value</em>
+      <strong><%= number_to_currency(@total_value) %></strong>
+    </div>
+  </div>
+
+</div>
+</div>
