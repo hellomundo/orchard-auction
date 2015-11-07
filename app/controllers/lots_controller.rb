@@ -1,4 +1,5 @@
 class LotsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_lot, only: [:show, :edit, :update, :destroy]
 
   # GET /lots
@@ -27,13 +28,13 @@ class LotsController < ApplicationController
   end
 
   # to add/remove items from the lot
-  def toggle 
+  def toggle
     @msg = ""
     @added = false;
     @lot = Lot.find(params[:id])
     @item = Item.find(params[:item_id])
     @available_items = Item.where("lot_id IS NULL")
-    
+
     if(@lot.items.exists?(@item.id))
       # add the association
       @msg = "I found the record, deleting it"
@@ -46,12 +47,12 @@ class LotsController < ApplicationController
       @lot.items << @item
       @lot.save
     end
-    
+
     respond_to do |format|
       format.js {}
     end
   end
-  
+
   # POST /lots
   # POST /lots.json
   def create

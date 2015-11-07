@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   # GET /items
   # GET /items.json
@@ -23,7 +24,7 @@ class ItemsController < ApplicationController
   end
 
   # POST /donor/1/items/1
-  def create 
+  def create
     @donor = Donor.find(params[:donor_id])
     @item = @donor.items.create(item_params)
     redirect_to donor_path(@donor)
