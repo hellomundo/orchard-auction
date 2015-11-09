@@ -50,7 +50,7 @@ table {
     background-color: $white;
     border-bottom: 1px solid $steel;
   }
-  
+
   tbody {
     tr {
       td {
@@ -58,7 +58,7 @@ table {
         line-height: 2.25em;
       }
     }
-    
+
   }
 }
 
@@ -67,10 +67,24 @@ table {
   @include button();
 }
 
+.form-control {
+  .btn {
+    margin-right: 1em;
+  }
+}
+
+.action-button {
+  @include button(rem-calc(6), $primary-color, 5px);
+  font-size: .7em;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: .6rem 0 2.25rem;
+}
+
 // Stats
 .stat {
   margin-bottom: 1em;
-  
+
   em {
     font-size: 75%;
     font-style: normal;
@@ -79,11 +93,11 @@ table {
     border-bottom: 1px solid $steel;
     display: block;
   }
-  
+
   p {
     margin-top: .5em;
   }
-  
+
   strong {
     font-size: 2em;
     color: $charcoal;
@@ -100,24 +114,24 @@ table {
 // Panel Styles
 
 .panel-header {
-  
+
   height: 3em;
   border-bottom: 2px solid $steel;
   margin-bottom: 2.5em;
   @include clearfix();
-  
+
   h1 {
     float: left;
 
   }
-  
+
   ul {
     @include inline-list;
     float:right;
-    
+
     li {
       margin-left: .375rem;
-      
+
       a {
         @include button(rem-calc(6), $primary-color, 5px);
         font-size: .7em;
@@ -126,10 +140,5 @@ table {
         margin: .6rem 0 2.25rem;
       }
     }
-    
   }
-  
-  
 }
-
-

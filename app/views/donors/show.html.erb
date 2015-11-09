@@ -18,13 +18,10 @@
   <% if @donor.website.present? %><p><%= link_to @donor.website, "http://" + @donor.website %></p><% end %>
   <p>Status: <%= @donor.status.humanize %></p>
  </div>
- 
+
  <div class="orchard-panel">
 <div class="panel-header">
   <h1>Donations</h1>
-  <ul>
-    <li><%= link_to 'Add', "#" %></li>
-  </ul>
 </div>
   <table>
     <thead>
@@ -41,28 +38,29 @@
         <td><%= icon_link edit_donor_item_path(@donor, item), "wrench" %></td>
         <td><%= link_to item.name, donor_item_path(@donor, item) %></td>
         <td class="numeric"><%= number_to_currency(item.fmv) %></td>
-        <td><%= link_to '<i class="fi-x"></i>'.html_safe, donor_item_path(@donor, item), method: :delete, data: { confirm: 'Are you sure? This will also delete all sales records to this buyer.' } %></td>
+        <td><%= link_to '<i class="fi-x"></i>'.html_safe, donor_item_path(@donor, item), method: :delete, data: { confirm: 'Are you sure? This will erase this item from the database.' } %></td>
       </tr>
     <% end %>
     </tbody>
   </table>
-  <h4>Add Item</h4>
-  <%= simple_form_for([@donor, @donor.items.build]) do |f| %>
-  <p><%= f.input :name %></p>
-  <p><%= f.input :description, input_html: { class: 'materialize-textarea' } %></p>
-  <p><%= f.input :fmv %></p>
-  <p>
-    <%= f.button :submit, class: "btn" %>
-  </p>
-  <% end %>
+  <a class="action-button" id="donation-add-button">Add</a>
+  <!-- form for adding a donation item -->
+  <div id="donation-add-form">
+    <h4>Add Item</h4>
+    <%= simple_form_for([@donor, @donor.items.build]) do |f| %>
+    <p><%= f.input :name %></p>
+    <p><%= f.input :description %></p>
+    <p><%= f.input :fmv %></p>
+    <p class="form-control">
+      <%= f.button :submit, class: "btn" %><%= f.button :submit, "Create and Add Another", class: "btn" %><a id="donation-cancel-button" class="btn">Cancel</a>
+    </p>
+    <% end %>
+  </div>
 </div>
 
 <div class="orchard-panel">
 <div class="panel-header">
   <h1>Communication History</h1>
-  <ul>
-    <li><%= link_to 'Add', "#" %></li>
-  </ul>
 </div>
   <table>
     <thead>
@@ -84,14 +82,16 @@
     <% end %>
     </tbody>
   </table>
-  
-  <h4>Add Contact</h4>
-  <%= simple_form_for([@donor, @donor.contacts.build]) do |f| %>
-  <p><%= f.label :contacted_on %> <%= f.date_field :contacted_on, :value => Time.now.strftime('%Y-%m-%d'), class: 'datepicker' %></p>
-  <p><%= f.input :channel %></p>
-  <p><%= f.input :note, input_html: { class: 'materialize-textarea' } %></p>
-  <p>
-    <%= f.button :submit, class: "btn" %>
-  </p>
-<% end %>
+  <a class="action-button" id="contact-add-button">Add</a>
+  <div id="contact-add-form">
+    <h4>Add Contact</h4>
+    <%= simple_form_for([@donor, @donor.contacts.build]) do |f| %>
+    <p><%= f.label :contacted_on %> <%= f.date_field :contacted_on, :value => Time.now.strftime('%Y-%m-%d'), class: 'datepicker' %></p>
+    <p><%= f.input :channel %></p>
+    <p><%= f.input :note, input_html: { class: 'materialize-textarea' } %></p>
+    <p class="form-control">
+      <%= f.button :submit, class: "btn" %><a id="contact-cancel-button" class="btn">Cancel</a>
+    </p>
+    <% end %>
+  </div>
 </div>
