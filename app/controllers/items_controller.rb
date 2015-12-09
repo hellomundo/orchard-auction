@@ -27,7 +27,10 @@ class ItemsController < ApplicationController
   def create
     @donor = Donor.find(params[:donor_id])
     @item = @donor.items.create(item_params)
-    redirect_to donor_path(@donor)
+    respond_to do |format|
+      format.html { redirect_to donor_path(@donor) }
+      format.js
+    end
   end
 
   # PATCH/PUT /donor/1/items/1
