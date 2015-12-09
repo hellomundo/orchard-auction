@@ -32,22 +32,17 @@
         <th></th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="donor-items">
       <% @donor.items.each do |item| %>
-      <tr>
-        <td><%= icon_link edit_donor_item_path(@donor, item), "wrench" %></td>
-        <td><%= link_to item.name, donor_item_path(@donor, item) %></td>
-        <td class="numeric"><%= number_to_currency(item.fmv) %></td>
-        <td><%= link_to '<i class="fi-x"></i>'.html_safe, donor_item_path(@donor, item), method: :delete, data: { confirm: 'Are you sure? This will erase this item from the database.' } %></td>
-      </tr>
-    <% end %>
+        <%= render 'items/item_row', item: item, donor: @donor  %>
+      <% end %>
     </tbody>
   </table>
   <a class="action-button" id="donation-add-button">Add</a>
   <!-- form for adding a donation item -->
   <div id="donation-add-form">
     <h4>Add Item</h4>
-    <%= simple_form_for([@donor, @donor.items.build]) do |f| %>
+    <%= simple_form_for([@donor, @donor.items.build], :remote => true) do |f| %>
     <p><%= f.input :name %></p>
     <p><%= f.input :description %></p>
     <p><%= f.input :fmv %></p>
@@ -71,11 +66,11 @@
         <th>Notes</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="donor-contacts">
     <% @donor.contacts.each do |contact| %>
       <tr>
         <td><%= contact.contacted_on %></td>
-        <td><%= contact.channel.humanize %></td>
+        <td><% if contact.channel.nil? %>&mdash;<% else %>%= contact.channel.humanize<% end %></td>
         <td><%= contact.user.first_name %></td>
         <td><%= contact.note %></td>
       </tr>
