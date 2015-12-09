@@ -8,7 +8,8 @@
     <li><%= link_to 'Edit', edit_donor_path(@donor) %></li>
   </ul>
 </div>
-<p><%= @donor.first_name %> <%= @donor.last_name %></p>
+  <p><%= @donor.first_name %> <%= @donor.last_name %>
+  <% if @donor.title.present? %><br /><%= @donor.title %><% end %></p>
   <p><%= @donor.email %></p>
   <p><%= @donor.phone %></p>
   <p><%= @donor.address1 %><br />
@@ -43,9 +44,25 @@
   <div id="donation-add-form">
     <h4>Add Item</h4>
     <%= simple_form_for([@donor, @donor.items.build], :remote => true) do |f| %>
-    <p><%= f.input :name %></p>
-    <p><%= f.input :description %></p>
-    <p><%= f.input :fmv %></p>
+    <div class="form-inputs">
+      <div class="row">
+        <div class="large-12 columns"><%= f.input :name %></div>
+      </div>
+      <div class="row">
+        <div class="large-6 columns"><%= f.input :category %></div>
+        <div class="large-6 columns"><%= f.input :format %></div>
+      </div>
+      <div class="row">
+        <div class="large-6 columns"><%= f.input :fmv %></div>
+        <div class="large-6 columns"><%= f.input :opening_price %></div>
+      </div>
+       <div class="row">
+        <div class="large-12 columns"><%= f.input :description %></div>
+      </div>
+      <div class="row">
+        <div class="large-12 columns"><%= f.input :restrictions %></div>
+      </div>
+    </div>
     <p class="form-control">
       <%= f.button :submit, class: "btn" %><%= f.button :submit, "Create and Add Another", class: "btn" %><a id="donation-cancel-button" class="btn">Cancel</a>
     </p>

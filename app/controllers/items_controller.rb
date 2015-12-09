@@ -39,7 +39,7 @@ class ItemsController < ApplicationController
     @donor = Donor.find(params[:donor_id])
     respond_to do |format|
       if @item.update(item_params)
-        format.html { redirect_to @donor, notice: 'Item was successfully updated.' }
+        format.html { redirect_to donor_item_path(@donor, @item), notice: 'Item was successfully updated.' }
         format.json { render :show, status: :ok, location: @item }
       else
         format.html { render :edit }
@@ -66,6 +66,6 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:name, :description, :fmv, :restrictions, :format, :opening_price)
+      params.require(:item).permit(:name, :description, :fmv, :restrictions, :category, :format, :opening_price)
     end
 end

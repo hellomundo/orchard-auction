@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151022024133) do
+ActiveRecord::Schema.define(version: 20151209021714) do
 
   create_table "buyers", force: :cascade do |t|
     t.string   "first_name"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20151022024133) do
     t.string   "phone"
     t.boolean  "has_donated"
     t.string   "website"
+    t.string   "title"
   end
 
   create_table "items", force: :cascade do |t|
@@ -62,6 +63,7 @@ ActiveRecord::Schema.define(version: 20151022024133) do
     t.text     "restrictions"
     t.integer  "format",                                default: 0
     t.float    "opening_price"
+    t.integer  "category",                              default: 0
   end
 
   add_index "items", ["donor_id"], name: "index_items_on_donor_id"

@@ -4,7 +4,7 @@
   <h1><%= @item.name %></h1>
   <ul>
     <li><%= link_to 'Edit', edit_donor_item_path(@item.donor, @item) %></li>
-    
+
   </ul>
 </div>
 <div class="row">
@@ -29,6 +29,14 @@
     <div class="stat">
       <em>Type of Item</em>
       <strong><%= @item.format %></strong>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    <div class="stat">
+      <em>Item Category</em>
+      <strong><%= @item.category %></strong>
     </div>
   </div>
 </div>

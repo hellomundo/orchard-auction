@@ -3,7 +3,10 @@
 
   <div class="form-inputs">
     <div class="row">
-      <div class="large-6 columns"><%= f.input :name %></div>
+      <div class="large-12 columns"><%= f.input :name %></div>
+    </div>
+    <div class="row">
+      <div class="large-6 columns"><%= f.input :category %></div>
       <div class="large-6 columns"><%= f.input :format %></div>
     </div>
     <div class="row">
@@ -17,7 +20,7 @@
       <div class="large-12 columns"><%= f.input :restrictions %></div>
     </div>
      <div class="row">
-      <div class="large-12 columns">  
+      <div class="large-12 columns">
         <div class="form-actions">
           <%= f.button :submit %>
         </div>
