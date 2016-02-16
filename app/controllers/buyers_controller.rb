@@ -3,10 +3,22 @@ class BuyersController < ApplicationController
   before_action :set_buyer, only: [:show, :edit, :update, :destroy]
 
   def index
-    @buyers = Buyer.all
+    if params[:search]
+      bid = params[:search].to_i - 100
+      @buyer = Buyer.find_by_id(bid)
+      if @buyer
+        redirect_to @buyer
+      else
+        redirect_to buyers_path, notice: "Sorry, I couldn't find that buyer."
+      end
+    else
+      @buyers = Buyer.all
+    end
   end
 
   def show
+    @win = Win.new
+    @total = Win.total_for_buyer(@buyer)
   end
 
   def new
@@ -51,7 +63,7 @@ class BuyersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
   def buyer_params
-    params.require(:buyer).permit(:first_name, :last_name)
+    params.require(:buyer).permit(:first_name, :last_name, :search)
   end
 
 end

@@ -23,6 +23,8 @@ Rails.application.routes.draw do
 
   resources :buyers
 
+  resources :wins
+
   resources :items, only: [:index, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.

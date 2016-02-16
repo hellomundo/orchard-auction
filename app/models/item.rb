@@ -1,6 +1,8 @@
 class Item < ActiveRecord::Base
   belongs_to :donor
   belongs_to :lot
+  has_one :win
+  has_one :buyer, through: :wins
 
   # add parent_id to migration
   #t.references :parent, index: true

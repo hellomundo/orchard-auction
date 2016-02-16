@@ -81,6 +81,11 @@ table {
   margin: .6rem 0 2.25rem;
 }
 
+.search-button {
+  @include button();
+  padding: .75rem 2rem .75rem 2rem;
+}
+
 // Stats
 .stat {
   margin-bottom: 1em;
@@ -108,6 +113,10 @@ table {
 table {
   .numeric {
     text-align: right;
+  }
+
+  .summation {
+    border-top: solid black 2px;
   }
 }
 

@@ -1,0 +1,10 @@
+$("#win-errors ul").html("");
+<% if @win.errors.any? %>
+  <% @win.errors.full_messages.each do |message| %>
+    $("#win-errors ul").append($("<li />").html("<%= message.html_safe %>"));
+  <% end %>
+  $("#win-errors").slideDown();
+<% else %>
+  $("#win-list").html("<%= escape_javascript(render 'index') %>");
+  $("#win-errors").slideUp(0);
+<% end %>

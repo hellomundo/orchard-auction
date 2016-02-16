@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+<div class="orchard-panel">
+<div class="panel-header">
+  <h1><%= @win.item.name %></h1>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    <div class="lede"><%= @win.item.description %></div>
+  </div>
+</div>
+<div class="row">
+  <div class="large-8 columns">
+    <div class="stat">
+      <em>Winner</em>
+      <strong id="stat"><%= link_to @win.buyer.full_name, buyer_path(@win.buyer)%></strong>
+    </div>
+  </div>
+  <div class="large-4 columns">
+    <div class="stat">
+      <em>Price</em>
+      <strong><%= number_to_currency(@win.price) %></strong>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    <div class="stat">
+      <em>Item Category</em>
+      <strong><%= @win.item.category %></strong>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    <div class="stat">
+      <em>Restrictions</em>
+      <p><%= @win.item.restrictions %></p>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
