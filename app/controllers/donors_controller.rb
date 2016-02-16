@@ -5,7 +5,24 @@ class DonorsController < ApplicationController
   # GET /donors
   # GET /donors.json
   def index
-    @donors = Donor.all
+
+    if params[:search_name].present?
+      if params[:search_cat].present?
+        # search for name and category
+        @donors = Donor.search_by_name_and_cat(params[:search_name], params[:search_cat])
+      else
+        @donors = Donor.search_by_name(params[:search_name])
+      end
+    elsif params[:search_cat].present?
+      #show all in cat
+      @donors = Donor.filter_by_cat(params[:search_cat])
+    else
+      @donors = Donor.all
+    end
+
+    #@donors = Donor.all
+
+    @search_placeholder = params[:search_name] || ""
 
     respond_to do |format|
       format.html

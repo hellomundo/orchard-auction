@@ -4,6 +4,18 @@ class Donor < ActiveRecord::Base
 
   enum status: { "uncalled" => 0, "called" => 1, "needs_callback" => 2, "opted_out" => 3, "donated" => 4 }
 
+  def self.search_by_name(name)
+    where("company LIKE ?", "%#{name}%")
+  end
+
+  def self.search_by_name_and_cat(name, cat)
+    where(status: cat).where("company LIKE ?", "%#{name}%")
+  end
+
+  def self.filter_by_cat(cat)
+    where(status: cat)
+  end
+
   def self.to_csv
     attributes = %w{company first_name last_name phone address1 address2 city state zip has_donated}
     CSV.generate do |csv|
