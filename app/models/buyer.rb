@@ -1,6 +1,6 @@
 class Buyer < ActiveRecord::Base
 
-  has_many :wins
+  has_many :wins , dependent: :destroy
   has_many :items, through: :wins
 
   validates :first_name, :last_name, :presence => true
