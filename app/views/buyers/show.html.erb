@@ -10,6 +10,9 @@
   </div>
   <div class="row">
     <div class="large-12 columns"><h3><%= @buyer.first_name %> <%= @buyer.last_name %></h3></div>
+    <% if @buyer.email.present? %>
+    <div class="large-12 columns"><p><%= mail_to @buyer.email %></p></div>
+    <% end %>
   </div>
 </div>
 

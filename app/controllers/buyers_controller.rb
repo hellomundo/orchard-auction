@@ -62,8 +62,9 @@ class BuyersController < ApplicationController
   end
 
     # Never trust parameters from the scary internet, only allow the white list through.
+    # test to make sure :search is needed
   def buyer_params
-    params.require(:buyer).permit(:first_name, :last_name, :search)
+    params.require(:buyer).permit(:first_name, :last_name, :email, :search)
   end
 
 end
