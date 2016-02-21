@@ -4,12 +4,20 @@ class BuyersController < ApplicationController
 
   def index
     if params[:search]
-      bid = params[:search].to_i - 100
-      @buyer = Buyer.find_by_id(bid)
-      if @buyer
-        redirect_to @buyer
+      # check if it is a string or a number
+      query = params[:search]
+      # is it a number?
+      if query.to_i.to_s == query
+        bid = query.to_i - 100
+        @buyers = Buyer.where(:id => bid)
       else
+        @buyers = Buyer.where('last_name LIKE :search OR first_name LIKE :search', search: "%#{query}%")
+      end
+
+      if @buyers.blank?
         redirect_to buyers_path, notice: "Sorry, I couldn't find that buyer."
+      elsif @buyers.length == 1
+        redirect_to @buyers.first
       end
     else
       @buyers = Buyer.all
