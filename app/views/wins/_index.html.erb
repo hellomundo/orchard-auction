@@ -15,7 +15,7 @@
       <tr>
         <td><%= icon_link edit_win_path(win), "wrench" %></td>
         <td><%= link_to win.item.name, donor_item_path(win.item.donor, win.item) %></td>
-        <td><%= link_to(win.buyer.last_name, buyer_path(win.buyer)) %></td>
+        <td><%= link_to(win.buyer.reverse_name, buyer_path(win.buyer)) %></td>
         <td><%= number_to_currency(win.price) %></td>
         <td><%= link_to '<i class="fi-x"></i>'.html_safe, win, method: :delete, remote: true, data: { confirm: 'Are you sure? This will delete the record of this win.' } %></td>
       </tr>

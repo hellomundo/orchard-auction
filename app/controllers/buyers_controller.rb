@@ -51,7 +51,7 @@ class BuyersController < ApplicationController
 
 
     if @buyer.update(buyer_params)
-      redirect_to @buyer, notice: 'Buyer was successfully created.'
+      redirect_to @buyer, notice: 'Buyer was successfully updated.'
     else
       render :edit
     end
@@ -72,7 +72,7 @@ class BuyersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     # test to make sure :search is needed
   def buyer_params
-    params.require(:buyer).permit(:first_name, :last_name, :email, :search)
+    params.require(:buyer).permit(:first_name, :last_name, :email, :telephone, :guests, :search)
   end
 
 end

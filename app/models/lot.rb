@@ -1,6 +1,7 @@
 class Lot < ActiveRecord::Base
   has_many :items
-  
+  # has_one :win, as: :winnable
+
   #should do this on save
   def calculated_fmv
     if(self.items.size > 0)
@@ -9,19 +10,19 @@ class Lot < ActiveRecord::Base
       0
     end
   end
-  
+
   def lot_number
     self.id + 100
   end
-  
-  def name 
+
+  def name
     if read_attribute(:name).blank?
       if self.items.blank?
         return nil
       else
         return self.items.first.name
       end
-    else 
+    else
       return read_attribute(:name)
     end
   end

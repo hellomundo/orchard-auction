@@ -1,7 +1,7 @@
 class Item < ActiveRecord::Base
   belongs_to :donor
   belongs_to :lot
-  has_one :win
+  has_one :win #, as: :winnable
   has_one :buyer, through: :wins
 
   # add parent_id to migration
@@ -27,6 +27,7 @@ class Item < ActiveRecord::Base
                   "Gift Basket" => 12,
                   "Food/Beverages" => 13,
                   "Dining" => 14,
-                  "Sports/Recreation Equipment" => 15 }
+                  "Sports/Recreation Equipment" => 15,
+                  "Toys/Games/Books for Family" => 16 }
 
 end
