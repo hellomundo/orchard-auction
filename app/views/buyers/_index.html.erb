@@ -12,7 +12,7 @@
     <% @buyer.wins.each do |win| %>
     <tr>
       <td></td>
-      <td><%= link_to win.item.name, win_path(win) %></td>
+      <td><%= link_to win.lot.name, win_path(win) %></td>
       <td class="numeric"><%= number_to_currency(win.price) %></td>
       <td><%= link_to '<i class="fi-x"></i>'.html_safe, win_path(win), method: :delete, data: { confirm: 'Are you sure? This remove this win for this buyer.' } %></td>
     </tr>
