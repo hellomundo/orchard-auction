@@ -53,15 +53,28 @@ class LotsController < ApplicationController
     end
   end
 
+  def generate
+    # find every item that isn't in a lot
+    @available_items = Item.where("lot_id IS NULL")
+    # create a new lot for each item
+    for item in @available_items
+      lot = Lot.new()
+      lot.items << item
+      lot.save
+    end
+
+    redirect_to lots_path
+  end
+
   # POST /lots
   # POST /lots.json
   def create
     @lot = Lot.new(lot_params)
     # a lot must have at least one item
-    if(params[:item_ids].blank?)
-      redirect_to @lot, notice: 'You must add at least one item to the lot.'
-      return
-    end
+    # if(params[:item_ids].blank?)
+    #   redirect_to @lot, notice: 'You must add at least one item to the lot.'
+    #   return
+    # end
 
     respond_to do |format|
       if @lot.save

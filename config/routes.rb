@@ -5,6 +5,11 @@ Rails.application.routes.draw do
     member do
       get :toggle
     end
+
+    collection do
+      get 'generate'
+    end
+
   end
 
   devise_for :users, :controllers => { registrations: 'registrations' }

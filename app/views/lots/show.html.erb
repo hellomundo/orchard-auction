@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 <div class="orchard-panel">
 <div class="panel-header">
-  <h1>#<%= @lot.lot_number %> <%= @lot.name %></h1>
+  <h1 id="lot-name">#<%= @lot.lot_number %> <%= @lot.name %></h1>
   <ul>
     <li><%= link_to 'Edit', edit_lot_path(@lot) %></li>
 
@@ -9,7 +9,7 @@
 </div>
 <div class="row">
   <div class="large-12 columns">
-    <div class="lede"><%= @lot.description %></div>
+    <div class="lede" id="desc"><%= @lot.description %></div>
   </div>
 </div>
 <div class="row">
@@ -22,19 +22,19 @@
   <div class="large-3 columns">
     <div class="stat">
       <em>Opening Price</em>
-      <strong><%= number_to_currency(@lot.opening_price) %></strong>
+      <strong id="opening-price"><%= number_to_currency(@lot.opening_price) %></strong>
     </div>
   </div>
   <div class="large-3 columns">
     <div class="stat">
       <em>Buy It Now Price</em>
-      <strong><%= number_to_currency(@lot.buy_now_price) %></strong>
+      <strong id="bin-price"><%= number_to_currency(@lot.buy_now_price) %></strong>
     </div>
   </div>
   <div class="large-3 columns">
     <div class="stat">
       <em>Bid Increment</em>
-      <strong><%= number_to_currency(@lot.bid_increment) %></strong>
+      <strong id="bid-increment"><%= number_to_currency(@lot.bid_increment) %></strong>
     </div>
   </div>
 
@@ -60,9 +60,9 @@
     <% @lot.items.each do |item| %>
     <tr id="item-<%= item.id %>">
         <td><%= icon_link(toggle_lot_path(@lot, item_id: item), "arrow-down", true) %></td>
-        <td><%= item.name %></td>
+        <td><%= link_to item.name, donor_item_path(item.donor, item) %></td>
         <td><%= link_to item.donor.company, donor_path(item.donor) %></td>
-        <td class="numeric"><%= item.fmv %></td>
+        <td class="numeric"><%= number_to_currency(item.fmv) %></td>
       </tr>
     <% end %>
   </tbody>
@@ -86,9 +86,9 @@
     <% @available_items.each do |item| %>
       <tr id="item-<%= item.id %>">
         <td><%= icon_link(toggle_lot_path(@lot, item_id: item), "arrow-up", true) %></td>
-        <td><%= item.name %></td>
+        <td><%= link_to item.name, donor_item_path(item.donor, item) %></td>
         <td><%= link_to item.donor.company, donor_path(item.donor) %></td>
-        <td class="numeric"><%= item.fmv %></td>
+        <td class="numeric"><%= number_to_currency(item.fmv) %></td>
       </tr>
     <% end %>
   </tbody>
