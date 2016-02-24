@@ -1,6 +1,8 @@
 class Lot < ActiveRecord::Base
   has_many :items, dependent: :nullify
   # has_one :win, as: :winnable
+  has_one :win #, as: :winnable
+  has_one :buyer, through: :wins
 
   #should do this on save
   def calculated_fmv

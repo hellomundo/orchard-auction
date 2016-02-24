@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160224165324) do
+ActiveRecord::Schema.define(version: 20160224210203) do
 
   create_table "buyers", force: :cascade do |t|
     t.string   "first_name"
@@ -105,13 +105,13 @@ ActiveRecord::Schema.define(version: 20160224165324) do
 
   create_table "wins", force: :cascade do |t|
     t.integer  "buyer_id"
-    t.integer  "item_id"
     t.decimal  "price",      precision: 8, scale: 2
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.integer  "lot_id"
   end
 
   add_index "wins", ["buyer_id"], name: "index_wins_on_buyer_id"
-  add_index "wins", ["item_id"], name: "index_wins_on_item_id"
+  add_index "wins", ["lot_id"], name: "index_wins_on_lot_id"
 
 end

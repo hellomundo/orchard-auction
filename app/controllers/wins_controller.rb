@@ -62,7 +62,7 @@ class WinsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
   def win_params
-    params.require(:win).permit(:buyer_id, :item_id, :price)
+    params.require(:win).permit(:buyer_id, :lot_id, :price)
   end
 
 end
