@@ -121,6 +121,6 @@ class LotsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lot_params
-      params.require(:lot).permit(:name, :description, :opening_price, :bid_increment, :buy_now_price)
+      params.require(:lot).permit(:name, :description, :opening_price, :bid_increment, :buy_now_price, :table_number )
     end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160223144922) do
+ActiveRecord::Schema.define(version: 20160224165324) do
 
   create_table "buyers", force: :cascade do |t|
     t.string   "first_name"
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 20160223144922) do
     t.float    "opening_price"
     t.float    "bid_increment"
     t.float    "buy_now_price"
+    t.integer  "table_number"
   end
 
   create_table "users", force: :cascade do |t|
