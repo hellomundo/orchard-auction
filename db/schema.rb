@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160224210203) do
+ActiveRecord::Schema.define(version: 20160226025255) do
 
   create_table "buyers", force: :cascade do |t|
     t.string   "first_name"
@@ -75,12 +75,13 @@ ActiveRecord::Schema.define(version: 20160224210203) do
   create_table "lots", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.float    "opening_price"
     t.float    "bid_increment"
     t.float    "buy_now_price"
     t.integer  "table_number"
+    t.integer  "quantity_available"
   end
 
   create_table "users", force: :cascade do |t|

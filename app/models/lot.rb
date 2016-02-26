@@ -4,6 +4,8 @@ class Lot < ActiveRecord::Base
   has_one :win #, as: :winnable
   has_one :buyer, through: :wins
 
+  before_save :default_values
+
   #should do this on save
   def calculated_fmv
     if(self.items.size > 0)
@@ -48,6 +50,9 @@ class Lot < ActiveRecord::Base
   end
 
   private
+  def default_values
+    self.quantity_available ||= 1
+  end
 
   def calculate_opening
     (calculated_fmv * 0.25 / 5.0).floor * 5.0

@@ -24,11 +24,15 @@ class Win < ActiveRecord::Base
     end
 
     def validate_single_owner
-      lot = Win.where(:lot_id => self.lot_id)
-      if lot.count > 0
-        errors.add(:lot, "This lot has already been won.")
-        return false
+      win = Win.where(:lot_id => self.lot_id-100)
+      if win.count > 0
+        # This lot has been won before
+        if win.count >= win.first.lot.quantity_available
+          errors.add(:lot, "This lot has already been won.")
+          return false
+        end
       end
+      return true
     end
 
     def validate_buyer
