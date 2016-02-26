@@ -16,4 +16,17 @@ class Buyer < ActiveRecord::Base
   def reverse_name
     self.last_name + ", " + self.first_name
   end
+
+  def self.import(file)
+    CSV.foreach(file.path, headers: true) do |row|
+      # only fill certain rows
+      d = Buyer.new ({  :first_name => row['first_name'],
+                        :last_name => row['last_name'],
+                        :telephone => row['telephone'],
+                        :guests => row['guests']
+        })
+      d.save
+    end
+  end
+
 end

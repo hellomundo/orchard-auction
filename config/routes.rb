@@ -26,7 +26,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :buyers
+  resources :buyers do
+    collection do
+      get 'destroy_all'
+      post 'import'
+    end
+  end
 
   resources :wins
 

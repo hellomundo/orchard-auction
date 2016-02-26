@@ -4,6 +4,7 @@
 <div class="panel-header">
   <h1>Buyers</h1>
   <ul>
+    <li><%= link_to 'Delete All', destroy_all_buyers_path %></li>
     <li><%= link_to 'New Buyer', new_buyer_path %></li>
   </ul>
 </div>
@@ -34,3 +35,14 @@
     <% end %>
   </tbody>
 </table>
+
+<br>
+  <div class="panel-header">
+    <h3>Import Buyers</h3>
+  </div>
+  <%= form_tag import_buyers_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+  <% end %>
+
+</div>

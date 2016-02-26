@@ -62,6 +62,17 @@ class BuyersController < ApplicationController
     redirect_to buyers_url, notice: 'Buyer was successfully destroyed.'
   end
 
+  def destroy_all
+    Buyer.destroy_all
+    redirect_to buyers_path
+  end
+
+  # POST /buyers/import
+  def import
+    Buyer.import(params[:file])
+    redirect_to buyers_path, notice: "Buyers imported."
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
