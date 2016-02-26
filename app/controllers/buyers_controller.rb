@@ -20,7 +20,7 @@ class BuyersController < ApplicationController
         redirect_to @buyers.first
       end
     else
-      @buyers = Buyer.all
+      @buyers = Buyer.order(:last_name)
     end
   end
 
@@ -62,10 +62,10 @@ class BuyersController < ApplicationController
     redirect_to buyers_url, notice: 'Buyer was successfully destroyed.'
   end
 
-  def destroy_all
-    Buyer.destroy_all
-    redirect_to buyers_path
-  end
+  # def destroy_all
+  #   Buyer.destroy_all
+  #   redirect_to buyers_path
+  # end
 
   # POST /buyers/import
   def import

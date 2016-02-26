@@ -28,7 +28,7 @@ Rails.application.routes.draw do
 
   resources :buyers do
     collection do
-      get 'destroy_all'
+#      get 'destroy_all'
       post 'import'
     end
   end
