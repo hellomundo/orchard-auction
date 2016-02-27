@@ -15,12 +15,12 @@ class Lot < ActiveRecord::Base
     end
   end
 
-  def opening_price
-    self[:opening_price] || calculate_opening
+  def calculated_opening_price
+    self.opening_price || calculate_opening
   end
 
-  def bid_increment
-    self[:opening_price] || calculate_increment
+  def calculated_bid_increment
+    self.opening_price || calculate_increment
   end
 
   def lot_number
