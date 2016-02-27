@@ -66,6 +66,10 @@ class LotsController < ApplicationController
     redirect_to lots_path
   end
 
+  def destroy_all
+    Lot.destroy_all
+    redirect_to lots_path
+  end
   # POST /lots
   # POST /lots.json
   def create

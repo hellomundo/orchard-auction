@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
     collection do
       get 'generate'
+      get 'destroy_all'
     end
 
   end
