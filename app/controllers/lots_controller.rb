@@ -6,6 +6,10 @@ class LotsController < ApplicationController
   # GET /lots.json
   def index
     @lots = Lot.all
+    respond_to do |format|
+      format.html
+      format.csv { render text: @lots.to_csv }
+    end
   end
 
   # GET /lots/1

@@ -49,7 +49,27 @@ class Lot < ActiveRecord::Base
     end
   end
 
+
+  def self.to_csv
+    attributes = %w{id name description fmv calculated_opening_price calculated_bid_increment table_number items }
+
+    CSV.generate do |csv|
+      csv << attributes
+      all.each do |lot|
+        if lot.items.any?
+          row = [lot.lot_number, lot.name, lot.description, lot.calculated_fmv, lot.calculated_opening_price, lot.calculated_bid_increment, lot.table_number ]
+          other = lot.items.collect { |o| o.name }.join("\n")
+          row << other
+          csv << row
+        else
+          csv << [lot.lot_number, lot.name, lot.description, lot.calculated_fmv, lot.calculated_opening_price, lot.calculated_bid_increment, lot.table_number, nil ]
+        end
+      end
+    end
+  end
+
   private
+
   def default_values
     self.quantity_available ||= 1
   end
