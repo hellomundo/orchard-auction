@@ -87,7 +87,7 @@ class Lot < ActiveRecord::Base
   end
 
   def calculate_opening
-    (calculated_fmv * 0.25 / 5.0).floor * 5.0
+    (calculated_fmv * 0.40 / 5.0).floor * 5.0
   end
 
   def calculate_increment
