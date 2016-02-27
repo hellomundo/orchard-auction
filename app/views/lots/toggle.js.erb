@@ -35,10 +35,10 @@ var targ = $('#item-<%= @item.id %> > td > a > i');
 // update the fmv price
 $('#fmv-price').text("<%= number_to_currency(@lot.calculated_fmv) %>");
 // update the description
-$('#opening-price').text("<%= number_to_currency(@lot.opening_price) %>");
+$('#opening-price').text("<%= number_to_currency(@lot.calculated_opening_price) %>");
 // update the opening price
 $('#desc').text("<%= @lot.description %>");
 // update the bid increment
-$('#bid-increment').text("<%= number_to_currency(@lot.bid_increment) %>");
+$('#bid-increment').text("<%= number_to_currency(@lot.calculated_bid_increment) %>");
 
 // window.alert("<%= @msg %>");

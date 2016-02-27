@@ -27,7 +27,7 @@
   <div class="large-3 columns">
     <div class="stat">
       <em>Opening Price</em>
-      <strong id="opening-price"><%= number_to_currency(@lot.opening_price) %></strong>
+      <strong id="opening-price"><%= number_to_currency(@lot.calculated_opening_price) %></strong>
     </div>
   </div>
   <div class="large-3 columns">
@@ -39,7 +39,7 @@
   <div class="large-3 columns">
     <div class="stat">
       <em>Bid Increment</em>
-      <strong id="bid-increment"><%= number_to_currency(@lot.bid_increment) %></strong>
+      <strong id="bid-increment"><%= number_to_currency(@lot.calculated_bid_increment) %></strong>
     </div>
   </div>
 
