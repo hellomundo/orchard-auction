@@ -60,7 +60,7 @@ class Lot < ActiveRecord::Base
       all.each do |lot|
         if lot.items.any?
           row = [lot.lot_number, lot.name, lot.calculated_description, lot.calculated_fmv, lot.calculated_opening_price, lot.calculated_bid_increment, lot.table_number ]
-          items = lot.items.collect { |o| o.name }.join("\n")
+          items = lot.items.collect { |o| o.name + " ($" + sprintf('%02.f', o.fmv) + ") from " + o.donor.company }.join("\n")
 
           if lot.items.count == 1
             # there is only one donor
