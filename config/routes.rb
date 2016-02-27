@@ -37,7 +37,12 @@ Rails.application.routes.draw do
 
   resources :pledges
 
-  resources :items, only: [:index, :destroy]
+  resources :items do #, only: [:index, :destroy, :import]
+    collection do
+      post 'import'
+    end
+
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

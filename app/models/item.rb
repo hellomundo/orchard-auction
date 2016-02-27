@@ -28,4 +28,30 @@ class Item < ActiveRecord::Base
                   "Sports/Recreation Equipment" => 15,
                   "Toys/Games/Books for Family" => 16 }
 
+  def self.to_csv
+    attributes = %w{name description fmv donor_id format opening_price category restrictions}
+    CSV.generate do |csv|
+      csv << attributes
+      all.each do |item|
+        csv << item.attributes.values_at(*attributes)
+      end
+    end
+  end
+
+  def self.import(file)
+    CSV.foreach(file.path, headers: true) do |row|
+      # only fill certain rows
+      d = Item.new ({  :name => row['name'],
+                        :description => row['description'],
+                        :fmv => row['fmv'],
+                        :donor_id => row['donor_id'],
+                        :format => row['format'].to_i,
+                        :opening_price => row['opening_price'],
+                        :category => row['category'].to_i,
+        })
+      # check to see if donor has donated before
+      d.save
+    end
+  end
+
 end

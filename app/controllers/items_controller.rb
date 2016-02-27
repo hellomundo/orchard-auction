@@ -5,6 +5,11 @@ class ItemsController < ApplicationController
   # GET /items.json
   def index
     @items = Item.all
+
+    respond_to do |format|
+      format.html
+      format.csv { render text: @items.to_csv }
+    end
   end
 
   # GET /items/1
@@ -56,6 +61,12 @@ class ItemsController < ApplicationController
       format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  # POST /donors/import
+  def import
+    Item.import(params[:file])
+    redirect_to items_path, notice: "Items imported."
   end
 
   private
