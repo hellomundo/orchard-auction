@@ -11,7 +11,7 @@ class BuyersController < ApplicationController
         bid = query.to_i - 100
         @buyers = Buyer.where(:id => bid)
       else
-        @buyers = Buyer.where('last_name LIKE :search OR first_name LIKE :search', search: "%#{query}%")
+        @buyers = Buyer.where('lower(last_name) LIKE :search OR lower(first_name) LIKE :search', search: "%#{query.downcase}%")
       end
 
       if @buyers.blank?
@@ -26,7 +26,8 @@ class BuyersController < ApplicationController
 
   def show
     @win = Win.new
-    @total = Win.total_for_buyer(@buyer)
+    @win_total = Win.total_for_buyer(@buyer)
+    @pledge_total = Pledge.total_for_buyer(@buyer)
   end
 
   def new

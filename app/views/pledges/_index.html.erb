@@ -1,0 +1,26 @@
+<% if @pledges.count > 0 %>
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Buyer</th>
+      <th>Type</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pledges.each do |pledge| %>
+      <tr>
+        <td><%#= icon_link edit_pledge_path(pledge), "wrench" %></td>
+        <td><%= link_to(pledge.buyer.reverse_name, buyer_path(pledge.buyer)) %></td>
+        <td><%= pledge.pledge_type %></td>
+        <td><%= number_to_currency(pledge.amount) %></td>
+        <td><%= link_to '<i class="fi-x"></i>'.html_safe, pledge, method: :delete, remote: true, data: { confirm: 'Are you sure? This will delete the record of this pledge.' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% else %>
+<p>No pledges recorded yet.</p>
+<% end %>

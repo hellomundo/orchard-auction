@@ -13,7 +13,7 @@
   <tbody>
     <% @wins.each do |win| %>
       <tr>
-        <td><%= icon_link edit_win_path(win), "wrench" %></td>
+        <td><%#= icon_link edit_win_path(win), "wrench" %></td>
         <td><%= link_to win.lot.name, lot_path(win.lot) %></td>
         <td><%= link_to(win.buyer.reverse_name, buyer_path(win.buyer)) %></td>
         <td><%= number_to_currency(win.price) %></td>

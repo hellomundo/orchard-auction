@@ -38,15 +38,25 @@
     <h1>Wins</h1>
   </div>
   <div id="win-list">
-    <%= render "index" %>
+    <%= render "wins" %>
   </div>
-  <div id="win-total">
-    <ul></ul>
-  </div>
-  <div id="win-errors">
-    <ul></ul>
-  </div>
-  <div id="win-form">
-  </div>
+</div>
 
+<div class="orchard-panel">
+  <div class="panel-header">
+    <h1>Pledges</h1>
+  </div>
+  <div id="gen-list">
+    <%= render "pledges" %>
+  </div>
+</div>
+<div class="orchard-panel">
+  <div class="panel-header">
+    <h1>Total</h1>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
+      <h4 style="text-align: right">Total due for wins and pledges: <b> <%= number_to_currency(@buyer.total_purchase) %> </b></h4>
+    </div>
+  </div>
 </div>

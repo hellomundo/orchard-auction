@@ -35,6 +35,8 @@ Rails.application.routes.draw do
 
   resources :wins
 
+  resources :pledges
+
   resources :items, only: [:index, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.

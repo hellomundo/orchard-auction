@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+<div class="orchard-panel">
+
+  <div class="panel-header">
+    <h1>Pledges</h1>
+    <ul>
+      <li><%= link_to 'New Pledge', new_pledge_path %></li>
+    </ul>
+  </div>
+  <div id="gen-errors">
+    <ul></ul>
+  </div>
+  <div id="gen-list">
+  <%= render "index" %>
+  </div>
+</div>

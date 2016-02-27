@@ -1,0 +1,10 @@
+$("#gen-errors ul").html("");
+<% if @pledge.errors.any? %>
+  <% @pledge.errors.full_messages.each do |message| %>
+    $("#gen-errors ul").append($("<li />").html("<%= message.html_safe %>"));
+  <% end %>
+  $("#gen-errors").slideDown();
+<% else %>
+  $("#gen-list").html("<%= escape_javascript(render 'index') %>");
+  $("#gen-errors").slideUp(0);
+<% end %>
