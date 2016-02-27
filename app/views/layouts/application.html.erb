@@ -6,7 +6,7 @@
 
     <title><%= content_for?(:title) ? yield(:title) : "Orchard Auction" %></title>
 
-    <%= stylesheet_link_tag    "application" %>
+    <%= stylesheet_link_tag    "application", media: "all"%>
     <%= javascript_include_tag "vendor/modernizr" %>
     <script src="https://use.typekit.net/fli3tfm.js"></script>
     <script>try{Typekit.load({ async: true });}catch(e){}</script>
