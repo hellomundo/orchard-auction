@@ -27,13 +27,15 @@ class Lot < ActiveRecord::Base
     self.id + 100
   end
 
-  def description
-    if self[:description].blank?
+  def calculated_description
+    if self.description.blank?
       if self.items.blank?
         return nil
       else
         return self.items.first.description
       end
+    else
+      return self.description
     end
   end
 
@@ -51,19 +53,29 @@ class Lot < ActiveRecord::Base
 
 
   def self.to_csv
-    attributes = %w{id name description fmv calculated_opening_price calculated_bid_increment table_number items }
+    attributes = %w{id name description fmv opening_price bid_increment table_number items donor }
 
     CSV.generate do |csv|
       csv << attributes
       all.each do |lot|
         if lot.items.any?
-          row = [lot.lot_number, lot.name, lot.description, lot.calculated_fmv, lot.calculated_opening_price, lot.calculated_bid_increment, lot.table_number ]
-          other = lot.items.collect { |o| o.name }.join("\n")
-          row << other
-          csv << row
+          row = [lot.lot_number, lot.name, lot.calculated_description, lot.calculated_fmv, lot.calculated_opening_price, lot.calculated_bid_increment, lot.table_number ]
+          items = lot.items.collect { |o| o.name }.join("\n")
+
+          if lot.items.count == 1
+            # there is only one donor
+            donor = lot.items.first.donor.company
+          else
+            donor = nil
+          end
         else
-          csv << [lot.lot_number, lot.name, lot.description, lot.calculated_fmv, lot.calculated_opening_price, lot.calculated_bid_increment, lot.table_number, nil ]
+          row = [lot.lot_number, lot.name, lot.calculated_description, lot.calculated_fmv, lot.calculated_opening_price, lot.calculated_bid_increment, lot.table_number ]
+          items = nil
+          donor = nil
         end
+        row << items
+        row << donor
+        csv << row
       end
     end
   end

@@ -37,7 +37,7 @@ $('#fmv-price').text("<%= number_to_currency(@lot.calculated_fmv) %>");
 // update the description
 $('#opening-price').text("<%= number_to_currency(@lot.calculated_opening_price) %>");
 // update the opening price
-$('#desc').text("<%= @lot.description %>");
+$('#desc').text("<%= @lot.calculated_description %>");
 // update the bid increment
 $('#bid-increment').text("<%= number_to_currency(@lot.calculated_bid_increment) %>");
 
