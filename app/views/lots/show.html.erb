@@ -1,49 +1,64 @@
 <p id="notice"><%= notice %></p>
 <div class="orchard-panel">
-<div class="panel-header">
-  <h1 id="lot-name">#<%= @lot.lot_number %> <%= @lot.name %></h1>
-  <ul>
-    <li><%= link_to 'Edit', edit_lot_path(@lot) %></li>
+  <div class="panel-header">
+    <h1 id="lot-name">#<%= @lot.lot_number %> <%= @lot.name %></h1>
+    <ul>
+      <li><%= link_to 'Edit', edit_lot_path(@lot) %></li>
 
-  </ul>
-</div>
-<div class="row">
-  <div class="large-12 columns">
-    <div>Group <%= @lot.table_number %></div>
+    </ul>
   </div>
-</div>
-<div class="row">
-  <div class="large-12 columns">
-    <div class="lede" id="desc"><%= @lot.calculated_description %></div>
-  </div>
-</div>
-<div class="row">
-  <div class="large-3 columns">
-    <div class="stat">
-      <em>Calculated FMV</em>
-      <strong id="fmv-price"><%= number_to_currency(@lot.calculated_fmv) %></strong>
+  <div class="row">
+    <div class="large-12 columns">
+      <div>Group <%= @lot.table_number %></div>
     </div>
   </div>
-  <div class="large-3 columns">
-    <div class="stat">
-      <em>Opening Price</em>
-      <strong id="opening-price"><%= number_to_currency(@lot.calculated_opening_price) %></strong>
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="lede" id="desc"><%= @lot.calculated_description %></div>
     </div>
   </div>
-  <div class="large-3 columns">
-    <div class="stat">
-      <em>Buy It Now Price</em>
-      <strong id="bin-price"><%= number_to_currency(@lot.buy_now_price) %></strong>
+  <div class="row">
+    <div class="large-3 columns">
+      <div class="stat">
+        <em>Calculated FMV</em>
+        <strong id="fmv-price"><%= number_to_currency(@lot.calculated_fmv) %></strong>
+      </div>
+    </div>
+    <div class="large-3 columns">
+      <div class="stat">
+        <em>Opening Price</em>
+        <strong id="opening-price"><%= number_to_currency(@lot.calculated_opening_price) %></strong>
+      </div>
+    </div>
+    <div class="large-3 columns">
+      <div class="stat">
+        <em>Buy It Now Price</em>
+        <strong id="bin-price"><%= number_to_currency(@lot.buy_now_price) %></strong>
+      </div>
+    </div>
+    <div class="large-3 columns">
+      <div class="stat">
+        <em>Bid Increment</em>
+        <strong id="bid-increment"><%= number_to_currency(@lot.calculated_bid_increment) %></strong>
+      </div>
     </div>
   </div>
-  <div class="large-3 columns">
-    <div class="stat">
-      <em>Bid Increment</em>
-      <strong id="bid-increment"><%= number_to_currency(@lot.calculated_bid_increment) %></strong>
+  <% if @lot.has_been_won %>
+  <div class="row">
+    <div class="large-6 columns">
+      <div class="stat">
+        <em>Won By</em>
+        <p><%= @lot.winnner.full_name %></p>
+      </div>
+    </div>
+    <div class="large-6 columns">
+      <div class="stat">
+        <em>Winning Price</em>
+        <p><%= number_to_currency(@lot.winning_price) %></p>
+      </div>
     </div>
   </div>
-
-</div>
+  <% end %>
 </div>
 
 <div class="orchard-panel">

@@ -32,6 +32,10 @@ Rails.application.routes.draw do
 #      get 'destroy_all'
       post 'import'
     end
+
+    member do
+      patch :toggle_paid
+    end
   end
 
   resources :wins

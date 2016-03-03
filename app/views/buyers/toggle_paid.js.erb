@@ -1,0 +1,2 @@
+$("#btn_paid_toggle").text("<%= @buyer.is_paid ? 'Mark as Unpaid' : 'Mark as Paid' %>");
+$("#payment-info").text("Buyer has <%= @buyer.is_paid ? '' : 'NOT' %> Paid");

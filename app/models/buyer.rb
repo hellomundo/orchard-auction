@@ -30,6 +30,10 @@ class Buyer < ActiveRecord::Base
     self.last_name + ", " + self.first_name
   end
 
+  def toggle_paid
+    update_attribute(:is_paid, !self.is_paid)
+  end
+
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
       # only fill certain rows

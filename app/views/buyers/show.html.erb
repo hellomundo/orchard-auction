@@ -53,10 +53,14 @@
 <div class="orchard-panel">
   <div class="panel-header">
     <h1>Total</h1>
+    <ul>
+      <li><%= link_to "#{ @buyer.is_paid ? 'Mark as Unpaid' : 'Mark as Paid' }", toggle_paid_buyer_path(@buyer), method: :patch, remote: :true, id: "btn_paid_toggle" %></li>
+    </ul>
   </div>
   <div class="row">
     <div class="large-12 columns">
       <h4 style="text-align: right">Total due for wins and pledges: <b> <%= number_to_currency(@buyer.total_purchase) %> </b></h4>
+      <h3 id="payment-info" style="text-align: right">Buyer has <%= @buyer.is_paid ? '' : 'NOT' %> Paid</h4>
     </div>
   </div>
 </div>

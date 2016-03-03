@@ -1,6 +1,6 @@
 class BuyersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_buyer, only: [:show, :edit, :update, :destroy]
+  before_action :set_buyer, only: [:show, :edit, :update, :destroy, :toggle_paid]
 
   def index
     if params[:search]
@@ -49,8 +49,6 @@ class BuyersController < ApplicationController
   end
 
   def update
-
-
     if @buyer.update(buyer_params)
       redirect_to @buyer, notice: 'Buyer was successfully updated.'
     else
@@ -61,6 +59,10 @@ class BuyersController < ApplicationController
   def destroy
     @buyer.destroy
     redirect_to buyers_url, notice: 'Buyer was successfully destroyed.'
+  end
+
+  def toggle_paid
+    @buyer.toggle_paid 
   end
 
   # def destroy_all

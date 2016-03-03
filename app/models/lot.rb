@@ -27,6 +27,29 @@ class Lot < ActiveRecord::Base
     self.id + 100
   end
 
+  def has_been_won
+    # bad code - Lot has to know about Win
+    return Win.where(:lot_id => self.id).exists?
+  end
+
+  def winnner
+    if has_been_won
+      my_win.buyer
+    end
+  end
+
+  def my_win
+    if has_been_won
+      return Win.where(:lot_id => self.id).first
+    end
+  end
+
+  def winning_price
+    if has_been_won
+      my_win.price
+    end
+  end
+
   def calculated_description
     if self.description.blank?
       if self.items.blank?
