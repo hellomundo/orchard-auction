@@ -20,8 +20,6 @@ class DonorsController < ApplicationController
       @donors = Donor.order(sort_column)
     end
 
-    #@donors = Donor.all
-
     @search_placeholder = params[:search_name] || ""
 
     respond_to do |format|

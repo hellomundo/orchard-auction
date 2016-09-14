@@ -4,6 +4,7 @@ class BuyersController < ApplicationController
 
   def index
     if params[:search]
+      # fix - put all this in the model
       # check if it is a string or a number
       query = params[:search]
       # is it a number?
@@ -62,7 +63,7 @@ class BuyersController < ApplicationController
   end
 
   def toggle_paid
-    @buyer.toggle_paid 
+    @buyer.toggle_paid
   end
 
   # def destroy_all

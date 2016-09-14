@@ -1,5 +1,6 @@
 class ContactsController < ApplicationController
   def create
+    # fix - what if you can't find this donor?
     @donor = Donor.find(params[:donor_id])
     @contact = @donor.contacts.new(contact_params)
     @contact.user = current_user
