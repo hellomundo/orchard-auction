@@ -1,4 +1,6 @@
 class ContactsController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     # fix - what if you can't find this donor?
     @donor = Donor.find(params[:donor_id])
