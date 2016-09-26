@@ -184,6 +184,7 @@ DEPENDENCIES
   puma
   rails (= 4.2.4)
   rails_12factor
+  rake (= 10.4.2)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   simple_form

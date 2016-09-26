@@ -1,0 +1,38 @@
+<%= simple_form_for @submission do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <div class="row">
+      <div class="large-6 columns"><%= f.input :business, label: "Business Name" %></div>
+      <div class="large-6 columns"><%= f.input :contact, label: "Contact Person" %></div>
+    </div>
+    <div class="row">
+      <div class="large-6 columns"><%= f.input :telephone %></div>
+      <div class="large-6 columns"><%= f.input :email %></div>
+    </div>
+    <div class="row">
+      <div class="large-12 columns"><%= f.input :item, label: "Donated Item" %></div>
+    </div>
+    <div class="row">
+      <div class="large-6 columns"><%= f.input :category %></div>
+      <div class="large-6 columns"><%= f.input :format %></div>
+    </div>
+    <div class="row">
+      <div class="large-6 columns"><%= f.input :fmv, label: "Market Value" %></div>
+    </div>
+     <div class="row">
+      <div class="large-12 columns"><%= f.input :description %></div>
+    </div>
+    <div class="row">
+      <div class="large-12 columns"><%= f.input :restrictions %></div>
+    </div>
+     <div class="row">
+      <div class="large-12 columns">
+        <div class="form-actions">
+          <%= f.button :submit %>
+        </div>
+      </div>
+    </div>
+ </div>
+
+<% end %>

@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  devise_for :users, :controllers => { registrations: 'registrations' }
+
+  root 'application#index'
+
   resources :lots do
     resources :items, only: [:update, :destroy]
 
@@ -10,12 +15,7 @@ Rails.application.routes.draw do
       get 'generate'
       get 'destroy_all'
     end
-
   end
-
-  devise_for :users, :controllers => { registrations: 'registrations' }
-
-  root 'application#index'
 
   resources :donors do
     resources :contacts
@@ -40,14 +40,16 @@ Rails.application.routes.draw do
 
   resources :wins
 
+  resources :submissions
+
   resources :pledges
 
   resources :items do #, only: [:index, :destroy, :import]
     collection do
       post 'import'
     end
-
   end
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
