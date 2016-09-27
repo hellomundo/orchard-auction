@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+<div class="orchard-panel">
+
+  <div class="panel-header">
+    <h1>Auction Events</h1>
+    <ul>
+      <li><%= link_to 'New Auction', new_event_path %></li>
+    </ul>
+  </div>
+  <div id="gen-errors">
+    <ul></ul>
+  </div>
+  <div id="gen-list">
+    <% if @events.count > 0 %>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Theme</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @events.each do |event| %>
+          <tr>
+            <td><%= link_to(event.date, event_path(event)) %></td>
+            <td><%= event.theme %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% else %>
+    <p>No Auctions have been created yet.</p>
+    <% end %>
+  </div>
+</div>

@@ -47,6 +47,8 @@ Rails.application.routes.draw do
 
   resources :pledges
 
+  resources :events
+
   resources :items do #, only: [:index, :destroy, :import]
     collection do
       post 'import'
