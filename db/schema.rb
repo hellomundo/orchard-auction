@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160927175459) do
+ActiveRecord::Schema.define(version: 20161019025106) do
 
   create_table "buyers", force: :cascade do |t|
     t.string   "first_name"
@@ -22,7 +22,10 @@ ActiveRecord::Schema.define(version: 20160927175459) do
     t.string   "telephone"
     t.integer  "guests"
     t.boolean  "is_paid",    default: false, null: false
+    t.integer  "event_id"
   end
+
+  add_index "buyers", ["event_id"], name: "index_buyers_on_event_id"
 
   create_table "contacts", force: :cascade do |t|
     t.integer  "donor_id"
@@ -32,9 +35,11 @@ ActiveRecord::Schema.define(version: 20160927175459) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "user_id"
+    t.integer  "event_id"
   end
 
   add_index "contacts", ["donor_id"], name: "index_contacts_on_donor_id"
+  add_index "contacts", ["event_id"], name: "index_contacts_on_event_id"
   add_index "contacts", ["user_id"], name: "index_contacts_on_user_id"
 
   create_table "donors", force: :cascade do |t|
@@ -75,9 +80,11 @@ ActiveRecord::Schema.define(version: 20160927175459) do
     t.integer  "format",                                default: 0
     t.float    "opening_price"
     t.integer  "category",                              default: 0
+    t.integer  "event_id"
   end
 
   add_index "items", ["donor_id"], name: "index_items_on_donor_id"
+  add_index "items", ["event_id"], name: "index_items_on_event_id"
   add_index "items", ["lot_id"], name: "index_items_on_lot_id"
 
   create_table "lots", force: :cascade do |t|
@@ -90,7 +97,10 @@ ActiveRecord::Schema.define(version: 20160927175459) do
     t.float    "buy_now_price"
     t.integer  "table_number"
     t.integer  "quantity_available"
+    t.integer  "event_id"
   end
+
+  add_index "lots", ["event_id"], name: "index_lots_on_event_id"
 
   create_table "pledges", force: :cascade do |t|
     t.decimal  "amount"
@@ -98,9 +108,11 @@ ActiveRecord::Schema.define(version: 20160927175459) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "pledge_type"
+    t.integer  "event_id"
   end
 
   add_index "pledges", ["buyer_id"], name: "index_pledges_on_buyer_id"
+  add_index "pledges", ["event_id"], name: "index_pledges_on_event_id"
 
   create_table "submissions", force: :cascade do |t|
     t.string   "business"
@@ -115,7 +127,10 @@ ActiveRecord::Schema.define(version: 20160927175459) do
     t.text     "restrictions"
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
+    t.integer  "event_id"
   end
+
+  add_index "submissions", ["event_id"], name: "index_submissions_on_event_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
@@ -143,9 +158,11 @@ ActiveRecord::Schema.define(version: 20160927175459) do
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
     t.integer  "lot_id"
+    t.integer  "event_id"
   end
 
   add_index "wins", ["buyer_id"], name: "index_wins_on_buyer_id"
+  add_index "wins", ["event_id"], name: "index_wins_on_event_id"
   add_index "wins", ["lot_id"], name: "index_wins_on_lot_id"
 
 end

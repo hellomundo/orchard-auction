@@ -9,7 +9,8 @@ gem 'sass-rails', '~> 5.0'
 
 # required for flat ui kit
 #gem 'compass-rails', '~> 2.0.4'
-gem 'rake', '10.4.2'
+#gem 'rake', '10.4.2'
+gem 'rake', '11.2.2'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
