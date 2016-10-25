@@ -28,12 +28,6 @@
       <!-- Right Nav Section -->
       <ul class="right">
         <% if user_signed_in? %>
-        <li><%= link_to "Donors", event_donors_path(@event) %></li>
-        <li><%= link_to "Items", event_items_path(@event) %></li>
-        <li><%= link_to "Lots", lots_path %></li>
-        <li><%= link_to "Wins", wins_path %></li>
-        <li><%= link_to "Pledges", pledges_path %></li>
-        <li><%= link_to "Buyers", buyers_path %></li>
 
         <li class="has-dropdown">
           <a href="#"><%= current_user.first_name %></a>

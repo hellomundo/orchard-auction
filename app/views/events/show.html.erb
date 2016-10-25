@@ -1,24 +1,56 @@
 <p id="notice"><%= notice %></p>
 <div class="orchard-panel">
-  <div class="panel-header">
-    <h1><%= @event.date.strftime('%Y') %> Auction</h1>
-    <ul>
-      <li><%= link_to 'Edit', edit_event_path(@event) %></li>
-    </ul>
+<div class="panel-header">
+  <h1>Hello!</h1>
+  <ul>
+    <li><%= link_to 'Previous Auctions', events_path %></li>
+    <li><%= link_to 'Edit', edit_event_path(@event) %></li>
+  </ul>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    <div class="lede">Welcome to the <%= @event.date.strftime('%Y') %> Auction Admin Site.</div>
   </div>
-  <div class="row">
-    <div class="large-4 columns">
-      <div class="stat">
-        <em>Auction Date</em>
-        <strong id="stat"><%= @event.date %></strong>
-      </div>
+</div>
+<div class="row">
+  <div class="large-4 columns">
+    <div class="stat">
+      <em>Auction Date</em>
+      <strong id="stat"><%= @event.date %></strong>
     </div>
-    <div class="large-8 columns">
-      <div class="stat">
-        <em>Theme</em>
-        <p><%= @event.theme %></p>
-      </div>
+  </div>
+  <div class="large-8 columns">
+    <div class="stat">
+      <em>Theme</em>
+      <p><%= @event.theme %></p>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="large-3 columns">
+    <div class="stat">
+      <em>Donors Needing Follow-up</em>
+      <strong><%= @uncommitted_donors %></strong>
+    </div>
+  </div>
+  <div class="large-3 columns">
+    <div class="stat">
+      <em>Committed Donors</em>
+      <strong><%= @committed_donors %></strong>
+    </div>
+  </div>
+  <div class="large-3 columns">
+    <div class="stat">
+      <em>Items Donated</em>
+      <strong><%= @items_donated %></strong>
+    </div>
+  </div>
+  <div class="large-3 columns">
+    <div class="stat">
+      <em>Total Donations Value</em>
+      <strong><%= number_to_currency(@total_value) %></strong>
     </div>
   </div>
 
+</div>
 </div>

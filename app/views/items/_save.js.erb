@@ -1,0 +1,15 @@
+$("#gen-errors ul").html("");
+<% if @item.errors.any? %>
+  <% @item.errors.full_messages.each do |message| %>
+    $("#gen-errors ul").append($("<li />").html("<%= message.html_safe %>"));
+  <% end %>
+  $("#gen-errors").slideDown();
+<% else %>
+  $("#gen-list").html("<%= escape_javascript(render 'index') %>");
+  $("#gen-errors").slideUp(0);
+  $('#gen-form').slideUp('fast');
+  $('#btn_donor_item_toggle').text('Add Donation');
+  // reset the form
+  $('#new_item')[0].reset();
+
+<% end %>

@@ -1,6 +1,7 @@
 class Donor < ActiveRecord::Base
   has_many :contacts, dependent: :destroy
   has_many :items, dependent: :destroy
+  has_one :stage, class_name: "Status"
 
   enum status: { "uncalled" => 0, "called" => 1, "needs_callback" => 2, "opted_out" => 3, "donated" => 4 }
 
@@ -52,5 +53,17 @@ class Donor < ActiveRecord::Base
       d.save
     end
   end
+
+  def set_stage(the_stage, event)
+    s = Status.where(donor_id: self.id).first_or_create(event_id: event.id)
+    s.stage = the_stage
+    s.save
+  end
+
+  def get_stage(event)
+    s = Status.where(donor_id: self.id).first_or_create(event_id: event.id)
+    s.stage
+  end
+
 
 end

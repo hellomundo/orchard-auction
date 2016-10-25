@@ -3,17 +3,18 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { registrations: 'registrations' }
 
   authenticated :user do
-    root to: 'application#index', as: :authenticated_root
+    root to: 'events#index', as: :authenticated_root
   end
   root to: redirect('/users/sign_in')
 
   resources :lots do
-    resources :items, only: [:update, :destroy]
+    #resources :items, only: [:update, :destroy]
 
     member do
       get :toggle
     end
 
+    #utility functions
     collection do
       get 'generate'
       get 'destroy_all'
@@ -22,7 +23,7 @@ Rails.application.routes.draw do
 
   resources :donors do
     resources :contacts
-    resources :items
+    #resources :items
 
     collection do
       get 'destroy_all'
@@ -36,6 +37,7 @@ Rails.application.routes.draw do
       post 'import'
     end
 
+    #need to fix
     member do
       patch :toggle_paid
     end
@@ -47,7 +49,16 @@ Rails.application.routes.draw do
 
   resources :pledges
 
-  resources :events
+  resources :events do
+    resources :items
+    resources :donors do
+      member do
+        patch 'stage', action: :update_stage
+      end
+    end
+    resources :contacts
+
+  end
 
   resources :items do #, only: [:index, :destroy, :import]
     collection do

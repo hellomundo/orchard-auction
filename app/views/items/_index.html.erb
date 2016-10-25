@@ -1,0 +1,26 @@
+<% if @items.count > 0 %>
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Item</th>
+      <th class="numeric">Value</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @items.each do |item| %>
+    <tr>
+      <td><%= icon_link edit_event_item_path(item.event, item), "wrench" %></td>
+      <td><%= link_to item.name, event_item_path(item.event, item) %></td>
+      <td><%= link_to item.id %></td>
+      <td class="numeric"><%= number_to_currency(item.fmv) %></td>
+      <td><%= link_to '<i class="fi-x"></i>'.html_safe, event_item_path(item.event, item), method: :delete, remote: true, data: { confirm: 'Are you sure? This will erase this item from the database.' } %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% else %>
+<p>No items donated yet.</p>
+<% end %>

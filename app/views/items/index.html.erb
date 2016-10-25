@@ -19,8 +19,8 @@
   <tbody>
     <% @items.each do |item| %>
       <tr>
-        <td><%= icon_link edit_donor_item_path(item.donor, item), "wrench" %></td>
-        <td><%= link_to item.name, donor_item_path(item.donor, item) %></td>
+        <td><%= icon_link edit_event_item_path(item.event, item), "wrench" %></td>
+        <td><%= link_to item.name, event_item_path(item.event, item) %></td>
         <td><%= link_to item.donor.company, donor_path(item.donor) %></td>
         <td class="numeric"><%= number_to_currency(item.fmv) %></td>
         <td><%#= link_to 'Show', item %></td>

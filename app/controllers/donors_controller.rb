@@ -1,11 +1,11 @@
 class DonorsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_donor, only: [:show, :edit, :update, :destroy]
+  before_action :set_donor, only: [:show, :edit, :update, :destroy, :update_stage]
+  #before_action :set_event, only: [:index, :edit, :show, :update]
 
   # GET /donors
   # GET /donors.json
   def index
-
     if params[:search_name].present?
       if params[:search_cat].present?
         # search for name and category
@@ -31,6 +31,7 @@ class DonorsController < ApplicationController
   # GET /donors/1
   # GET /donors/1.json
   def show
+    @items = @donor.items
   end
 
   # GET /donors/new
@@ -53,28 +54,28 @@ class DonorsController < ApplicationController
   def create
     @donor = Donor.new(donor_params)
 
-    respond_to do |format|
-      if @donor.save
-        format.html { redirect_to @donor, notice: 'Donor was successfully created.' }
-        format.json { render :show, status: :created, location: @donor }
-      else
-        format.html { render :new }
-        format.json { render json: @donor.errors, status: :unprocessable_entity }
-      end
+    if @donor.save
+      redirect_to event_donor_path(@event, @donor), notice: 'Donor was successfully created.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /donors/1
   # PATCH/PUT /donors/1.json
   def update
-    respond_to do |format|
       if @donor.update(donor_params)
-        format.html { redirect_to @donor, notice: 'Donor was successfully updated.' }
-        format.json { render :show, status: :ok, location: @donor }
+        redirect_to event_donor_path(@event, @donor), notice: 'Donor was successfully updated.'
       else
-        format.html { render :edit }
-        format.json { render json: @donor.errors, status: :unprocessable_entity }
+        render :edit
       end
+  end
+
+  def update_stage
+    @donor.set_stage(params[:donor][:stage], @event)
+    respond_to do |format|
+      format.html { redirect_to event_donor_path(@event, @donor) }
+      format.js
     end
   end
 
@@ -82,16 +83,12 @@ class DonorsController < ApplicationController
   # DELETE /donors/1.json
   def destroy
     @donor.destroy
-    respond_to do |format|
-      format.html { redirect_to donors_url, notice: 'Donor was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to event_donors_url(@event), notice: 'Donor was successfully destroyed.'
   end
 
  def destroy_all
    Donor.destroy_all
-   redirect_to donors_url
-
+   redirect_to event_donors_path(@event)
  end
 
   private
@@ -100,9 +97,13 @@ class DonorsController < ApplicationController
       @donor = Donor.find(params[:id])
     end
 
+    # def set_event
+    #   @event_id = params[:event_id]
+    # end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def donor_params
-      params.require(:donor).permit(:company, :first_name, :last_name, :title, :phone, :email, :address1, :address2, :city, :state, :zip, :website, :status, :has_donated)
+      params.require(:donor).permit(:company, :first_name, :last_name, :title, :phone, :email, :address1, :address2, :city, :state, :zip, :website, :status, :has_donated, :stage)
     end
 
     def sort_column

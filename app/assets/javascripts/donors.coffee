@@ -4,17 +4,20 @@
 
 $(document).on "page:change", ->
 # hide the forms
-  $('#donation-add-form').hide 0
+  $('#gen-form').hide 0
   $('#contact-add-form').hide 0
 
 # show and hide the donation form
-  $('#donation-cancel-button').click ->
-    $('#donation-add-form').slideUp "fast"
-    $('#donation-add-button').show 0
 
-  $('#donation-add-button').click ->
-    $('#donation-add-form').slideDown "fast"
-    $('#donation-add-button').hide 0
+  $('#btn_donor_item_toggle').click (e) ->
+    e.stopPropagation();
+    e.preventDefault();
+    if $('#gen-form').is(':visible')
+      closeItemForm()
+      return true
+    else
+      openItemForm()
+      return true
 
 # show and hide the contact form
   $('#contact-cancel-button').click ->
@@ -24,3 +27,17 @@ $(document).on "page:change", ->
   $('#contact-add-button').click ->
     $('#contact-add-form').slideDown "fast"
     $('#contact-add-button').hide 0
+
+  closeItemForm = () ->
+      $('#gen-form').slideUp "fast"
+      $('#btn_donor_item_toggle').text('Add Donation')
+      #reset the form
+      $('#new_item')[0].reset()
+      return true
+
+  openItemForm = () ->
+      $('#gen-form').slideDown "fast"
+      $('#btn_donor_item_toggle').text('Cancel')
+      return true
+
+  return true;

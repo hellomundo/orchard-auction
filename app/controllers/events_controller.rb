@@ -1,5 +1,9 @@
 class EventsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+
+  layout "events", except: [:show]
+  layout "application", only: [:show]
 
   # GET /events
   # GET /events.json
@@ -10,6 +14,15 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+    total_donors = Donor.count
+    # how many donors have donated
+    @committed_donors = Donor.where(status: 4).count
+    # how many donors have been followed up with
+    @uncommitted_donors = total_donors - @committed_donors
+    # how may items have been donated
+    @items_donated = Item.where(event_id: @event.id).count
+    # what is the overall value of donations
+    @total_value = Item.where(event_id: @event.id).sum("fmv")
   end
 
   # GET /events/new

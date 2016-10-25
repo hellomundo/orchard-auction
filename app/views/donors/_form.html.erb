@@ -1,4 +1,4 @@
-<%= simple_form_for(@donor) do |f| %>
+<%= simple_form_for([@event, @donor]) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
@@ -30,11 +30,12 @@
     </div>
     <div class="row">
       <div class="large-6 columns"><%= f.input :has_donated %></div>
-      <div class="large-6 columns"><%= f.input :status %></div>
+      <div class="large-6 columns"><%#= f.input :status %></div>
     </div>
     <div class="row">
       <div class="large-12 columns">
         <div class="form-actions">
+          <%= f.hidden_field :event_id, value: @event_id %>
           <%= f.button :submit %>
         </div>
       </div>

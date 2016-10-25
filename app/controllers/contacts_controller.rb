@@ -8,7 +8,7 @@ class ContactsController < ApplicationController
     @contact.user = current_user
     #if statement around this to check for success?
     @contact.save
-    redirect_to donor_path(@donor)
+    redirect_to event_donor_path(@event, @donor)
   end
 
   private

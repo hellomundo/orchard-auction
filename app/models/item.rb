@@ -3,6 +3,7 @@ class Item < ActiveRecord::Base
   include ItemFormats
 
   belongs_to :donor
+  belongs_to :event
   belongs_to :lot
 
   # add parent_id to migration

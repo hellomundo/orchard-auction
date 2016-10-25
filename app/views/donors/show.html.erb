@@ -4,8 +4,7 @@
 <div class="panel-header">
   <h1><%= @donor.company %></h1>
   <ul>
-    <li><%= link_to 'Back', donors_path %></li>
-    <li><%= link_to 'Edit', edit_donor_path(@donor) %></li>
+    <li><%= link_to 'Edit', edit_event_donor_path(@event, @donor) %></li>
   </ul>
 </div>
   <p><%= @donor.first_name %> <%= @donor.last_name %>
@@ -17,63 +16,44 @@
   <%= @donor.city %>, <%= @donor.state %> <%= @donor.zip %></p>
   <p>This donor <strong>HAS <% if !@donor.has_donated %>NOT<% end %></strong> donated before.</p>
   <% if @donor.website.present? %><p><%= link_to @donor.website, "http://" + @donor.website %></p><% end %>
-  <p>Status: <%= @donor.status.humanize %></p>
+  <p>Status: <%= @donor.get_stage(@event).humanize %></p>
  </div>
 
  <div class="orchard-panel">
-<div class="panel-header">
-  <h1>Donations</h1>
-</div>
-  <table>
-    <thead>
-      <tr>
-        <th></th>
-        <th>Item</th>
-        <th class="numeric">Value</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody id="donor-items">
-      <% @donor.items.each do |item| %>
-        <%= render 'items/item_row', item: item, donor: @donor  %>
-      <% end %>
-    </tbody>
-  </table>
-  <a class="action-button" id="donation-add-button">Add</a>
-  <!-- form for adding a donation item -->
-  <div id="donation-add-form">
-    <h4>Add Item</h4>
-    <%= simple_form_for([@donor, @donor.items.build], :remote => true) do |f| %>
-    <div class="form-inputs">
-      <div class="row">
-        <div class="large-12 columns"><%= f.input :name %></div>
-      </div>
-      <div class="row">
-        <div class="large-6 columns"><%= f.input :category %></div>
-        <div class="large-6 columns"><%= f.input :format %></div>
-      </div>
-      <div class="row">
-        <div class="large-6 columns"><%= f.input :fmv %></div>
-        <div class="large-6 columns"><%= f.input :opening_price %></div>
-      </div>
-       <div class="row">
-        <div class="large-12 columns"><%= f.input :description %></div>
-      </div>
-      <div class="row">
-        <div class="large-12 columns"><%= f.input :restrictions %></div>
-      </div>
-    </div>
-    <p class="form-control">
-      <%= f.button :submit, class: "btn" %><%= f.button :submit, "Create and Add Another", class: "btn" %><a id="donation-cancel-button" class="btn">Cancel</a>
-    </p>
-    <% end %>
-  </div>
+   <div class="panel-header">
+     <h1>Donations</h1>
+     <ul>
+       <li><a href="#" id="btn_donor_item_toggle">New Item</a></li>
+     </ul>
+   </div>
+   <div id="gen-errors">
+     <ul></ul>
+   </div>
+   <div id="gen-form">
+     <%= render "items/form" %>
+   </div>
+   <div id="gen-list">
+     <%= render "items/index" %>
+   </div>
+
 </div>
 
 <div class="orchard-panel">
-<div class="panel-header">
-  <h1>Communication History</h1>
+  <div class="panel-header">
+    <h1>Donor Status</h1>
+  </div>
+  <%= simple_form_for([@event,@donor], :url => stage_event_donor_path) do |f| %>
+  <div class="row">
+    <div class="large-6 columns"><%= f.input :stage, collection: Status.stages.keys.to_a, :selected => @donor.get_stage(@event) %></div>
+    <div class="large-6 columns"><%= f.button :submit, class: "btn" %></div>
+  </div>
+<% end %>
 </div>
+
+<div class="orchard-panel">
+  <div class="panel-header">
+    <h1>Communication History</h1>
+  </div>
   <table>
     <thead>
       <tr>
@@ -87,7 +67,7 @@
     <% @donor.contacts.each do |contact| %>
       <tr>
         <td><%= contact.contacted_on %></td>
-        <td><% if contact.channel.nil? %>&mdash;<% else %>%= contact.channel.humanize<% end %></td>
+        <td><% if contact.channel.nil? %>&mdash;<% else %><%= contact.channel.humanize %><% end %></td>
         <td><%= contact.user.first_name %></td>
         <td><%= contact.note %></td>
       </tr>

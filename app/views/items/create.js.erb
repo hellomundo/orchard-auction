@@ -1,6 +1,3 @@
-// reset the form
-$('#new_item').trigger("reset");
+<%= render "items/save" %>
 
-$("#donor-items").append('<%= escape_javascript(render 'item_row', item: @item, donor: @donor )%>');
-
-// if submit button was not xxxxx then close the form
+closeItemForm();
