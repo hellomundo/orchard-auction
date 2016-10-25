@@ -1,0 +1,15 @@
+$("#com-errors ul").html("");
+<% if @contact.errors.any? %>
+  <% @contact.errors.full_messages.each do |message| %>
+    $("#com-errors ul").append($("<li />").html("<%= message.html_safe %>"));
+  <% end %>
+  $("#com-errors").slideDown();
+<% else %>
+  $("#com-list").html("<%= escape_javascript(render 'index') %>");
+  $("#com-errors").slideUp(0);
+  $('#com-form').slideUp('fast');
+  $('#btn_donor_contact_toggle').text('Record a Contact');
+  // reset the form
+  $('#new_contact')[0].reset();
+
+<% end %>

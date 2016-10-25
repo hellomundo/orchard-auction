@@ -31,7 +31,11 @@ class DonorsController < ApplicationController
   # GET /donors/1
   # GET /donors/1.json
   def show
-    @items = @donor.items
+    @items = @donor.items.where(event_id: @event.id)
+    @contacts = @donor.contacts.where(event_id: @event.id)
+
+    #if @items.blank? then @items = []
+
   end
 
   # GET /donors/new

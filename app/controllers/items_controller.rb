@@ -34,7 +34,7 @@ class ItemsController < ApplicationController
   def create
     @donor = Donor.find(item_params[:donor_id])
     @item = @event.items.create(item_params)
-    @items = @donor.items
+    @items = @event.items.where(donor_id: @donor.id)
     respond_to do |format|
       format.html { redirect_to event_donor_path(@event, @donor) }
       format.js

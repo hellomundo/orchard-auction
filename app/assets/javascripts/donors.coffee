@@ -5,7 +5,7 @@
 $(document).on "page:change", ->
 # hide the forms
   $('#gen-form').hide 0
-  $('#contact-add-form').hide 0
+  $('#com-form').hide 0
 
 # show and hide the donation form
 
@@ -19,15 +19,6 @@ $(document).on "page:change", ->
       openItemForm()
       return true
 
-# show and hide the contact form
-  $('#contact-cancel-button').click ->
-    $('#contact-add-form').slideUp "fast"
-    $('#contact-add-button').show 0
-
-  $('#contact-add-button').click ->
-    $('#contact-add-form').slideDown "fast"
-    $('#contact-add-button').hide 0
-
   closeItemForm = () ->
       $('#gen-form').slideUp "fast"
       $('#btn_donor_item_toggle').text('Add Donation')
@@ -38,6 +29,28 @@ $(document).on "page:change", ->
   openItemForm = () ->
       $('#gen-form').slideDown "fast"
       $('#btn_donor_item_toggle').text('Cancel')
+      return true
+
+  $('#btn_donor_contact_toggle').click (e) ->
+    e.stopPropagation();
+    e.preventDefault();
+    if $('#com-form').is(':visible')
+      closeContactForm()
+      return true
+    else
+      openContactForm()
+      return true
+
+  closeContactForm = () ->
+      $('#com-form').slideUp "fast"
+      $('#btn_donor_contact_toggle').text('Record a Contact')
+      #reset the form
+      $('#new_contact')[0].reset()
+      return true
+
+  openContactForm = () ->
+      $('#com-form').slideDown "fast"
+      $('#btn_donor_contact_toggle').text('Cancel')
       return true
 
   return true;

@@ -3,16 +3,21 @@ class ContactsController < ApplicationController
 
   def create
     # fix - what if you can't find this donor?
-    @donor = Donor.find(params[:donor_id])
-    @contact = @donor.contacts.new(contact_params)
+    @donor = Donor.find(contact_params[:donor_id])
+    @contact = @event.contacts.new(contact_params)
     @contact.user = current_user
     #if statement around this to check for success?
     @contact.save
-    redirect_to event_donor_path(@event, @donor)
+    @contacts = @donor.contacts.where(event_id: @event.id)
+    respond_to do |format|
+      format.html { redirect_to event_donor_path(@event, @donor) }
+      format.js
+    end
+
   end
 
   private
     def contact_params
-      params.require(:contact).permit(:contacted_on, :channel, :note)
+      params.require(:contact).permit(:donor_id, :contacted_on, :channel, :note)
   end
 end

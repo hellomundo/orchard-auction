@@ -55,13 +55,13 @@ class Donor < ActiveRecord::Base
   end
 
   def set_stage(the_stage, event)
-    s = Status.where(donor_id: self.id).first_or_create(event_id: event.id)
+    s = Status.where("donor_id = ? AND event_id = ?", self.id, event.id).first_or_create()
     s.stage = the_stage
     s.save
   end
 
   def get_stage(event)
-    s = Status.where(donor_id: self.id).first_or_create(event_id: event.id)
+    s = Status.where("donor_id = ? AND event_id = ?", self.id, event.id).first_or_create()
     s.stage
   end
 
