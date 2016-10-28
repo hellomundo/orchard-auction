@@ -54,6 +54,19 @@ class Donor < ActiveRecord::Base
     end
   end
 
+  def items_for_event(event)
+    self.items.where(event_id: event.id)
+  end
+
+  def contacts_for_event(event)
+    self.contacts.where(event_id: event)
+  end
+
+  def status_for_event(event)
+    s = Status.where("donor_id = ? AND event_id = ?", self.id, event.id).first_or_create()
+    s.stage
+  end
+
   def set_stage(the_stage, event)
     s = Status.where("donor_id = ? AND event_id = ?", self.id, event.id).first_or_create()
     s.stage = the_stage

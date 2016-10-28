@@ -58,4 +58,10 @@ class Item < ActiveRecord::Base
     end
   end
 
+  def self.all_for_event(event)
+  end
+
+  def self.all_for_donor_and_event(donor, event)
+  end
+
 end
