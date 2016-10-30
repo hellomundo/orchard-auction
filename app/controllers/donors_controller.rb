@@ -9,15 +9,15 @@ class DonorsController < ApplicationController
     if params[:search_name].present?
       if params[:search_cat].present?
         # search for name and category
-        @donors = Donor.search_by_name_and_cat(params[:search_name], params[:search_cat])
+        @donors = Donor.by_event_name_and_stage(@event.id, params[:search_name], params[:search_cat])
       else
-        @donors = Donor.search_by_name(params[:search_name])
+        @donors = Donor.by_event_and_name(@event.id, params[:search_name])
       end
     elsif params[:search_cat].present?
       #show all in cat
-      @donors = Donor.filter_by_cat(params[:search_cat])
+      @donors = Donor.by_event_and_stage(@event.id, params[:search_cat])
     else
-      @donors = Donor.order(sort_column)
+      @donors = Donor.by_event(@event.id).order(sort_column)
     end
 
     @search_placeholder = params[:search_name] || ""

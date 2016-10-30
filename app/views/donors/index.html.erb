@@ -11,7 +11,7 @@
 <div class="row">
   <%= form_tag event_donors_path(@event), :method => 'get' do%>
     <div class="large-4 columns"><%= text_field_tag 'search_name', @search_placeholder %></div>
-    <div class="large-4 columns"><%= select_tag 'search_cat', options_for_select(Donor.statuses), id: "search_cat", :include_blank => "All Statuses" %></div>
+    <div class="large-4 columns"><%= select_tag 'search_cat', options_for_select(Status.stages.collect { |s| [s[0].humanize, s[1]]}), id: "search_cat", :include_blank => "All Statuses" %></div>
     <div class="large-4 columns"><%= submit_tag "Find Donor", :class => "search-button", :name => nil %></div>
   <% end %>
 </div>
@@ -35,7 +35,7 @@
         <td><%= donor.id %></td>
         <td><%= link_to donor.company, event_donor_path(@event, donor) %></td>
         <td><%= donor.first_name %> <%= donor.last_name %></td>
-        <td><%= donor.status.humanize %></td>
+        <td><%= donor.stage != nil ? donor.stage.stage : "uncalled" %></td>
         <td><%= link_to '<i class="fi-x"></i>'.html_safe, donor, method: :delete, data: { confirm: 'Are you sure? This will also delete all the items donated by this donor.' } %></td>
       </tr>
     <% end %>
