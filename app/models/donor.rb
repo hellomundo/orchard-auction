@@ -17,6 +17,10 @@ class Donor < ActiveRecord::Base
     where(status: cat)
   end
 
+  def self.for_event_at_stage(event_id, stage)
+    joins(:stage).where('statuses.event_id = ? AND statuses.stage = ?', event_id, stage)
+  end
+
   def self.to_csv
     attributes = %w{company first_name last_name phone address1 address2 city state zip has_donated}
     CSV.generate do |csv|
@@ -62,21 +66,24 @@ class Donor < ActiveRecord::Base
     self.contacts.where(event_id: event)
   end
 
-  def status_for_event(event)
-    s = Status.where("donor_id = ? AND event_id = ?", self.id, event.id).first_or_create()
-    s.stage
-  end
-
   def set_stage(the_stage, event)
-    s = Status.where("donor_id = ? AND event_id = ?", self.id, event.id).first_or_create()
+    s = my_status(event)
     s.stage = the_stage
     s.save
   end
 
   def get_stage(event)
-    s = Status.where("donor_id = ? AND event_id = ?", self.id, event.id).first_or_create()
-    s.stage
+    my_status(event).stage
   end
 
+  private
+
+  def my_status(event)
+    s = Status.where(donor_id: id, event_id: event.id).first
+    if s.blank?
+      s = Status.create(donor_id: id, event_id: event.id)
+    end
+    return s
+  end
 
 end

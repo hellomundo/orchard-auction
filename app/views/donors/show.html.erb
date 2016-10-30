@@ -42,7 +42,7 @@
   <div class="panel-header">
     <h1>Donor Status</h1>
   </div>
-  <%= simple_form_for([@event,@donor], :url => stage_event_donor_path) do |f| %>
+  <%= simple_form_for([@event,@donor], :url => stage_event_donor_path, remote: false) do |f| %>
   <div class="row">
     <div class="large-6 columns"><%= f.input :stage, collection: Status.stages.keys.to_a, :selected => @donor.get_stage(@event) %></div>
     <div class="large-6 columns"><%= f.button :submit, class: "btn" %></div>

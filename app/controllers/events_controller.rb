@@ -16,7 +16,7 @@ class EventsController < ApplicationController
   def show
     total_donors = Donor.count
     # how many donors have donated
-    @committed_donors = Donor.where(status: 4).count
+    @committed_donors = Status.joins(:donor).where(stage: 4, event_id: @event.id).count
     # how many donors have been followed up with
     @uncommitted_donors = total_donors - @committed_donors
     # how may items have been donated
