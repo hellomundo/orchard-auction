@@ -1,4 +1,4 @@
-<% if @buyer.wins.count > 0 %>
+<% if @buyer.event_wins(@event).count > 0 %>
 <table>
   <thead>
     <tr>
@@ -9,12 +9,12 @@
     </tr>
   </thead>
   <tbody id="buyer-wins">
-    <% @buyer.wins.each do |win| %>
+    <% @buyer.event_wins(@event).each do |win| %>
     <tr>
       <td></td>
-      <td><%= link_to win.lot.name, lot_path(win.lot) %></td>
+      <td><%= link_to win.lot.name, event_lot_path(@event, win.lot) %></td>
       <td class="numeric"><%= number_to_currency(win.price) %></td>
-      <td><%= link_to '<i class="fi-x"></i>'.html_safe, win_path(win), method: :delete, data: { confirm: 'Are you sure? This remove this win for this buyer.' } %></td>
+      <td><%= link_to '<i class="fi-x"></i>'.html_safe, event_win_path(@event, win), method: :delete, data: { confirm: 'Are you sure? This remove this win for this buyer.' } %></td>
     </tr>
     <% end %>
     <tr></tr>

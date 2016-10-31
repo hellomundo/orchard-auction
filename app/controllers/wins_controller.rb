@@ -11,15 +11,16 @@ class WinsController < ApplicationController
 
   def new
     @win = Win.new
-    @wins = Win.all
+    @wins = Win.where(event_id: @event.id)
   end
 
   def edit
   end
 
   def create
-    @wins = Win.all
+    @wins = Win.where(event_id: @event.id)
     @win = Win.new(win_params)
+    @win.event_id = @event.id
 
     if @win.save
       respond_to do |format|
@@ -44,7 +45,7 @@ class WinsController < ApplicationController
   end
 
   def destroy
-    @wins = Win.all
+    @wins = Win.where(event_id: @event.id)
     @win.destroy
     respond_to do |format|
       format.html { redirect_to wins_url, notice: 'Okay, I deleted that win.' }

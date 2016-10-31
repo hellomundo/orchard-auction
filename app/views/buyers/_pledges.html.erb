@@ -1,4 +1,4 @@
-<% if @buyer.pledges.count > 0 %>
+<% if @buyer.event_pledges(@event).count > 0 %>
 <table>
   <thead>
     <tr>
@@ -9,7 +9,7 @@
     </tr>
   </thead>
   <tbody id="buyer-pledges">
-    <% @buyer.pledges.each do |pledge| %>
+    <% @buyer.event_pledges(@event).each do |pledge| %>
     <tr>
       <td></td>
       <td><%= pledge.pledge_type %></td>

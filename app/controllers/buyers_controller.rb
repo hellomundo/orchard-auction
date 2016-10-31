@@ -27,8 +27,8 @@ class BuyersController < ApplicationController
 
   def show
     @win = Win.new
-    @win_total = Win.total_for_buyer(@buyer)
-    @pledge_total = Pledge.total_for_buyer(@buyer)
+    @win_total = Win.event_total_for_buyer(@event, @buyer)
+    @pledge_total = Pledge.event_total_for_buyer(@event, @buyer)
   end
 
   def new

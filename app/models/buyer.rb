@@ -10,16 +10,24 @@ class Buyer < ActiveRecord::Base
     self.id + 100
   end
 
-  def total_wins
-    Win.total_for_buyer(self)
+  def event_wins(event)
+    wins.where(event_id: event.id)
   end
 
-  def total_pledges
-    Pledge.total_for_buyer(self)
+  def event_pledges(event)
+    pledges.where(event_id: event.id)
   end
 
-  def total_purchase
-    self.total_wins + self.total_pledges
+  def event_total_wins(event)
+    Win.event_total_for_buyer(event, self)
+  end
+
+  def event_total_pledges(event)
+    Pledge.event_total_for_buyer(event, self)
+  end
+
+  def event_total_purchase(event)
+    self.event_total_wins(event) + self.event_total_pledges(event)
   end
 
   def full_name

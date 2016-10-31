@@ -5,8 +5,8 @@ class Win < ActiveRecord::Base
 
   before_save :validate_single_owner, :validate_lot, :validate_buyer
 
-  def self.total_for_buyer(buyer)
-    Win.where(:buyer_id => buyer.id).sum(:price)
+  def self.event_total_for_buyer(event, buyer)
+    Win.where(event_id: event.id, buyer_id: buyer.id).sum(:price)
   end
 
   private
