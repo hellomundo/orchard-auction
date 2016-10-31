@@ -10,18 +10,18 @@ class BuyersController < ApplicationController
       # is it a number?
       if query.to_i.to_s == query
         bid = query.to_i - 100
-        @buyers = Buyer.where(:id => bid)
+        @buyers = Buyer.where(id: bid, event_id: @event.id)
       else
-        @buyers = Buyer.where('lower(last_name) LIKE :search OR lower(first_name) LIKE :search', search: "%#{query.downcase}%")
+        @buyers = Buyer.where('event_id = :eid AND lower(last_name) LIKE :search OR lower(first_name) LIKE :search', search: "%#{query.downcase}%", eid: @event.id)
       end
 
       if @buyers.blank?
-        redirect_to buyers_path, notice: "Sorry, I couldn't find that buyer."
+        redirect_to event_buyers_path(@event), notice: "Sorry, I couldn't find that buyer."
       elsif @buyers.length == 1
-        redirect_to @buyers.first
+        redirect_to event_buyer_path(@event, @buyers.first)
       end
     else
-      @buyers = Buyer.order(:last_name)
+      @buyers = Buyer.where(event_id: @event.id).order(:last_name)
     end
   end
 
@@ -40,9 +40,10 @@ class BuyersController < ApplicationController
 
   def create
     @buyer = Buyer.new(buyer_params)
+    @buyer.event_id = @event.id
 
     if @buyer.save
-      redirect_to @buyer, notice: 'Buyer was successfully created.'
+      redirect_to event_buyer_path(@event, @buyer), notice: 'Buyer was successfully created.'
     else
       render :new
     end
@@ -51,7 +52,7 @@ class BuyersController < ApplicationController
 
   def update
     if @buyer.update(buyer_params)
-      redirect_to @buyer, notice: 'Buyer was successfully updated.'
+      redirect_to event_buyer_path(@event, @buyer), notice: 'Buyer was successfully updated.'
     else
       render :edit
     end
@@ -59,7 +60,7 @@ class BuyersController < ApplicationController
 
   def destroy
     @buyer.destroy
-    redirect_to buyers_url, notice: 'Buyer was successfully destroyed.'
+    redirect_to event_buyers_path(@event), notice: 'Buyer was successfully destroyed.'
   end
 
   def toggle_paid
@@ -74,7 +75,7 @@ class BuyersController < ApplicationController
   # POST /buyers/import
   def import
     Buyer.import(params[:file])
-    redirect_to buyers_path, notice: "Buyers imported."
+    redirect_to event_buyers_path(@event), notice: "Buyers imported."
   end
 
 

@@ -21,6 +21,7 @@ class PledgesController < ApplicationController
   def create
     @pledges = set_pledges(@event)
     @pledge = Pledge.new(pledge_params)
+    @pledge.event_id = @event.id
 
     if @pledge.save
       respond_to do |format|

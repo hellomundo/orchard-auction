@@ -4,8 +4,8 @@
   <div class="panel-header">
     <h1>#<%= @buyer.buyer_number %></h1>
     <ul>
-      <li><%= link_to 'Add Another', new_buyer_path %></li>
-      <li><%= link_to 'Edit', edit_buyer_path(@buyer) %></li>
+      <li><%= link_to 'Add Another', new_event_buyer_path(@event) %></li>
+      <li><%= link_to 'Edit', edit_event_buyer_path(@event, @buyer) %></li>
     </ul>
   </div>
   <div class="row">

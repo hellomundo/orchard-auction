@@ -14,7 +14,7 @@
       <td></td>
       <td><%= pledge.pledge_type %></td>
       <td class="numeric"><%= number_to_currency(pledge.amount) %></td>
-      <td><%= link_to '<i class="fi-x"></i>'.html_safe, pledge_path(pledge), method: :delete, data: { confirm: 'Are you sure? This remove this pledge for this buyer.' } %></td>
+      <td><%= link_to '<i class="fi-x"></i>'.html_safe, event_pledge_path(@event, pledge), method: :delete, data: { confirm: 'Are you sure? This remove this pledge for this buyer.' } %></td>
     </tr>
     <% end %>
     <tr></tr>
