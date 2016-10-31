@@ -7,19 +7,6 @@ Rails.application.routes.draw do
   end
   root to: redirect('/users/sign_in')
 
-  resources :lots do
-    #resources :items, only: [:update, :destroy]
-
-    member do
-      get :toggle
-    end
-
-    #utility functions
-    collection do
-      get 'generate'
-      get 'destroy_all'
-    end
-  end
 
   resources :donors do
     resources :contacts
@@ -43,20 +30,32 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :wins
-
-  resources :submissions
-
-  resources :pledges
 
   resources :events do
+    resources :wins
+    resources :buyers
+    resources :submissions
+    resources :pledges
     resources :items
+    resources :contacts
     resources :donors do
       member do
         patch 'stage', action: :update_stage
       end
     end
-    resources :contacts
+
+    resources :lots do
+      member do
+        get :toggle
+      end
+
+      #utility functions
+      collection do
+        get 'generate'
+        get 'destroy_all'
+      end
+    end
+
 
   end
 

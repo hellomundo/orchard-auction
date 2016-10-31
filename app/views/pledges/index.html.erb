@@ -4,13 +4,13 @@
   <div class="panel-header">
     <h1>Pledges</h1>
     <ul>
-      <li><%= link_to 'New Pledge', new_pledge_path %></li>
+      <li><%= link_to 'New Pledge', new_event_pledge_path(@event) %></li>
     </ul>
   </div>
-  <div id="gen-errors">
+  <div id="pledge-errors">
     <ul></ul>
   </div>
-  <div id="gen-list">
+  <div id="pledge-list">
   <%= render "index" %>
   </div>
 </div>

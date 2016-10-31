@@ -1,5 +1,5 @@
 <div id="pledge-add-form">
-  <%= simple_form_for(@pledge, :remote => true) do |f| %>
+  <%= simple_form_for([@event, @pledge], :remote => true) do |f| %>
   <div class="form-inputs">
     <div class="row">
       <div class="large-4 columns"><%= f.input :buyer_id %></div>

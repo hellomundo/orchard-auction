@@ -3,7 +3,7 @@ class PledgesController < ApplicationController
   before_action :set_pledge, only: [:show, :edit, :update, :destroy]
 
   def index
-    @pledges = Pledge.all
+    @pledges = set_pledges(@event)
   end
 
   def show
@@ -11,15 +11,15 @@ class PledgesController < ApplicationController
 
   def new
     @pledge = Pledge.new
-    @pledges = Pledge.all
+    @pledges = set_pledges(@event)
   end
 
   def edit
-    @pledges = Pledge.all
+    @pledges = set_pledges(@event)
   end
 
   def create
-    @pledges = Pledge.all
+    @pledges = set_pledges(@event)
     @pledge = Pledge.new(pledge_params)
 
     if @pledge.save
@@ -37,7 +37,7 @@ class PledgesController < ApplicationController
   end
 
   def update
-    @pledges = Pledge.all
+    @pledges = set_pledges(@event)
     if @pledge.update(pledge_params)
       respond_to do |format|
         format.html { redirect_to @pledge, notice: 'Pledge was successfully updated.'}
@@ -52,7 +52,7 @@ class PledgesController < ApplicationController
   end
 
   def destroy
-    @pledges = Pledge.all
+    @pledges = set_pledges(@event)
     @pledge.destroy
     respond_to do |format|
       format.html { redirect_to pledges_url, notice: 'Okay, I deleted that pledge.' }
@@ -66,6 +66,10 @@ class PledgesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
   def set_pledge
     @pledge = Pledge.find(params[:id])
+  end
+
+  def set_pledges(event)
+    @pledges = Pledge.by_event(event)
   end
 
     # Never trust parameters from the scary internet, only allow the white list through.

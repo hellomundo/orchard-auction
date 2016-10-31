@@ -3,7 +3,7 @@
   <div class="panel-header">
     <h1 id="lot-name">#<%= @lot.lot_number %> <%= @lot.name %></h1>
     <ul>
-      <li><%= link_to 'Edit', edit_lot_path(@lot) %></li>
+      <li><%= link_to 'Edit', edit_event_lot_path(@event, @lot) %></li>
 
     </ul>
   </div>
@@ -79,9 +79,9 @@
   <tbody>
     <% @lot.items.each do |item| %>
     <tr id="item-<%= item.id %>">
-        <td><%= icon_link(toggle_lot_path(@lot, item_id: item), "arrow-down", true) %></td>
-        <td><%= link_to item.name, donor_item_path(item.donor, item) %></td>
-        <td><%= link_to item.donor.company, donor_path(item.donor) %></td>
+        <td><%= icon_link(toggle_event_lot_path(@event, @lot, item_id: item), "arrow-down", true) %></td>
+        <td><%= link_to item.name, event_item_path(@event, item) %></td>
+        <td><%= link_to item.donor.company, event_donor_path(@event, item.donor) %></td>
         <td class="numeric"><%= number_to_currency(item.fmv) %></td>
       </tr>
     <% end %>
@@ -105,9 +105,9 @@
   <tbody>
     <% @available_items.each do |item| %>
       <tr id="item-<%= item.id %>">
-        <td><%= icon_link(toggle_lot_path(@lot, item_id: item), "arrow-up", true) %></td>
-        <td><%= link_to item.name, donor_item_path(item.donor, item) %></td>
-        <td><%= link_to item.donor.company, donor_path(item.donor) %></td>
+        <td><%= icon_link(toggle_event_lot_path(@event, @lot, item_id: item), "arrow-up", true) %></td>
+        <td><%= link_to item.name, event_item_path(@event, item.donor, item) %></td>
+        <td><%= link_to item.donor.company, event_donor_path(@event, item.donor) %></td>
         <td class="numeric"><%= number_to_currency(item.fmv) %></td>
       </tr>
     <% end %>

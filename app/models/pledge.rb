@@ -4,7 +4,11 @@ class Pledge < ActiveRecord::Base
   before_save :validate_buyer
 
   def self.total_for_buyer(buyer)
-    Pledge.where(:buyer_id => buyer.id).sum(:amount)
+    where(:buyer_id => buyer.id).sum(:amount)
+  end
+
+  def self.by_event(event)
+    where(event_id: event.id)
   end
 
   private

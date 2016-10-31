@@ -3,10 +3,11 @@
 <div class="panel-header">
   <h1>Auction Lots</h1>
   <ul>
-    <li><%= link_to 'New Lot', new_lot_path %></li>
+    <li><%= link_to 'New Lot', new_event_lot_path(@event) %></li>
   </ul>
 </div>
 
+<% if @lots.count > 0 %>
 <table>
   <thead>
     <tr>
@@ -21,18 +22,16 @@
   <tbody>
     <% @lots.each do |lot| %>
       <tr>
-        <td><%= icon_link edit_lot_path(lot), "wrench" %></td>
+        <td><%= icon_link edit_event_lot_path(@event, lot), "wrench" %></td>
         <td><%= lot.lot_number %></td>
-        <td><%= link_to lot.name, lot %></td>
+        <td><%= link_to lot.name, event_lot_path(@event) %></td>
         <td><%= lot.table_number %></td>
-        <td><%= icon_delete_link lot, "Deleting this lot will NOT delete the items inside of it." %></td>
+        <td><%= icon_delete_link delete_lot_path(@event), "Deleting this lot will NOT delete the items inside of it." %></td>
 
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Lot', new_lot_path %>
+<% else %>
+<p>No lots created yet.</p><% end %>
 </div>

@@ -3,7 +3,7 @@ class WinsController < ApplicationController
   before_action :set_win, only: [:show, :edit, :update, :destroy]
 
   def index
-    @wins = Win.all
+    @wins = Win.where(event_id: @event.id)
   end
 
   def show
