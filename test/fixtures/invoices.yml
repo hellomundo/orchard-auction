@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  wintotal: 9.99
+  pledgetotal: 9.99
+  invoice_status_id: 
+
+two:
+  wintotal: 9.99
+  pledgetotal: 9.99
+  invoice_status_id: 

@@ -13,6 +13,8 @@ gem 'sass-rails', '~> 5.0'
 gem 'rake', '11.2.2'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
+# Fixes issue with warnings
+gem 'thor', '= 0.19.1'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes

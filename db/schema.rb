@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161024044156) do
+ActiveRecord::Schema.define(version: 20170201060811) do
 
   create_table "buyers", force: :cascade do |t|
     t.string   "first_name"
@@ -68,6 +68,27 @@ ActiveRecord::Schema.define(version: 20161024044156) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "invoice_statuses", force: :cascade do |t|
+    t.integer  "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "invoices", force: :cascade do |t|
+    t.decimal  "wintotal",          precision: 8, scale: 2
+    t.decimal  "pledgetotal",       precision: 8, scale: 2
+    t.decimal  "total",             precision: 8, scale: 2
+    t.integer  "invoice_status_id"
+    t.integer  "buyer_id_id"
+    t.integer  "event_id_id"
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+  end
+
+  add_index "invoices", ["buyer_id_id"], name: "index_invoices_on_buyer_id_id"
+  add_index "invoices", ["event_id_id"], name: "index_invoices_on_event_id_id"
+  add_index "invoices", ["invoice_status_id"], name: "index_invoices_on_invoice_status_id"
+
   create_table "items", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -101,6 +122,18 @@ ActiveRecord::Schema.define(version: 20161024044156) do
   end
 
   add_index "lots", ["event_id"], name: "index_lots_on_event_id"
+
+  create_table "payments", force: :cascade do |t|
+    t.integer  "form"
+    t.decimal  "amount",      precision: 8, scale: 2
+    t.integer  "buyer_id_id"
+    t.integer  "event_id_id"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
+  add_index "payments", ["buyer_id_id"], name: "index_payments_on_buyer_id_id"
+  add_index "payments", ["event_id_id"], name: "index_payments_on_event_id_id"
 
   create_table "pledges", force: :cascade do |t|
     t.decimal  "amount"
