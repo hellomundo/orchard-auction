@@ -31,7 +31,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'foundation-icons-sass-rails'
 
-gem 'foundation-rails'
+gem 'foundation-rails', '~> 6.2.4'
 #gem 'materialize-sass'
 #gem 'normalize-rails'
 #gem 'skeleton-rails', '~> 1.0', github: 'helios-technologies/skeleton-rails'
