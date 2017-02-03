@@ -32,7 +32,7 @@ class Lot < ActiveRecord::Base
     return Win.where(:lot_id => self.id).exists?
   end
 
-  def winnner
+  def winner
     if has_been_won
       my_win.buyer
     end
