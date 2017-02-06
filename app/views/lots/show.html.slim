@@ -54,40 +54,44 @@
   .panel-header
     h4 Items in this Lot
 
-  <p id="no-items-message" style="display:<%= @lot.items.empty? ? 'block' : 'none' %>">This lot has no items. To add an item to the lot, click the up arrow on one of the available items listed below.</p>
+  #no-items-message style="display: #{@lot.items.empty? ? 'block' : 'none'}"
+    | This lot has no items. To add an item to the lot, click the up arrow on one of the available items listed below.
 
-<table id="contained-items"  style="display:<%= @lot.items.empty? ? 'none' : 'table' %>">
-  thead
-    tr
-      th
-      th Name
-      th Donor
-      th.numeric FMV
+  table#contained-items style="display: #{@lot.items.empty? ? 'none' : 'table'}"
+    thead
+      tr
+        th
+        th Name
+        th Donor
+        th.numeric FMV
 
-  tbody
-    - @lot.items.each do |item|
-      tr id='#item-#{item.id}'
-        td = icon_link(toggle_event_lot_path(@event, @lot, item_id: item), "arrow-down", true)
-        td = link_to item.name, event_item_path(@event, item)
-        td = link_to item.donor.company, event_donor_path(@event, item.donor)
-        td.numeric = number_to_currency(item.fmv)
+    tbody
+      - @lot.items.each do |item|
+        tr id='item-#{item.id}'
+          td = icon_link(toggle_event_lot_path(@event, @lot, item_id: item), "arrow-down", true)
+          td = link_to item.name, event_item_path(@event, item)
+          td = link_to item.donor.company, event_donor_path(@event, item.donor)
+          td.numeric = number_to_currency(item.fmv)
 
 .orchard-panel
   .panel-header
     h4 Available Items to Add
-    <p id="no-available-message" style="display:<%= @available_items.empty? ? 'block' : 'none' %>">All items are already in other lots. To move an item from another lot to this one, remove the item from that lot and it will show up here as available. To create a new item, go to its Donor page and add the item.</p>
-  <table id="available-items" style="display:<%= @available_items.empty? ? 'none' : 'table' %>">
-  thead
-    tr
-      th
-      th Name
-      th Donor
-      th.numeric FMV
 
-  tbody
-    - @available_items.each do |item|
-      tr id='#item-#{item.id}'
-        td = icon_link(toggle_event_lot_path(@event, @lot, item_id: item), "arrow-up", true)
-        td = link_to item.name, event_item_path(@event, item.donor, item)
-        td = link_to item.donor.company, event_donor_path(@event, item.donor)
-        td.numeric = number_to_currency(item.fmv)
+  #no-available-message style="display: #{@available_items.empty? ? 'block' : 'none'}"
+    | All items are already in other lots. To move an item from another lot to this one, remove the item from that lot and it will show up here as available. To create a new item, go to its Donor page and add the item.
+
+  table#available-items style="display: #{@available_items.empty? ? 'none' : 'table'}"
+    thead
+      tr
+        th
+        th Name
+        th Donor
+        th.numeric FMV
+
+    tbody
+      - @available_items.each do |item|
+        tr id='item-#{item.id}'
+          td = icon_link(toggle_event_lot_path(@event, @lot, item_id: item), "arrow-up", true)
+          td = link_to item.name, event_item_path(@event, item.donor, item)
+          td = link_to item.donor.company, event_donor_path(@event, item.donor)
+          td.numeric = number_to_currency(item.fmv)
