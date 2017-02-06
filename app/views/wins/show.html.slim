@@ -1,0 +1,18 @@
+.orchard-panel
+  .panel-header
+    h1 = @win.item.name
+
+  .row
+    .full
+      .lede = @win.lot.description
+
+  .row
+    .nine-left
+      .stat
+        em Winner
+        strong#stat = link_to @win.buyer.full_name, event_buyer_path(@event, @win.buyer)
+
+    .fourth-right
+      .stat
+        em Price
+        strong = number_to_currency(@win.price)

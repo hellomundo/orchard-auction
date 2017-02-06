@@ -1,0 +1,22 @@
+- if @buyer.event_wins(@event).count > 0
+  table
+    thead
+      tr
+        th
+        th Item
+        th.numeric Price
+        th
+    tbody#buyer-wins
+      - @buyer.event_wins(@event).each do |win|
+        tr
+          td
+          td = link_to win.lot.name, event_lot_path(@event, win.lot)
+          td.numeric = number_to_currency(win.price)
+          td = link_to '<i class="fi-x"></i>'.html_safe, event_win_path(@event, win), method: :delete, data: { confirm: 'Are you sure? This remove this win for this buyer.' }
+        tr.summation
+          td
+          td Total:
+          td.numeric = number_to_currency(@win_total)
+          td
+- else
+  p No wins entered yet for this buyer</p>

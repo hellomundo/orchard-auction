@@ -1,0 +1,14 @@
+.orchard-panel
+  .panel-header
+    h1 Pledges
+    ul
+      li = link_to 'New Pledge', new_event_pledge_path(@event), id: 'pledge-btn'
+
+  #pledge-errors
+    ul
+
+  #pledge-panel
+    = render "form"
+
+  #pledge-list
+    = render "index"

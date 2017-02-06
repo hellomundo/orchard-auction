@@ -29,19 +29,21 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem 'foundation-icons-sass-rails'
+#gem 'foundation-icons-sass-rails'
+#gem 'foundation-rails', '~> 5.5.2.1'
 
-gem 'foundation-rails', '~> 5.5.2.1'
-#gem 'materialize-sass'
-#gem 'normalize-rails'
-#gem 'skeleton-rails', '~> 1.0', github: 'helios-technologies/skeleton-rails'
+gem 'slim', '~> 3.0', '>= 3.0.7'
+gem 'susy', '~> 2.2', '>= 2.2.12'
+gem 'normalize-rails', '~> 4.1', '>= 4.1.1'
+gem 'breakpoint', '~> 2.7'
+gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.1'
 
 gem 'simple_form'
 
 gem 'enum_help'
 
-gem 'sweet-alert'
-gem 'sweet-alert-confirm'
+#gem 'sweet-alert'
+#gem 'sweet-alert-confirm'
 
 gem 'devise'
 # Use ActiveModel has_secure_password

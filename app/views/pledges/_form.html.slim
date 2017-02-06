@@ -1,0 +1,14 @@
+#pledge-form
+  = simple_form_for([@event, @pledge], :remote => true) do |f|
+    .form-inputs
+      .row
+        .third-left = f.input :buyer_number
+        .third-middle = f.input :amount
+        .third-right = f.input :pledge_type
+
+    .form-control
+      .row
+        .fourth-left
+          = f.button :submit, class: "btn"
+        .fourth-middle
+          a#pledge-cancel-button.btn Cancel

@@ -1,0 +1,18 @@
+= simple_form_for([@event, @lot]) do |f|
+  = f.error_notification
+
+  .form-inputs
+    .row
+      .full = f.input :name
+    .row
+      .full = f.input :description
+    .row
+      .fourth-left = f.input :opening_price
+      .fourth-middle = f.input :bid_increment
+      .fourth-middle = f.input :buy_now_price
+      .fourth-right = f.input :table_number, collection: 1..10
+    .row
+      .fourth = f.input :quantity_available, placeholder: '1'
+
+    .form-actions
+      = f.button :submit

@@ -12,10 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require foundation
 //= require turbolinks
-//= require sweet-alert
-//= require sweet-alert-confirm
+//= require main
 //= require_tree .
-
-$(function() { $(document).foundation(); });

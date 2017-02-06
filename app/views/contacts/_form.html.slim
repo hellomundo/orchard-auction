@@ -1,0 +1,18 @@
+= simple_form_for([@event, Contact.new], remote: true) do |f|
+  .form-inputs
+    .row
+      .half-left
+        = f.label :contacted_on
+        = f.date_field :contacted_on, :value => Time.now.strftime('%Y-%m-%d'), class: 'datepicker'
+
+      .half-right = f.input :channel
+
+    .row
+      .full
+        = f.input :note, input_html: { class: 'materialize-textarea' }
+
+    = f.hidden_field :donor_id, value: @donor.id
+    .row
+      .full
+        .form-actions
+          = f.button :submit

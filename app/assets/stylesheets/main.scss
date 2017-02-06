@@ -1,18 +1,194 @@
-// override header sizes
+@import "susy";
+@import "breakpoint";
+
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400);
+
+// breakpoint page sizes
+$small: '32em';
+$medium: '45em';
+$large: '60em';
+
+
 // Header Styles
+$white       : #FFFFFF;
+$silver      : #EFEFEF;
+$smoke       : #EEEEEE;
+$steel       : #666666;
+$charcoal    : #555555;
+$action-color: #098c8c;
+$action-hover: #0ba5a5;
+$very-light-red: #ffeeea;
+
+$primary-color: #dddddd;
+
+$sans-serif: 'Source Sans Pro', sans-serif;
+$serif: 'Roboto Slab', serif;
+
+@mixin button($padding: .7em, $background: #eeeeee, $radius: 0) {
+	background-color: $background;
+	border-radius: $radius;
+	padding: $padding 2em;
+  height: auto;
+  font-size: 22px;
+  font-weight: bold;
+  display: inline-block;
+
+	&:hover {
+		cursor: pointer;
+		background-color: mix(black, $background, 15%);
+	}
+}
+
+@mixin inline-list {
+  list-style: none;
+}
+
+@mixin clearfix {
+    &:before,
+    &:after {
+        content: "";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+// susy settings
+$susy: (
+  columns: 12,
+  gutters: 1/4,
+  container: 90%,
+  math: fluid,
+  global-box-sizing: border-box,
+);
+
+.row {
+  @include container(100%);
+  position: relative;
+}
+
+.action {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.full { @include span(12); }
+
+.nine-left { @include span(9); }
+.nine-right { @include span(9 last); }
+
+.half-left { @include span(6); }
+.half-right { @include span(6 last); }
+
+.third-left, .third-middle { @include span(4); }
+.third-right { @include span(4 last); }
+
+.fourth-left, .fourth-middle { @include span(3); }
+.fourth-right { @include span(3 last); }
+
+.small-left, .small-middle { @include span(2); }
+.small-right { @include span(2 last); }
+
+// form reset
+// FORM RESET
+// Font
+$fh-font-family: $sans-serif;
+$fh-font-size: 25px;
+$fh-font-color: $steel;
+
+// Borders
+$fh-border-radius: 0px;
+$fh-border-width: 1px;
+$fh-border-style: solid;
+$fh-border-color: $silver;
+
+// Inputs, Textareas, Select, Option
+$fh-input-height: 60px;
+$fh-input-width: 100%;
+$fh-input-max-width: 100%;
+$fh-input-bg-color: $smoke;
+$fh-focus-bg-color: #fff;
+$fh-focus-border-color: $silver;
+$fh-focus-font-color: $fh-font-color;
+
+// Select Vendor Styling
+$fh-allow-vendor-styling: true;
+
+// Fieldset & Legend Styling
+$fh-fieldset-bare: false;
+
+// Buttons & Input Submits
+$fh-button-height: auto;
+$fh-button-width: 100%;
+$fh-button-max-width: 100%;
+$fh-button-font-color: #fff;
+$fh-button-bg-color: $action-color;
+$fh-button-vertical-padding: .7em;
+$fh-button-hover-bg-color: $action-hover;
+$fh-button-hover-font-color: #fff;
+
+// Layout
+$fh-centered: false;
+$fh-display: block;
+
+input[type="submit"] {
+  font-size: 22px;
+  padding: .7em 2em;
+}
+
+html {
+  font-family: $sans-serif;
+  font-weight: 300;
+  color: $steel;
+}
+
+a {
+  text-decoration: none;
+  color: $action-color;
+
+  &:visited, &:active {
+    color: $action-color;
+  }
+}
+
+p {
+  line-height: 1.5em;
+}
 
 // Layout Styles
 
 .container {
-  max-width: 960px;
-  margin: 0 auto;
+  @include container(90%);
+
+  @include breakpoint($small) {
+    width: 80%;
+  }
+
+  @include breakpoint($medium) {
+    width: 70%;
+    max-width: 70em;
+  }
+
+  @include breakpoint($large) {
+    //width: 50%;
+    width: 70em;
+    max-width: 70em;
+  }
+
+  margin: auto;
 }
 
 .orchard-panel {
-  width: 100%;
-  margin: 2em 0;
+  margin: 5em 0;
   background-color: $white;
-  padding: 2em 4em;
+  //padding: 2em 4em;
+
+  table {
+    margin-top: 2em;
+  }
 }
 
 .lede {
@@ -20,10 +196,17 @@
   margin-bottom: 1em;
 }
 
+.form-actions {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.item-list {
+  margin-top: 2em;
+}
 
 h1, h2, h3 {
-  font-family: "abril-fatface",serif;
-  font-style: italic;
+  font-family: $serif;
   font-size: 2em;
 }
 
@@ -40,27 +223,164 @@ h5 { font-size: 1em; }
   background-color: #95E4D6;
 }
 
+// Nav
+
+nav {
+  background-color: #fff;
+  position: relative;
+  padding: 0;
+  @include clearfix();
+
+  ul {
+    list-style-type:none;
+	  margin:0;
+	  padding:0;
+    display: none;
+	  position: static;
+
+    @include breakpoint($medium) {
+      position: absolute;
+      display: block;
+      right: 0;
+      top: 0;
+    }
+
+    li {
+      display:inline-block;
+    	float: left;
+    	margin-right: 1px;
+      width: 100%;
+      background-color: $silver;
+
+      @include breakpoint($medium) {
+        width: auto;
+        background-color: white;
+      }
+
+      a {
+        display:block;
+      	//min-width:140px;
+        padding: 0 1em;
+      	height: 50px;
+      	text-align: center;
+      	line-height: 50px;
+      	font-family: $sans-serif;;
+      	color: $steel;
+      	//background: #2f3036;
+      	text-decoration: none;
+        width: 100%;
+        background-color: $silver;
+
+        @include breakpoint($medium) {
+          width: auto;
+          background-color: white;
+        }
+
+      }
+
+      &:hover {
+        a {
+          background-color: $smoke;
+        }
+      }
+    }
+  }
+
+  .home {
+    display: inline-block;
+    padding: 1em;
+    font-family: $serif;
+    font-weight: 700;
+  }
+
+  .show-menu {
+  	font-family: #sans-serif;;
+  	text-decoration: none;
+  	color: $steel;
+  	text-align: center;
+    margin: 0;
+  	padding: 1em;
+  	display: block;
+    float: right;
+
+    // show the menu control for mobile
+    @include breakpoint($medium) {
+      display: none;
+    }
+  }
+
+  /*Hide checkbox*/
+  input[type=checkbox]{
+      display: none;
+  }
+
+  /*Show menu when invisible checkbox is checked*/
+  input[type=checkbox]:checked ~ #menu{
+      display: block;
+  }
+}
+
+// alerts and notices
+.flash {
+  padding: .2em 0em;
+}
+
+.notice {
+    background-color: $silver;
+  }
+
+.alert {
+  background-color: $very-light-red;
+}
+
+
 // Table Styles
 
 table {
-  border-collapse: collapse;
   width: 100%;
+  border-collapse: collapse;
+}
 
-  thead {
-    background-color: $white;
+tr {
+  padding: .5em;
+  border-bottom: 1px solid $silver;
+
+}
+
+thead {
+  tr {
     border-bottom: 1px solid $steel;
   }
 
-  tbody {
-    tr {
-      td {
-        border-bottom: 1px solid $smoke;
-        line-height: 2.25em;
-      }
-    }
-
+  .numeric {
+    text-align: right;
   }
 }
+tbody {
+  tr {
+    &:hover {
+      background-color: $smoke;
+    }
+  }
+}
+tfoot {
+  tr {
+    td {
+      font-weight: 700;
+    }
+  }
+}
+
+th {
+  padding: .5em;
+  text-align: left;
+  font-weight: 700;
+}
+
+td {
+  padding: 1em .5em;
+}
+
 
 // for buttons
 .btn {
@@ -68,13 +388,14 @@ table {
 }
 
 .form-control {
+  margin-top: 2em;
   .btn {
     margin-right: 1em;
   }
 }
 
 .action-button {
-  @include button(rem-calc(6), $primary-color, 5px);
+  @include button(.5em, $primary-color, 5px);
   font-size: .7em;
   font-weight: bold;
   text-transform: uppercase;
@@ -88,13 +409,14 @@ table {
 
 // Stats
 .stat {
-  margin-bottom: 1em;
+  margin-bottom: 2em;
 
   em {
-    font-size: 75%;
+    font-size: 100%;
     font-style: normal;
     color: $steel;
-    margin-bottom: 0;
+    margin-bottom: 1em;
+    padding-bottom: .3em;
     border-bottom: 1px solid $steel;
     display: block;
   }
@@ -124,29 +446,38 @@ table {
 
 .panel-header {
 
-  height: 3em;
-  border-bottom: 2px solid $steel;
-  margin-bottom: 2.5em;
+  border-bottom: 1px solid $steel;
+  margin-bottom: 0.5em;
   @include clearfix();
 
   h1 {
     float: left;
+    margin: 0;
 
   }
 
   ul {
     @include inline-list;
     float:right;
+    margin: 0;
 
     li {
       margin-left: .375rem;
+      display: inline-block;
 
       a {
-        @include button(rem-calc(6), $primary-color, 5px);
+        @include button(.5em, $primary-color, 5px);
         font-size: .7em;
+        color: $steel;
+        padding: .7em 2em;
         font-weight: bold;
         text-transform: uppercase;
-        margin: .6rem 0 2.25rem;
+        text-decoration: none;
+        margin: .6rem 0 1rem;
+
+        &:hover {
+          background-color: $silver;
+        }
       }
     }
   }

@@ -1,0 +1,44 @@
+.orchard-panel
+  .panel-header
+    h1 Donors
+    ul
+      li
+        /= link_to 'Delete All', destroy_all_donors_path
+      li = link_to 'New Donor', new_event_donor_path(@event)
+
+  .row
+    = form_tag event_donors_path(@event), :method => 'get' do
+      .third-left = text_field_tag 'search_name', @search_placeholder
+      .third-middle = select_tag 'search_cat', options_for_select(Status.stages.collect { |s| [s[0].humanize, s[1]]}), id: "search_cat", :include_blank => "All Statuses"
+      .third-right = submit_tag "Find Donor", :class => "search-button", :name => nil
+
+  table
+    thead
+      tr
+        th
+        th = link_to "ID", :sort => "id"
+        th = link_to "Company", :sort => "company"
+        th Name
+        th = link_to "Status", :sort => "status"
+        th
+
+    tbody
+      - @donors.each do |donor|
+        tr
+          td = icon_link edit_event_donor_path(@event, donor), "cog"
+          td = donor.id
+          td = link_to donor.company, event_donor_path(@event, donor)
+          td = donor.first_name
+            = donor.last_name
+          td = donor.stage != nil ? donor.stage.stage : "uncalled"
+          td = link_to '<i class="fa fa-trash-o"></i>'.html_safe, donor, method: :delete, data: { confirm: 'Are you sure? This will also delete all the items donated by this donor.' }
+
+.orchard-panel
+  .panel-header
+    h3 Import Donors
+
+  = form_tag import_donors_path, multipart: true do
+  .form-inputs
+    .row
+      .half-left = file_field_tag :file
+      .half-right = submit_tag "Import"

@@ -2,8 +2,8 @@ class EventsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
-  layout "events", except: [:show]
-  layout "application", only: [:show]
+  #layout "events", except: [:show]
+  #layout "application", only: [:show]
 
   # GET /events
   # GET /events.json

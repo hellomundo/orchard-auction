@@ -1,0 +1,65 @@
+.orchard-panel
+  .panel-header
+    h1
+      | #
+      = @buyer.buyer_number
+    ul
+      li = link_to 'Add Another', new_event_buyer_path(@event)
+      li = link_to 'Edit', edit_event_buyer_path(@event, @buyer)
+
+  .row
+    .full
+      h3  #{@buyer.first_name} #{@buyer.last_name}
+
+  .row
+    .third-left
+      .stat
+        em Email
+        - if @buyer.email.present?
+          p = mail_to @buyer.email
+        - else
+          p None on file
+
+    .third-middle
+      .stat
+        em Telephone
+        - if @buyer.telephone.present?
+          p = @buyer.telephone
+        - else
+          p None on file
+
+    .third-right
+      .stat
+        em No of Pre-Paid Guests
+        - if @buyer.guests.present?
+          p.strong = @buyer.guests
+        - else
+          p.strong 0
+
+.orchard-panel
+  .panel-header
+    h1 Wins
+  #win-list
+    = render "wins"
+
+.orchard-panel
+  .panel-header
+    h1 Pledges
+  #gen-list
+    = render "pledges"
+
+.orchard-panel
+  .panel-header
+    h1 Total
+    ul
+      li = link_to "#{ @buyer.is_paid ? 'Mark as Unpaid' : 'Mark as Paid' }", toggle_paid_buyer_path(@buyer), method: :patch, remote: :true, id: "btn_paid_toggle"
+
+.row
+    .full
+      h4.numeric
+        ' Total due for wins and pledges: 
+        = number_to_currency(@buyer.event_total_purchase(@event))
+      h3#payment-info.numeric
+        ' Buyer has
+        =(@buyer.is_paid ? '' : ' NOT')
+        |  paid

@@ -1,0 +1,31 @@
+.orchard-panel
+  .panel-header
+    h1 Items
+
+  table
+    thead
+      tr
+        th
+        th Name
+        th Donor
+        th.numeric FMV
+        th colspan="4"
+
+    tbody
+      - @items.each do |item|
+        tr
+          td = icon_link edit_event_item_path(item.event, item), "cog"
+          td = link_to item.name, event_item_path(item.event, item)
+          td = link_to item.donor.company, event_donor_path(item.event, item.donor)
+          td.numeric = number_to_currency(item.fmv)
+          td = icon_delete_link item, "Are you sure?"
+
+.orchard-panel
+  .panel-header
+    h3 Import Items
+
+  = form_tag import_items_path, multipart: true do
+    .form-inputs
+      .row
+        .half-left = file_field_tag :file
+        .half-right = submit_tag "Import"

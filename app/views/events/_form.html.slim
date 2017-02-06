@@ -1,0 +1,15 @@
+= simple_form_for(@event) do |f|
+  = f.error_notification
+
+  .form-inputs
+    .row
+      .full = f.label :date
+        = f.date_field :date, class: 'datepicker'
+        
+    .row
+      .full = f.input :theme
+
+    .row
+      .full
+        .form-actions
+          = f.button :submit

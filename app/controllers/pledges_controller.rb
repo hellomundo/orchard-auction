@@ -3,6 +3,7 @@ class PledgesController < ApplicationController
   before_action :set_pledge, only: [:show, :edit, :update, :destroy]
 
   def index
+    @pledge = Pledge.new
     @pledges = set_pledges(@event)
   end
 
@@ -75,7 +76,7 @@ class PledgesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
   def pledge_params
-    params.require(:pledge).permit(:buyer_id, :amount, :pledge_type)
+    params.require(:pledge).permit(:buyer_number, :amount, :pledge_type)
   end
 
 end

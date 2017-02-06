@@ -1,0 +1,21 @@
+- if @pledges.count > 0
+  table
+    thead
+      tr
+        th
+        th Buyer
+        th Type
+        th Amount
+        th
+
+    tbody
+      - @pledges.each do |pledge|
+        tr
+          td = icon_link edit_event_pledge_path(@event, pledge), "cog", remote: true
+          td = link_to(pledge.buyer.reverse_name, event_buyer_path(@event, pledge.buyer))
+          td = pledge.pledge_type
+          td = number_to_currency(pledge.amount)
+          td = link_to '<i class="fa fa-trash-o"></i>'.html_safe, event_pledge_path(@event, pledge), method: :delete, remote: true, data: { confirm: 'Are you sure? This will delete the record of this pledge.' }
+
+- else
+  p No pledges recorded yet.

@@ -1,0 +1,38 @@
+.orchard-panel
+  .panel-header
+    h1 = @item.name
+    ul
+      li = link_to 'Edit', edit_event_item_path(@item.event, @item)
+
+  .row
+    .full
+      .lede = @item.description
+
+  .row
+    .third-left
+      .stat
+        em FMV
+        strong#fmv-price = number_to_currency(@item.fmv)
+    .third-middle
+      .stat
+        em Opening Price
+        strong = number_to_currency(@item.opening_price)
+    .third-right
+      .stat
+        em Donor
+        strong = @item.donor.company
+
+  .row
+    .half-left
+      .stat
+        em Item Category</em>
+        strong = @item.category
+    .half-right
+      .stat
+        em Type of Item
+        strong = @item.format
+  .row
+    .full
+      .stat
+        em Restrictions</em>
+        p = @item.restrictions

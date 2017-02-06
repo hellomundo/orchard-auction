@@ -42,6 +42,14 @@ class Buyer < ActiveRecord::Base
     update_attribute(:is_paid, !self.is_paid)
   end
 
+  def self.find_by_buyer_number(buyer_num)
+    begin
+      Buyer.find_by_id(buyer_num.to_i - 100)
+    rescue ActiveRecord::RecordNotFound
+      nil
+    end
+  end
+
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
       # only fill certain rows

@@ -1,0 +1,74 @@
+.orchard-panel
+  .panel-header
+    h1 = @donor.company
+    ul
+      li = link_to 'Edit', edit_event_donor_path(@event, @donor)
+
+  .row
+    .half-left
+      p  #{@donor.first_name} #{@donor.last_name}
+      - if @donor.title.present?
+        p = @donor.title
+      - if @donor.email.present?
+        p = mail_to @donor.email
+      - if @donor.phone.present?
+        p = @donor.phone
+      - if @donor.address1.present?
+        p
+          = @donor.address1
+          - if @donor.address2.present?
+            br
+            = @donor.address2
+          br
+          | #{@donor.city}, #{@donor.state} #{@donor.zip}
+    .half-right
+      p
+        ' This donor
+        strong = @donor.has_donated ? 'HAS' : "HAS NOT"
+        '  donated before.
+
+      - if @donor.website.present?
+        p = link_to @donor.website, "http://" + @donor.website
+
+      p Status: #{@donor.get_stage(@event).humanize}
+
+.orchard-panel
+   .panel-header
+     h1 Donations
+     ul
+       li
+        a href="#" id="btn_donor_item_toggle" New Item
+
+   #gen-errors
+     ul
+
+   #gen-form
+     = render "items/inline_form"
+
+   #gen-list.item-list
+     = render "items/index"
+
+.orchard-panel
+  .panel-header
+    h1 Donor Status
+
+  = simple_form_for([@event,@donor], :url => stage_event_donor_path, remote: false) do |f|
+    .row
+      .half-left = f.input :stage, collection: Status.stages.keys.to_a, :selected => @donor.get_stage(@event)
+      .half-right.action = f.button :submit, class: "btn"
+
+.orchard-panel
+  .panel-header
+    h1 Communication History
+    ul
+      li
+        a href="#" id="btn_donor_contact_toggle" Record a Contact
+
+  #com-errors
+    ul
+
+  #com-form
+    = render "contacts/form"
+
+  #com-list.item-list
+    = render "contacts/index"

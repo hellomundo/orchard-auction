@@ -1,0 +1,19 @@
+.orchard-panel
+  .panel-header
+    h1 Pledge
+
+  .row
+    .third-left
+      .stat
+        em Buyer
+        strong#stat = link_to @pledge.buyer.full_name, event_buyer_path(@event, @pledge.buyer)
+
+    .third-middle
+      .stat
+        em Price
+        strong = number_to_currency(@pledge.amount)
+
+    .third-right
+      .stat
+        em Type
+        strong = @pledge.pledge_type

@@ -11,10 +11,10 @@
  * file per style scope.
  *
  *= require_self
- *= require sweet-alert
+ *= require normalize-rails
 
  */
 
-@import 'foundation_and_overrides';
-@import 'foundation-icons';
 @import 'main';
+@import 'formhack';
+@import "font-awesome";

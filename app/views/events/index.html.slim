@@ -1,0 +1,26 @@
+.orchard-panel
+
+  .panel-header
+    h1 Auction Events
+    ul
+      li = link_to 'New Auction', new_event_path
+
+  #gen-errors
+    ul
+
+  #gen-list
+    - if @events.count > 0
+      table
+        thead
+          tr
+            th Date
+            th Theme
+
+        tbody
+          - @events.each do |event|
+            tr
+              td = link_to(event.date, event_path(event))
+              td = event.theme
+
+    - else
+      p No Auctions have been created yet.

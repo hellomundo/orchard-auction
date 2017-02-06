@@ -1,0 +1,24 @@
+- if @buyer.event_pledges(@event).count > 0
+  table
+    thead
+      tr
+        th
+        th Type
+        th.numeric Amount
+        th
+
+    tbody id="buyer-pledges"
+      - @buyer.event_pledges(@event).each do |pledge|
+        tr
+          td
+          td = pledge.pledge_type
+          td.numeric = number_to_currency(pledge.amount)
+          td = link_to '<i class="fa fa-trash-o"></i>'.html_safe, event_pledge_path(@event, pledge), method: :delete, data: { confirm: 'Are you sure? This remove this pledge for this buyer.' }
+
+        tr.summation
+          td
+          td Total:
+          td.numeric = number_to_currency(@pledge_total)
+          td
+- else
+  p No pledges entered yet for this buyer

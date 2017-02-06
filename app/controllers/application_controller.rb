@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   def set_event
     event_id = params[:event_id];
 
-    if event_id
+    if event_id.present?
       @event = Event.find(event_id)
     else
       @event = Event.last

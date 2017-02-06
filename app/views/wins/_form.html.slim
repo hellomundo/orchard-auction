@@ -1,0 +1,13 @@
+#win-add-form
+  = simple_form_for([@event, @win], :remote => true) do |f|
+    .form-inputs
+      .row
+        .third-left = f.input :lot_id
+        .third-middle = f.input :buyer_id
+        .third-right = f.input :price
+
+    .form-control
+      .row
+        .full
+          = f.button :submit, class: "btn"
+          a#win-cancel-button.btn Cancel

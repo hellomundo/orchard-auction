@@ -1,0 +1,17 @@
+= simple_form_for([@event, @buyer]) do |f|
+  = f.error_notification
+
+  .form-inputs
+    .row
+      .third-left = f.input :first_name
+      .third-middle = f.input :last_name
+      .third-right = f.input :guests
+
+    .row
+      .half-left = f.input :email
+      .half-right = f.input :telephone
+
+    .row
+      .full
+        .form-actions
+          = f.button :submit

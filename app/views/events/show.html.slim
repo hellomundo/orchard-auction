@@ -1,0 +1,42 @@
+.orchard-panel
+  .panel-header
+    h1 Hello!
+    ul
+      li = link_to 'Previous Auctions', events_path
+      li = link_to 'Edit', edit_event_path(@event)
+
+  .row
+    .full
+      .lede
+        ' Welcome to the
+        = @event.date.strftime('%Y')
+        ' Auction Admin Site.
+
+  .row
+    .half-left
+      .stat
+        em Auction Date
+        strong#stat = @event.date.strftime("%a %B %d, %Y")
+
+    .half-right
+      .stat
+        em Theme
+        strong = @event.theme
+
+  .row
+    .fourth-left
+      .stat
+        em Donors Needing Follow-up
+        strong = @uncommitted_donors
+    .fourth-middle
+      .stat
+        em Committed Donors
+        strong = @committed_donors
+    .fourth-middle
+      .stat
+        em Items Donated
+        strong = @items_donated
+    .fourth-right
+      .stat
+        em Total Donations Value
+        strong = number_to_currency(@total_value)

@@ -1,0 +1,32 @@
+<%= simple_form_for([@event, Item.new], remote: true) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <div class="row">
+      <div class="full"><%= f.input :name %></div>
+    </div>
+    <div class="row">
+      <div class="half-left"><%= f.input :category %></div>
+      <div class="half-right"><%= f.input :format %></div>
+    </div>
+    <div class="row">
+      <div class="half-left"><%= f.input :fmv %></div>
+      <div class="half-right"><%= f.input :opening_price %></div>
+    </div>
+     <div class="row">
+      <div class="full"><%= f.input :description %></div>
+    </div>
+    <div class="row">
+      <div class="full"><%= f.input :restrictions %></div>
+    </div>
+    <%= f.hidden_field :donor_id, value: @donor.id %>
+    <div class="row">
+    <div class="full">
+      <div class="form-actions">
+        <%= f.button :submit %>
+      </div>
+    </div>
+    </div>
+ </div>
+
+<% end %>

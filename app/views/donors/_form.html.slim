@@ -1,0 +1,40 @@
+= simple_form_for([@event, @donor]) do |f|
+  = f.error_notification
+
+  .form-inputs
+    .row
+      .full = f.input :company
+
+    .row
+      .third-left = f.input :first_name
+      .third-middle = f.input :last_name
+      .third-right = f.input :title
+
+    .row
+      .half-left = f.input :email
+      .half-right = f.input :phone
+
+    .row
+      .full = f.input :address1
+
+    .row
+      .full = f.input :address2
+
+    .row
+      .half-left = f.input :city
+      .small-middle = f.input :state
+      .third-right = f.input :zip
+
+    .row
+      .full = f.input :website
+
+    .row
+      .half-left = f.input :has_donated
+      .half-right
+        /= f.input :status
+
+    .row
+      .full
+        .form-actions
+          = f.hidden_field :event_id, value: @event_id
+          = f.button :submit

@@ -44,7 +44,7 @@ class ItemsController < ApplicationController
   # PATCH/PUT /donor/1/items/1
   # PATCH/PUT /items/1.json
   def update
-    @donor = Donor.find(params[:donor_id])
+    @donor = Donor.find(item_params[:donor_id])
     respond_to do |format|
       if @item.update(item_params)
         format.html { redirect_to event_item_path(@item.event, @item), notice: 'Item was successfully updated.' }
@@ -61,7 +61,9 @@ class ItemsController < ApplicationController
   def destroy
     donor = @item.donor
     @item.destroy
-    @items = donor.items
+
+    @items = donor.items.where(event_id: params[:event_id]) 
+    #@items = donor.items
     respond_to do |format|
       format.html { redirect_to event_items_url(@event), notice: 'Item was successfully destroyed.' }
       format.js

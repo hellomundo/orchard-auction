@@ -1,0 +1,23 @@
+= simple_form_for([@event, @item]) do |f|
+  = f.error_notification
+
+  .form-inputs
+    .row
+      .full = f.input :name
+    .row
+      .half-left = f.input :category
+      .half-right = f.input :format
+    .row
+      .half-left = f.input :fmv
+      .half-right = f.input :opening_price
+    .row
+      .full = f.input :description
+    .row
+      .full = f.input :restrictions
+
+    = f.hidden_field :donor_id, value: @donor.id
+    
+    .row
+      .full
+        .form-actions
+          = f.button :submit
