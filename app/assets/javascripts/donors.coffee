@@ -2,8 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$(document).on 'ready page:change', ->
-# hide the forms
+$(document).on "turbolinks:load", ->
+  # hide the forms
   $('#gen-form').hide 0
   $('#com-form').hide 0
 
