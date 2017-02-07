@@ -6,9 +6,9 @@
     thead
       tr
         th
-        th Name
-        th Donor
-        th.numeric FMV
+        th = sort_link "name"
+        th = sort_link "donors.company", "Donor"
+        th.numeric = sort_link "fmv", "FMV"
         th colspan="4"
 
     tbody

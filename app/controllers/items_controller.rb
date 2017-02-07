@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
   def index
     #@items = Item.all
     event_id = params[:event_id] || Event.last.id;
-    @items = Item.includes(:donor).where(event_id: params[:event_id])
+    @items = Item.includes(:donor).where(event_id: params[:event_id]).order("#{sort_column} #{sort_direction}")
 
     respond_to do |format|
       format.html
@@ -62,7 +62,7 @@ class ItemsController < ApplicationController
     donor = @item.donor
     @item.destroy
 
-    @items = donor.items.where(event_id: params[:event_id]) 
+    @items = donor.items.where(event_id: params[:event_id])
     #@items = donor.items
     respond_to do |format|
       format.html { redirect_to event_items_url(@event), notice: 'Item was successfully destroyed.' }
@@ -77,6 +77,10 @@ class ItemsController < ApplicationController
   end
 
   private
+    def sortable_columns
+      ["name", "donors.company", "fmv"]
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_item
       @item = Item.find(params[:id])
