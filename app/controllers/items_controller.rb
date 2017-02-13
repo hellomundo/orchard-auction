@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
   def index
     #@items = Item.all
     event_id = params[:event_id] || Event.last.id;
-    @items = Item.includes(:donor).where(event_id: params[:event_id]).order("#{sort_column} #{sort_direction}")
+    @items = Item.includes(:donor).includes(:lot).where(event_id: params[:event_id]).order("#{sort_column} #{sort_direction}")
 
     respond_to do |format|
       format.html
