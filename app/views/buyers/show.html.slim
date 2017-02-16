@@ -50,16 +50,19 @@
 
 .orchard-panel
   .panel-header
-    h1 Total
+    h1 Payments
     ul
-      li = link_to "#{ @buyer.is_paid ? 'Mark as Unpaid' : 'Mark as Paid' }", toggle_paid_buyer_path(@buyer), method: :patch, remote: :true, id: "btn_paid_toggle"
+      li = link_to "Make a Payment", new_event_payment_path(event_id: @event.id, buyer_id: @buyer.id, amount: @balance)
+  #payments-list
+    = render "payments"
 
-.row
-    .full
-      h4.numeric
-        ' Total due for wins and pledges: 
-        = number_to_currency(@buyer.event_total_purchase(@event))
-      h3#payment-info.numeric
-        ' Buyer has
-        =(@buyer.is_paid ? '' : ' NOT')
-        |  paid
+.orchard-panel
+  .panel-header
+    h1 Balance
+    ul
+
+  .row
+      .full
+        h4.numeric
+          ' Total due for wins and pledges:
+          = number_to_currency(@balance)

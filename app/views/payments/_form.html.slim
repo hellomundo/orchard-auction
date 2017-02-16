@@ -1,0 +1,16 @@
+= simple_form_for([@event, @payment]) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :buyer_id, as: :hidden, input_html: { value: @buyer_id }
+    .row
+      .half-left = f.input :form
+      .half-right = f.input :amount, input_html: { value: @amount }
+
+    .row
+      .full = f.input :note, label: "Check Number or Reference Number"
+
+    .row
+      .full
+        .form-actions
+          = f.button :submit

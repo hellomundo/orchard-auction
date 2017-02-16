@@ -1,0 +1,24 @@
+- if @buyer.event_payments(@event).count > 0
+  table
+    thead
+      tr
+        th
+        th Type
+        th.numeric Amount
+        th
+
+    tbody id="buyer-pledges"
+      - @buyer.event_payments(@event).each do |payment|
+        tr
+          td
+          td = payment.form
+          td.numeric = number_to_currency(payment.amount)
+          td = link_to '<i class="fa fa-trash-o"></i>'.html_safe, event_payment_path(@event, payment), method: :delete, data: { confirm: 'Are you sure? This removes this payment for this buyer.' }
+
+      tr.summation
+        td
+        td Total:
+        td.numeric = number_to_currency(@payment_total)
+        td
+- else
+  p No payments recorded yet for this buyer

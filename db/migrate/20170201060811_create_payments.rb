@@ -3,8 +3,8 @@ class CreatePayments < ActiveRecord::Migration
     create_table :payments do |t|
       t.integer :form
       t.decimal :amount, precision: 8, scale: 2
-      t.references :buyer_id, index: true, foreign_key: true
-      t.references :event_id, index: true, foreign_key: true
+      t.references :buyer, index: true, foreign_key: true
+      t.references :event, index: true, foreign_key: true
 
       t.timestamps null: false
     end

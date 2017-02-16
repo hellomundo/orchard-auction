@@ -1,0 +1,7 @@
+.orchard-panel
+  .panel-header
+    h1 New Payment
+    ul
+      li = link_to 'cancel', event_payments_path(@event)
+
+  = render 'form'

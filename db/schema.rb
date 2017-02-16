@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170201060811) do
+ActiveRecord::Schema.define(version: 20170215230735) do
 
   create_table "buyers", force: :cascade do |t|
     t.string   "first_name"
@@ -79,14 +79,14 @@ ActiveRecord::Schema.define(version: 20170201060811) do
     t.decimal  "pledgetotal",       precision: 8, scale: 2
     t.decimal  "total",             precision: 8, scale: 2
     t.integer  "invoice_status_id"
-    t.integer  "buyer_id_id"
-    t.integer  "event_id_id"
+    t.integer  "buyer_id"
+    t.integer  "event_id"
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
   end
 
-  add_index "invoices", ["buyer_id_id"], name: "index_invoices_on_buyer_id_id"
-  add_index "invoices", ["event_id_id"], name: "index_invoices_on_event_id_id"
+  add_index "invoices", ["buyer_id"], name: "index_invoices_on_buyer_id"
+  add_index "invoices", ["event_id"], name: "index_invoices_on_event_id"
   add_index "invoices", ["invoice_status_id"], name: "index_invoices_on_invoice_status_id"
 
   create_table "items", force: :cascade do |t|
@@ -125,15 +125,16 @@ ActiveRecord::Schema.define(version: 20170201060811) do
 
   create_table "payments", force: :cascade do |t|
     t.integer  "form"
-    t.decimal  "amount",      precision: 8, scale: 2
-    t.integer  "buyer_id_id"
-    t.integer  "event_id_id"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.decimal  "amount",     precision: 8, scale: 2
+    t.integer  "buyer_id"
+    t.integer  "event_id"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.string   "note"
   end
 
-  add_index "payments", ["buyer_id_id"], name: "index_payments_on_buyer_id_id"
-  add_index "payments", ["event_id_id"], name: "index_payments_on_event_id_id"
+  add_index "payments", ["buyer_id"], name: "index_payments_on_buyer_id"
+  add_index "payments", ["event_id"], name: "index_payments_on_event_id"
 
   create_table "pledges", force: :cascade do |t|
     t.decimal  "amount"

@@ -3,6 +3,7 @@ class Buyer < ActiveRecord::Base
   has_many :wins , dependent: :destroy
   has_many :lots, through: :wins
   has_many :pledges
+  has_many :payments
 
   validates :first_name, :last_name, :presence => true
 
@@ -24,6 +25,10 @@ class Buyer < ActiveRecord::Base
 
   def event_total_pledges(event)
     Pledge.event_total_for_buyer(event, self)
+  end
+
+  def event_payments(event)
+    payments.where(event_id: event.id)
   end
 
   def event_total_purchase(event)

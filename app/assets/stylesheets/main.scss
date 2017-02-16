@@ -352,9 +352,6 @@ thead {
     border-bottom: 1px solid $steel;
   }
 
-  .numeric {
-    text-align: right;
-  }
 }
 tbody {
   tr {
@@ -391,7 +388,7 @@ td {
   @include button();
 }
 
-.form-control {
+.form-controls {
   margin-top: 2em;
   .btn {
     margin-right: 1em;
@@ -435,11 +432,12 @@ td {
   }
 }
 
+.numeric {
+  text-align: right;
+}
+
 // Table Styles
 table {
-  .numeric {
-    text-align: right;
-  }
 
   .summation {
     border-top: solid black 2px;

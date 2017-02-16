@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     resources :buyers
     resources :submissions
     resources :pledges
+    resources :payments
     resources :items
     resources :contacts
     resources :donors do
