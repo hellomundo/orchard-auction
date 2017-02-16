@@ -23,6 +23,10 @@ class EventsController < ApplicationController
     @items_donated = Item.where(event_id: @event.id).count
     # what is the overall value of donations
     @total_value = Item.where(event_id: @event.id).sum("fmv")
+
+    @total_won = Win.where(event_id: @event.id).sum(:price)
+    @total_pledged = Pledge.where(event_id: @event.id).sum(:amount)
+    @total_payments = Payment.where(event_id: @event.id).sum(:amount)
   end
 
   # GET /events/new

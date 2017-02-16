@@ -40,3 +40,17 @@
       .stat
         em Total Donations Value
         strong = number_to_currency(@total_value)
+
+  .row
+    .third-left
+      .stat
+        em Value of Won Items
+        strong = number_to_currency(@total_won)
+    .third-middle
+      .stat
+        em Total Pledged
+        strong = number_to_currency(@total_pledged)
+    .third-right
+      .stat
+        em Total Payments
+        strong = number_to_currency(@total_payments)
