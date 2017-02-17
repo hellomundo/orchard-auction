@@ -15,7 +15,7 @@ class LotsController < ApplicationController
   # GET /lots/1
   # GET /lots/1.json
   def show
-    @available_items = Item.where("event_id = ? AND lot_id IS NULL", @event.id)
+    @available_items = Item.where("event_id = ? AND is_available = ? AND lot_id IS NULL", @event.id, true)
   end
 
   # GET /lots/new

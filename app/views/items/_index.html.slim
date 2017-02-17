@@ -4,8 +4,9 @@
       tr
         th
         th Item
-        th Item Number
+        th Item No
         th.numeric Value
+        th
         th
 
     tbody
@@ -15,7 +16,7 @@
           td = link_to item.name, event_item_path(item.event, item)
           td = link_to item.id, event_item_path(item.event, item)
           td.numeric = number_to_currency(item.fmv)
-          td = link_to '<i class="fa fa-trash-o"></i>'.html_safe, event_item_path(item.event, item), method: :delete, remote: true, data: { confirm: 'Are you sure? This will erase this item from the database.' }
-
+          td.icon = icon_toggle_link item.is_available, toggle_availability_item_path(item), "minus-circle", "plus-circle", true
+          td.icon = icon_delete_link item_path(item), 'Are you sure? This will erase this item from the database.', true
 - else
   p No items donated yet.

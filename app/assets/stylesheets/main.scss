@@ -355,6 +355,9 @@ thead {
 }
 tbody {
   tr {
+    &.unavailable {
+      background-color: $very-light-red;
+    }
     &:hover {
       background-color: $smoke;
     }
@@ -380,6 +383,10 @@ th {
 
 td {
   padding: 1em .5em;
+
+  &.icon {
+    text-align: center;
+  }
 }
 
 

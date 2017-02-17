@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_item, only: [:show, :edit, :update, :toggle_availability, :destroy]
   # GET /items
   # GET /items.json
   def index
@@ -74,6 +74,16 @@ class ItemsController < ApplicationController
   def import
     Item.import(params[:file])
     redirect_to items_path, notice: "Items imported."
+  end
+
+  def toggle_availability
+    @item.is_available = !@item.is_available
+    #should try to catch error here
+    @item.save
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   private

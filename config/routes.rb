@@ -64,6 +64,10 @@ Rails.application.routes.draw do
     collection do
       post 'import'
     end
+
+    member do
+      get :toggle_availability
+    end
   end
 
 
