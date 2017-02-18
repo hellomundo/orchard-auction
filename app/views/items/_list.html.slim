@@ -6,6 +6,7 @@
         th = sort_link "name"
         th = sort_link "donors.company", "Donor"
         th = sort_link "category"
+        th = sort_link "format"
         th.cell-short Lot
         th.numeric = sort_link "fmv", "FMV"
         th.cell-icon
@@ -18,6 +19,7 @@
           td = link_to item.name, event_item_path(item.event, item)
           td = link_to item.donor.company, event_donor_path(item.event, item.donor)
           td = item.category
+          td = item.format
           td = link_to item.lot.lot_number, event_lot_path(item.event, item.lot) unless item.lot.blank?
           td.numeric = number_to_currency(item.fmv)
           td.icon
