@@ -2,22 +2,22 @@
   table
     thead
       tr
-        th
-        th #
+        th.cell-icon
+        th.cell-short #
         th Lot
         th Winner
-        th Price
-        th
+        th.numeric.cell-amount Price
+        th.cell-icon
 
     tbody
       - @wins.each do |win|
         tr
-          td = icon_link edit_event_win_path(@event, win), "cog"
+          td.icon = icon_link edit_event_win_path(@event, win), "cog"
           td = link_to win.lot.lot_number, event_lot_path(@event, win.lot)
           td = link_to win.lot.name, event_lot_path(@event, win.lot)
           td = link_to(win.buyer.reverse_name, event_buyer_path(@event, win.buyer))
-          td = number_to_currency(win.price)
-          td = link_to '<i class="fa fa-trash-o"></i>'.html_safe, event_win_path(@event, win), method: :delete, remote: true, data: { confirm: 'Are you sure? This will delete the record of this win.' }
+          td.numeric = number_to_currency(win.price)
+          td.icon = link_to '<i class="fa fa-trash-o"></i>'.html_safe, event_win_path(@event, win), method: :delete, remote: true, data: { confirm: 'Are you sure? This will delete the record of this win.' }
 
 - else
   p No wins recorded yet.

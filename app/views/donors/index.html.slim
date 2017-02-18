@@ -15,23 +15,23 @@
   table
     thead
       tr
-        th
-        th = link_to "ID", :sort => "id"
+        th.cell-icon
+        th.cell-short = link_to "ID", :sort => "id"
         th = link_to "Company", :sort => "company"
         th Name
         th = link_to "Status", :sort => "status"
-        th
+        th.cell-icon
 
     tbody
       - @donors.each do |donor|
         tr
-          td = icon_link edit_event_donor_path(@event, donor), "cog"
+          td.icon = icon_link edit_event_donor_path(@event, donor), "cog"
           td = donor.id
           td = link_to donor.company, event_donor_path(@event, donor)
           td = donor.first_name
             = donor.last_name
           td = donor.stage != nil ? donor.stage.stage : "uncalled"
-          td = link_to '<i class="fa fa-trash-o"></i>'.html_safe, donor, method: :delete, data: { confirm: 'Are you sure? This will also delete all the items donated by this donor.' }
+          td.icon = link_to '<i class="fa fa-trash-o"></i>'.html_safe, donor, method: :delete, data: { confirm: 'Are you sure? This will also delete all the items donated by this donor.' }
 
 .orchard-panel
   .panel-header

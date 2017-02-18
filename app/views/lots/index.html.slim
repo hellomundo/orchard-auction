@@ -4,24 +4,4 @@
     ul
       li = link_to 'New Lot', new_event_lot_path(@event)
 
-  - if @lots.count > 0
-    table
-      thead
-        tr
-          th
-          th No.
-          th Name
-          th Table
-          th
-
-      tbody
-        - @lots.each do |lot|
-          tr
-            td = icon_link edit_event_lot_path(@event, lot), "cog"
-            td = lot.lot_number
-            td = link_to lot.name, event_lot_path(@event, lot)
-            td = lot.table_number
-            td = icon_delete_link event_lot_path(@event, lot), "Deleting this lot will NOT delete the items inside of it."
-
-  - else
-    p No lots created yet.
+  = render "index"

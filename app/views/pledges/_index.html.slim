@@ -2,20 +2,20 @@
   table
     thead
       tr
-        th
+        th.cell-icon
         th Buyer
         th Type
-        th Amount
-        th
+        th.numeric.cell-amount Amount
+        th.cell-icon
 
     tbody
       - @pledges.each do |pledge|
         tr
-          td = icon_link edit_event_pledge_path(@event, pledge), "cog", remote: true
+          td.icon = icon_link edit_event_pledge_path(@event, pledge), "cog", remote: true
           td = link_to(pledge.buyer.reverse_name, event_buyer_path(@event, pledge.buyer))
           td = pledge.pledge_type
-          td = number_to_currency(pledge.amount)
-          td = link_to '<i class="fa fa-trash-o"></i>'.html_safe, event_pledge_path(@event, pledge), method: :delete, remote: true, data: { confirm: 'Are you sure? This will delete the record of this pledge.' }
+          td.numeric = number_to_currency(pledge.amount)
+          td.icon = link_to '<i class="fa fa-trash-o"></i>'.html_safe, event_pledge_path(@event, pledge), method: :delete, remote: true, data: { confirm: 'Are you sure? This will delete the record of this pledge.' }
 
 - else
   p No pledges recorded yet.
