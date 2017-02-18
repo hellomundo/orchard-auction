@@ -406,6 +406,10 @@ td {
   width: 15%;
 }
 
+.cell-long {
+  width: 30%;
+}
+
 // for buttons
 .btn {
   @include button();

@@ -3,11 +3,11 @@
     thead
       tr
         th.cell-icon
-        th = sort_link "name"
+        th.cell-long = sort_link "name"
         th = sort_link "donors.company", "Donor"
         th = sort_link "category"
         th = sort_link "format"
-        th.cell-short Lot
+        th Lot
         th.numeric = sort_link "fmv", "FMV"
         th.cell-icon
         th.cell-icon
