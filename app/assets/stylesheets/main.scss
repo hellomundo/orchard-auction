@@ -337,7 +337,9 @@ nav {
 // Table Styles
 
 table {
+  table-layout: fixed;
   width: 100%;
+  white-space: nowrap;
   border-collapse: collapse;
 }
 
@@ -383,10 +385,21 @@ th {
 
 td {
   padding: 1em .5em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   &.icon {
     text-align: center;
   }
+}
+
+.cell-icon {
+  width: 5%;
+}
+
+.cell-amount {
+  width: 15%;
 }
 
 

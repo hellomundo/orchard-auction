@@ -24,7 +24,7 @@
       .stat
         em Telephone
         - if @buyer.telephone.present?
-          p = @buyer.telephone
+          p = number_to_phone(@buyer.telephone)
         - else
           p None on file
 

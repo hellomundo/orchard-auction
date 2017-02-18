@@ -48,7 +48,7 @@ class WinsController < ApplicationController
     @wins = Win.where(event_id: @event.id)
     @win.destroy
     respond_to do |format|
-      format.html { redirect_to wins_url, notice: 'Okay, I deleted that win.' }
+      format.html { redirect_to :back, notice: 'Okay, I deleted that win.' }
       format.js
     end
 

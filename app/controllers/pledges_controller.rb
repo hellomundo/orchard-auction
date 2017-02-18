@@ -57,7 +57,7 @@ class PledgesController < ApplicationController
     @pledges = set_pledges(@event)
     @pledge.destroy
     respond_to do |format|
-      format.html { redirect_to pledges_url, notice: 'Okay, I deleted that pledge.' }
+      format.html { redirect_to :back, notice: 'Okay, I deleted that pledge.' }
       format.js
     end
 

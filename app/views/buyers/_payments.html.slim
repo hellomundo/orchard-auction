@@ -2,21 +2,18 @@
   table
     thead
       tr
-        th
         th Type
-        th.numeric Amount
-        th
+        th.numeric.cell-amount Amount
+        th.cell-icon
 
     tbody id="buyer-pledges"
       - @buyer.event_payments(@event).each do |payment|
         tr
-          td
           td = payment.form
           td.numeric = number_to_currency(payment.amount)
-          td = link_to '<i class="fa fa-trash-o"></i>'.html_safe, event_payment_path(@event, payment), method: :delete, data: { confirm: 'Are you sure? This removes this payment for this buyer.' }
+          td.icon = icon_delete_link event_payment_path(@event, payment), 'Are you sure? This removes this payment for this buyer.'
 
       tr.summation
-        td
         td Total:
         td.numeric = number_to_currency(@payment_total)
         td
