@@ -87,7 +87,7 @@ class ItemsController < ApplicationController
 
   private
     def sortable_columns
-      ["name", "donors.company", "fmv"]
+      ["name", "category", "donors.company", "fmv"]
     end
 
     # Use callbacks to share common setup or constraints between actions.
