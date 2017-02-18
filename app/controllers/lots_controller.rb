@@ -64,6 +64,7 @@ class LotsController < ApplicationController
     for item in @available_items
       lot = Lot.new()
       lot.items << item
+      lot.event_id = item.event_id
       lot.save
     end
 
