@@ -57,13 +57,14 @@ class Buyer < ActiveRecord::Base
     end
   end
 
-  def self.import(file)
+  def self.import(file, event_id)
     CSV.foreach(file.path, headers: true) do |row|
       # only fill certain rows
       d = Buyer.new ({  :first_name => row['first_name'],
                         :last_name => row['last_name'],
-                        :telephone => row['telephone'],
-                        :event_id => row['event_id'],
+                        :telephone => row['phone'],
+                        :email => row['email'],
+                        :event_id => event_id,
                         :guests => row['guests']
         })
       d.save

@@ -76,7 +76,7 @@ class BuyersController < ApplicationController
 
   # POST /buyers/import
   def import
-    Buyer.import(params[:file])
+    Buyer.import(params[:file], @event.id)
     redirect_to event_buyers_path(@event), notice: "Buyers imported."
   end
 
