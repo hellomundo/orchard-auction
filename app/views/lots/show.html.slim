@@ -5,10 +5,11 @@
     ul
       li = link_to 'Edit', edit_event_lot_path(@event, @lot)
 
-  .row
-    .full
-      | Group
-      = @lot.table_number
+  -if @lot.table_number.present?
+    .row
+      .full.group
+        ' Group
+        = @lot.table_number
 
   .row
     .full
@@ -60,15 +61,17 @@
   table#contained-items style="display: #{@lot.items.empty? ? 'none' : 'table'}"
     thead
       tr
-        th
+        th.cell-icon
         th Name
         th Donor
-        th.numeric FMV
+        th.numeric.cell-amount FMV
 
     tbody
       - @lot.items.each do |item|
         tr id='item-#{item.id}'
-          td = icon_link(toggle_event_lot_path(@event, @lot, item_id: item), "arrow-down", true)
+          td.icon
+            - unless @lot.has_been_won
+              = icon_link(toggle_event_lot_path(@event, @lot, item_id: item), "arrow-down", true)
           td = link_to item.name, event_item_path(@event, item)
           td = link_to item.donor.company, event_donor_path(@event, item.donor)
           td.numeric = number_to_currency(item.fmv)
@@ -77,21 +80,24 @@
   .panel-header
     h4 Available Items to Add
 
-  #no-available-message style="display: #{@available_items.empty? ? 'block' : 'none'}"
-    | All items are already in other lots. To move an item from another lot to this one, remove the item from that lot and it will show up here as available. To create a new item, go to its Donor page and add the item.
+  - if @lot.has_been_won
+    div This lot has been won. Can't add any more items.
+  - else
+    #no-available-message style="display: #{@available_items.empty? ? 'block' : 'none'}"
+      | All items are already in other lots. To move an item from another lot to this one, remove the item from that lot and it will show up here as available. To create a new item, go to its Donor page and add the item.
 
-  table#available-items style="display: #{@available_items.empty? ? 'none' : 'table'}"
-    thead
-      tr
-        th
-        th Name
-        th Donor
-        th.numeric FMV
+    table#available-items style="display: #{@available_items.empty? ? 'none' : 'table'}"
+      thead
+        tr
+          th.cell-icon
+          th Name
+          th Donor
+          th.numeric.cell-amount FMV
 
-    tbody
-      - @available_items.each do |item|
-        tr id='item-#{item.id}'
-          td = icon_link(toggle_event_lot_path(@event, @lot, item_id: item), "arrow-up", true)
-          td = link_to item.name, event_item_path(@event, item)
-          td = link_to item.donor.company, event_donor_path(@event, item.donor)
-          td.numeric = number_to_currency(item.fmv)
+      tbody
+        - @available_items.each do |item|
+          tr id='item-#{item.id}'
+            td.icon = icon_link(toggle_event_lot_path(@event, @lot, item_id: item), "arrow-up", true)
+            td = link_to item.name, event_item_path(@event, item)
+            td = link_to item.donor.company, event_donor_path(@event, item.donor)
+            td.numeric = number_to_currency(item.fmv)

@@ -14,6 +14,7 @@ $large: '60em';
 $white       : #FFFFFF;
 $silver      : #EFEFEF;
 $smoke       : #EEEEEE;
+$trout       : #CCCCCC;
 $steel       : #666666;
 $charcoal    : #555555;
 $action-color: #098c8c;
@@ -188,6 +189,10 @@ p {
 
   table {
     margin-top: 2em;
+  }
+
+  .group {
+    margin-bottom: .5em;
   }
 }
 
@@ -475,14 +480,21 @@ table {
 
 .panel-header {
 
-  border-bottom: 1px solid $steel;
-  margin-bottom: 0.5em;
+  border-bottom: 7px solid $trout;
+  margin-bottom: 1em;
   @include clearfix();
 
   h1 {
     float: left;
-    margin: 0;
+    margin: 0 0 .2em 0;
+  }
 
+  h3 {
+    margin-bottom: .4em;
+  }
+
+  h4 {
+    margin-bottom: .5em;
   }
 
   ul {
@@ -502,7 +514,7 @@ table {
         font-weight: bold;
         text-transform: uppercase;
         text-decoration: none;
-        margin: .6rem 0 1rem;
+        margin: .6rem 0;
 
         &:hover {
           background-color: $silver;
