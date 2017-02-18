@@ -1,0 +1,18 @@
+- if @buyers.count > 0
+  table
+    thead
+      tr
+        th.cell-icon
+        th.cell-short Buyer No
+        th Name
+        th.cell-icon
+
+    tbody
+      - @buyers.each do |buyer|
+        tr
+          td.icon = icon_link edit_event_buyer_path(@event, buyer), "cog"
+          td = buyer.buyer_number
+          td = link_to(buyer.reverse_name, event_buyer_path(@event, buyer))
+          td.icon = link_to '<i class="fa fa-trash-o"></i>'.html_safe, event_buyer_path(@event, buyer), method: :delete, data: { confirm: 'Are you sure? This will also delete all sales records to this buyer.' }
+- else
+  p No buyers added yet.
