@@ -40,7 +40,7 @@ class WinsController < ApplicationController
     if @win.update(win_params)
       redirect_to @win, notice: 'Win was successfully updated.'
     else
-      render :edit
+      render :edit, notice: 'Some kind of problem'
     end
   end
 

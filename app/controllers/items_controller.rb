@@ -26,7 +26,6 @@ class ItemsController < ApplicationController
 
   # GET /donor/1/items/1/edit
   def edit
-    @item = Item.find(params[:id])
     @donor = @item.donor
   end
 
