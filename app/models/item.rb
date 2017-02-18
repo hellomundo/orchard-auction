@@ -1,3 +1,5 @@
+require 'csv'
+
 class Item < ActiveRecord::Base
   include ItemCategories
   include ItemFormats

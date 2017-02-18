@@ -18,7 +18,7 @@
     h3 Import Buyers
 
   = form_tag import_buyers_path, multipart: true do
-  .form-inputs
-    .row
-      .half-left = file_field_tag :file
-      .half-right = submit_tag "Import"
+    .form-inputs
+      .row
+        .half-left = file_field_tag :file
+        .half-right = submit_tag "Import"

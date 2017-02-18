@@ -1,3 +1,5 @@
+require 'csv'
+
 class Buyer < ActiveRecord::Base
 
   has_many :wins , dependent: :destroy
@@ -61,6 +63,7 @@ class Buyer < ActiveRecord::Base
       d = Buyer.new ({  :first_name => row['first_name'],
                         :last_name => row['last_name'],
                         :telephone => row['telephone'],
+                        :event_id => row['event_id'],
                         :guests => row['guests']
         })
       d.save
