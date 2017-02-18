@@ -2,7 +2,7 @@
   table
     thead
       tr
-        th.cell-icon
+        /th.cell-icon
         th Buyer
         th Type
         th.numeric.cell-amount Amount
@@ -11,7 +11,7 @@
     tbody
       - @pledges.each do |pledge|
         tr
-          td.icon = icon_link edit_event_pledge_path(@event, pledge), "cog", remote: true
+          /td.icon = icon_link edit_event_pledge_path(@event, pledge), "cog", remote: true
           td = link_to(pledge.buyer.reverse_name, event_buyer_path(@event, pledge.buyer))
           td = pledge.pledge_type
           td.numeric = number_to_currency(pledge.amount)
