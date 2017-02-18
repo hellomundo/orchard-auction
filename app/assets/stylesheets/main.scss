@@ -183,7 +183,7 @@ p {
 }
 
 .orchard-panel {
-  margin: 5em 0;
+  margin: 3em 0;
   background-color: $white;
   //padding: 2em 4em;
 
@@ -490,11 +490,13 @@ table {
   }
 
   h3 {
-    margin-bottom: .4em;
+    float: left;
+    margin: .4em 0 .4em 0;
   }
 
   h4 {
-    margin-bottom: .5em;
+    float: left;
+    margin: 0 0 .5em 0;
   }
 
   ul {

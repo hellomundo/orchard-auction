@@ -38,19 +38,19 @@
 
 .orchard-panel
   .panel-header
-    h1 Wins
+    h3 Wins
   #win-list
     = render "wins"
 
 .orchard-panel
   .panel-header
-    h1 Pledges
+    h3 Pledges
   #gen-list
     = render "pledges"
 
 .orchard-panel
   .panel-header
-    h1 Payments
+    h3 Payments
     ul
       li = link_to "Make a Payment", new_event_payment_path(event_id: @event.id, buyer_id: @buyer.id, amount: @balance)
   #payments-list
@@ -58,7 +58,7 @@
 
 .orchard-panel
   .panel-header
-    h1 Balance
+    h3 Balance
     ul
 
   .row
