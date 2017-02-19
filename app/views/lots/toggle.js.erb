@@ -39,5 +39,7 @@ $('#opening-price').text("<%= number_to_currency(@lot.calculated_opening_price) 
 $('#desc').text("<%= @lot.calculated_description %>");
 // update the bid increment
 $('#bid-increment').text("<%= number_to_currency(@lot.calculated_bid_increment) %>");
+// update the bid increment
+$('#items-count').text("<%= @lot.items.count %>");
 
 //window.alert("<%= @msg %>");

@@ -8,6 +8,7 @@
         th = sort_link "category"
         th = sort_link "format"
         th Lot
+        th Note
         th.numeric = sort_link "fmv", "FMV"
         th.cell-icon
         th.cell-icon
@@ -21,6 +22,7 @@
           td = item.category
           td = item.format
           td = link_to item.lot.lot_number, event_lot_path(item.event, item.lot) unless item.lot.blank?
+          td = item.notes.present? ? '*' : ''
           td.numeric = number_to_currency(item.fmv)
           td.icon
             - if item.lot.blank?

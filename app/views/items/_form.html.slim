@@ -14,9 +14,11 @@
       .full = f.input :description
     .row
       .full = f.input :restrictions
+    .row
+      .full = f.input :notes
 
     = f.hidden_field :donor_id, value: @donor.id
-    
+
     .row
       .full
         .form-actions

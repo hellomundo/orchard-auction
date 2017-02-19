@@ -16,40 +16,51 @@
       .lede#desc = @lot.calculated_description
 
   .row
-    .fourth-left
-      .stat
-        em Calculated FMV
-        strong#fmv-price = number_to_currency(@lot.calculated_fmv)
-
-    .fourth-middle
+    .third-left
       .stat
         em Opening Price
         strong#opening-price = number_to_currency(@lot.calculated_opening_price)
 
-    .fourth-middle
-      .stat
-        em Buy It Now Price
-        strong#bin-price = number_to_currency(@lot.buy_now_price)
-
-    .fourth-right
+    .third-middle
       .stat
         em Bid Increment
         strong#bid-increment = number_to_currency(@lot.calculated_bid_increment)
 
-  -if @lot.has_been_won
+    .third-right
+      .stat
+        em Buy It Now Price
+        strong#bin-price = number_to_currency(@lot.buy_now_price)
+
   .row
-    .half-left
+    .third-left
       .stat
-        em Won By
-        p
-          - if @lot.winner.present?
-            = @lot.winner.full_name
-          - else
-            | No winner yet
-    .half-right
+        em Quantity Available
+        strong = @lot.quantity_available
+
+    .third-middle
       .stat
-        em Winning Price
-        p = number_to_currency(@lot.winning_price)
+        em No of Items in Lot
+        strong#items-count = @lot.items.count
+
+    .third-right
+      .stat
+        em Calculated FMV
+        strong#fmv-price = number_to_currency(@lot.calculated_fmv)
+
+  -if @lot.has_been_won
+    .row
+      .half-left
+        .stat
+          em Won By
+          p
+            - if @lot.winner.present?
+              = @lot.winner.full_name
+            - else
+              | No winner yet
+      .half-right
+        .stat
+          em Winning Price
+          p = number_to_currency(@lot.winning_price)
 
 .orchard-panel
   .panel-header

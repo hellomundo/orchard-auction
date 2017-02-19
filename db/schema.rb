@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170216220743) do
+ActiveRecord::Schema.define(version: 20170219172102) do
 
   create_table "buyers", force: :cascade do |t|
     t.string   "first_name"
@@ -103,6 +103,7 @@ ActiveRecord::Schema.define(version: 20170216220743) do
     t.integer  "category",                              default: 0
     t.integer  "event_id"
     t.boolean  "is_available",                          default: true
+    t.text     "notes"
   end
 
   add_index "items", ["donor_id"], name: "index_items_on_donor_id"
