@@ -5,7 +5,7 @@ class LotsController < ApplicationController
   # GET /lots
   # GET /lots.json
   def index
-    @lots = Lot.where(event_id: @event.id)
+    @lots = Lot.where(event_id: @event.id).order(:id)
     respond_to do |format|
       format.html
       format.csv { render text: @lots.to_csv }
