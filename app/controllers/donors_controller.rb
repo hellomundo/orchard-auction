@@ -17,7 +17,7 @@ class DonorsController < ApplicationController
       #show all in cat
       @donors = Donor.by_event_and_stage(@event.id, params[:search_cat])
     else
-      @donors = Donor.by_event(@event.id).order(sort_column)
+      @donors = Donor.by_event(@event.id).order("#{sort_column} #{sort_direction}")
     end
 
     @search_placeholder = params[:search_name] || ""
@@ -104,13 +104,13 @@ class DonorsController < ApplicationController
     # def set_event
     #   @event_id = params[:event_id]
     # end
+    def sortable_columns
+      ["company", "status", "id"]
+    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def donor_params
       params.require(:donor).permit(:company, :first_name, :last_name, :title, :phone, :email, :address1, :address2, :city, :state, :zip, :website, :status, :has_donated, :stage)
     end
 
-    def sort_column
-      Donor.column_names.include?(params[:sort]) ? params[:sort] : "company"
-    end
 end

@@ -16,10 +16,10 @@
     thead
       tr
         th.cell-icon
-        th.cell-short = link_to "ID", :sort => "id"
-        th = link_to "Company", :sort => "company"
+        th.cell-short = sort_link "id"
+        th = sort_link "company"
         th Name
-        th = link_to "Status", :sort => "status"
+        th = sort_link "status"
         th.cell-icon
 
     tbody

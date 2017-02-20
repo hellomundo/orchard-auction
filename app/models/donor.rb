@@ -35,7 +35,7 @@ class Donor < ActiveRecord::Base
   end
 
   def self.to_csv
-    attributes = %w{company first_name last_name phone address1 address2 city state zip has_donated}
+    attributes = %w{company first_name last_name phone address1 address2 city state zip status has_donated}
     CSV.generate do |csv|
       csv << attributes
       all.each do |donor|
