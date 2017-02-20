@@ -7,12 +7,13 @@
     .row
       .full = f.input :description
     .row
-      .fourth-left = f.input :opening_price
-      .fourth-middle = f.input :bid_increment
-      .fourth-middle = f.input :buy_now_price
-      .fourth-right = f.input :table_number, collection: 1..10
+      .third-left = f.input :opening_price
+      .third-middle = f.input :bid_increment
+      .third-right = f.input :buy_now_price, input_html: { data: {default: @lot.default_bin }}
+
     .row
-      .fourth = f.input :quantity_available, placeholder: '1'
+      .half-left = f.input :quantity_available, placeholder: '1'
+      .half-right = f.input :table_number, collection: 1..10
 
     .form-actions
       = f.button :submit

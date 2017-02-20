@@ -27,6 +27,11 @@ class Lot < ActiveRecord::Base
     self.id + 100
   end
 
+  def default_bin
+    # buy it now price is 75% of FMV
+    (calculated_fmv * 0.75 / 5.0).floor * 5.0;
+  end
+
   def has_been_won
     # bad code - Lot has to know about Win
     return Win.where(:lot_id => self.id).exists?
