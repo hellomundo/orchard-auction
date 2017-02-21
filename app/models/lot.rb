@@ -29,7 +29,9 @@ class Lot < ActiveRecord::Base
 
   def default_bin
     # buy it now price is 75% of FMV
-    (calculated_fmv * 0.75 / 5.0).floor * 5.0;
+    bin = (calculated_fmv * 0.9 / 5.0).floor * 5.0;
+    # if the calculated bin = fmv, then make it $5 less
+    # bin == calculated_fmv ? calculated_fmv - 5.0 : bin
   end
 
   def has_been_won
@@ -81,23 +83,23 @@ class Lot < ActiveRecord::Base
 
 
   def self.to_csv
-    attributes = %w{id name description fmv opening_price bid_increment table_number items donor }
+    attributes = %w{id name description fmv buy_now_price opening_price bid_increment table_number items donor }
 
     CSV.generate do |csv|
       csv << attributes
       all.each do |lot|
         if lot.items.any?
-          row = [lot.lot_number, lot.name, lot.calculated_description, lot.calculated_fmv, lot.calculated_opening_price, lot.calculated_bid_increment, lot.table_number ]
-          items = lot.items.collect { |o| o.name + " ($" + sprintf('%02.f', o.fmv) + ") from " + o.donor.company }.join("\n")
+          row = [lot.lot_number, lot.name, lot.calculated_description, lot.calculated_fmv, lot.buy_now_price, lot.calculated_opening_price, lot.calculated_bid_increment, lot.table_number ]
+          items = lot.items.collect { |o| o.name + " ($" + sprintf('%02.f', o.fmv) + ") from " + o.donor.company }.join(", ")
 
           if lot.items.count == 1
             # there is only one donor
             donor = lot.items.first.donor.company
           else
-            donor = nil
+            donor = lot.items.collect { |i| i.donor.company }.join(", ")
           end
         else
-          row = [lot.lot_number, lot.name, lot.calculated_description, lot.calculated_fmv, lot.calculated_opening_price, lot.calculated_bid_increment, lot.table_number ]
+          row = [lot.lot_number, lot.name, lot.calculated_description, lot.calculated_fmv, lot.buy_now_price, lot.calculated_opening_price, lot.calculated_bid_increment, lot.table_number ]
           items = nil
           donor = nil
         end

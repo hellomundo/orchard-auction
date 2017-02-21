@@ -6,6 +6,8 @@
         th.cell-short No.
         th Name
         th.cell-short Table
+        th.numeric.cell-amount BIN
+        th.numeric.cell-amount FMV
         th.cell-icon
 
     tbody
@@ -15,6 +17,8 @@
           td = lot.lot_number
           td = link_to lot.name, event_lot_path(@event, lot)
           td = lot.table_number
+          td.numeric = lot.buy_now_price
+          td.numeric = lot.calculated_fmv
           td.icon = icon_delete_link event_lot_path(@event, lot), "Deleting this lot will NOT delete the items inside of it."
 
 - else
