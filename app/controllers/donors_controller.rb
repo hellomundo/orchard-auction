@@ -105,7 +105,7 @@ class DonorsController < ApplicationController
     #   @event_id = params[:event_id]
     # end
     def sortable_columns
-      ["company", "status", "id"]
+      ["company", "stage", "id"]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
