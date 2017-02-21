@@ -7,7 +7,7 @@ class Donor < ActiveRecord::Base
 
   def self.by_event(event_id)
     #joins(:stage).where('statuses.event_id = ?', event_id)
-    joins("LEFT OUTER JOIN statuses ON donors.id = statuses.donor_id").where('statuses.event_id = ? OR statuses.donor_id IS NULL', event_id).includes(:stage)
+    joins("LEFT OUTER JOIN statuses ON donors.id = statuses.donor_id").where('statuses.event_id = ?', event_id).includes(:stage)
   end
 
   def self.by_event_and_name(event_id, name)
