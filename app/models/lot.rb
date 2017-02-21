@@ -20,7 +20,7 @@ class Lot < ActiveRecord::Base
   end
 
   def calculated_bid_increment
-    self.opening_price || calculate_increment
+    self.bid_increment || calculate_increment
   end
 
   def lot_number
