@@ -59,7 +59,7 @@ class LotsController < ApplicationController
 
   def generate
     # find every item that isn't in a lot
-    @available_items = Item.where("event_id = ? AND lot_id IS NULL", @event.id)
+    @available_items = Item.where("event_id = ? AND is_available = ? AND lot_id IS NULL", @event.id, true)
     # create a new lot for each item
     for item in @available_items
       lot = Lot.new()
