@@ -29,7 +29,7 @@ class Lot < ActiveRecord::Base
 
   def default_bin
     # buy it now price is 75% of FMV
-    bin = (calculated_fmv * 0.9 / 5.0).floor * 5.0;
+    bin = (calculated_fmv * 0.75 / 5.0).floor * 5.0;
     # if the calculated bin = fmv, then make it $5 less
     # bin == calculated_fmv ? calculated_fmv - 5.0 : bin
   end
