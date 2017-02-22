@@ -12,7 +12,7 @@ class BuyersController < ApplicationController
         bid = query.to_i - 100
         @buyers = Buyer.where(id: bid, event_id: @event.id)
       else
-        @buyers = Buyer.where('event_id = :eid AND lower(last_name) LIKE :search OR lower(first_name) LIKE :search', search: "%#{query.downcase}%", eid: @event.id)
+        @buyers = Buyer.where('event_id = :eid AND (lower(last_name) LIKE :search OR lower(first_name) LIKE :search)', search: "%#{query.downcase}%", eid: @event.id)
       end
 
       if @buyers.blank?
