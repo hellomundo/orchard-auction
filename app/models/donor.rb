@@ -11,24 +11,24 @@ class Donor < ActiveRecord::Base
 
   def self.by_event_and_name(event_id, name)
     #where('lower(donors.company) LIKE ?', "%#{name.downcase}%")
-    joins("LEFT OUTER JOIN statuses ON donors.id = statuses.donor_id").where("lower(donors.company) LIKE ?", "%#{name.downcase}%").includes(:stage)
+    joins("LEFT OUTER JOIN statuses ON donors.id = statuses.donor_id").where("lower(donors.company) LIKE ?", "%#{name.downcase}%").includes(:statuses)
 
   end
 
   def self.by_event_and_stage(event_id, stage)
     if(stage != '0')
-      joins("LEFT OUTER JOIN statuses ON donors.id = statuses.donor_id").where('statuses.event_id = ? AND statuses.stage = ?', event_id, stage).includes(:stage)
+      joins("LEFT OUTER JOIN statuses ON donors.id = statuses.donor_id").where('statuses.event_id = ? AND statuses.stage = ?', event_id, stage).includes(:statuses)
     else
-      joins("LEFT OUTER JOIN statuses ON donors.id = statuses.donor_id").where('statuses.donor_id IS NULL OR statuses.stage = 0', event_id).includes(:stage)
+      joins("LEFT OUTER JOIN statuses ON donors.id = statuses.donor_id").where('statuses.donor_id IS NULL OR statuses.stage = 0', event_id).includes(:statuses)
     end
     #joins(:stage).where('statuses.event_id = ? AND statuses.stage = ?', event_id, stage)
   end
 
   def self.by_event_name_and_stage(event_id, name, stage)
     if(stage != '0')
-      joins("LEFT OUTER JOIN statuses ON donors.id = statuses.donor_id").where('lower(donors.company) LIKE ? AND statuses.event_id = ? AND statuses.stage = ?', "%#{name.downcase}%", event_id, stage).includes(:stage)
+      joins("LEFT OUTER JOIN statuses ON donors.id = statuses.donor_id").where('lower(donors.company) LIKE ? AND statuses.event_id = ? AND statuses.stage = ?', "%#{name.downcase}%", event_id, stage).includes(:statuses)
     else
-      joins("LEFT OUTER JOIN statuses ON donors.id = statuses.donor_id").where('lower(donors.company) LIKE ? AND statuses.event_id = ? AND statuses.donor_id = NULL OR statuses.stage = 0', "%#{name.downcase}%", event_id).includes(:stage)
+      joins("LEFT OUTER JOIN statuses ON donors.id = statuses.donor_id").where('lower(donors.company) LIKE ? AND statuses.event_id = ? AND statuses.donor_id = NULL OR statuses.stage = 0', "%#{name.downcase}%", event_id).includes(:statuses)
     end
     #joins(:stage).where('lower(donors.company) LIKE ? AND statuses.event_id = ? AND statuses.stage = ?', "%#{name.downcase}%", event_id, stage)
   end
