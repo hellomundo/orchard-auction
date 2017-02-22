@@ -1,13 +1,12 @@
 class Donor < ActiveRecord::Base
   has_many :contacts, dependent: :destroy
   has_many :items, dependent: :destroy
-  has_one :stage, class_name: "Status", dependent: :destroy
-
-  enum status: { "uncalled" => 0, "called" => 1, "needs_callback" => 2, "opted_out" => 3, "donated" => 4 }
+  has_many :statuses, dependent: :destroy
 
   def self.by_event(event_id)
-    #joins(:stage).where('statuses.event_id = ?', event_id)
-    joins("LEFT OUTER JOIN statuses ON donors.id = statuses.donor_id").where('statuses.event_id = ?', event_id).includes(:stage)
+    #joins(:statuses).where('statuses.event_id = ?', event_id)
+    joins("LEFT JOIN statuses ON donors.id = statuses.donor_id").where("statuses.event_id = ? or statuses.event_id IS NULL", event_id).includes(:statuses)
+    #AND statuses.event_id = ?", event_id).includes(:stage)
   end
 
   def self.by_event_and_name(event_id, name)

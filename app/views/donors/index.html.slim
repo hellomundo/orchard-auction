@@ -30,7 +30,8 @@
           td = link_to donor.company, event_donor_path(@event, donor)
           td = donor.first_name
             = donor.last_name
-          td = donor.stage != nil ? donor.stage.stage : "uncalled"
+          /td = donor.statuses != nil ? donor.statuses.first.stage : "uncalled"
+          td = donor.statuses.first != nil ? donor.statuses.first.stage : "uncalled"
           td.icon = link_to '<i class="fa fa-trash-o"></i>'.html_safe, donor, method: :delete, data: { confirm: 'Are you sure? This will also delete all the items donated by this donor.' }
 
 .orchard-panel

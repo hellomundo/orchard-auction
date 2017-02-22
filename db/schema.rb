@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170219172102) do
+ActiveRecord::Schema.define(version: 20170222041354) do
 
   create_table "buyers", force: :cascade do |t|
     t.string   "first_name"
@@ -44,8 +44,8 @@ ActiveRecord::Schema.define(version: 20170219172102) do
 
   create_table "donors", force: :cascade do |t|
     t.string   "company"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.string   "first_name"
     t.string   "last_name"
     t.string   "address1"
@@ -53,7 +53,6 @@ ActiveRecord::Schema.define(version: 20170219172102) do
     t.string   "city"
     t.string   "state"
     t.integer  "zip"
-    t.integer  "status",      default: 0
     t.string   "email"
     t.string   "phone"
     t.boolean  "has_donated"
