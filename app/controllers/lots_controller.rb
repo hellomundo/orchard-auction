@@ -9,6 +9,11 @@ class LotsController < ApplicationController
     respond_to do |format|
       format.html
       format.csv { render text: @lots.to_csv }
+      format.pdf do
+        pdf = BidBooklet.new(view_context)
+        pdf.build_document(@lots)
+        send_data pdf.render, filename: "bid_sheets.pdf", type: "application/pdf"
+      end
     end
   end
 
@@ -16,6 +21,14 @@ class LotsController < ApplicationController
   # GET /lots/1.json
   def show
     @available_items = Item.where("event_id = ? AND is_available = ? AND lot_id IS NULL", @event.id, true)
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = BidSheet.new(view_context)
+        pdf.build_sheet(@lot)
+        send_data pdf.render, filename: "bid_sheet_#{@lot.lot_number}.pdf", type: "application/pdf"
+      end
+    end
   end
 
   # GET /lots/new

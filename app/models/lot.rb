@@ -81,6 +81,13 @@ class Lot < ActiveRecord::Base
     end
   end
 
+  def item_list
+    items.collect { |o| o.name + " ($" + sprintf('%02.f', o.fmv) + ") from " + o.donor.company }.join(", ")
+  end
+
+  def donor_list
+    items.collect { |i| i.donor.company }.join(", ")
+  end
 
   def self.to_csv
     attributes = %w{id name description fmv buy_now_price opening_price bid_increment table_number items donor }

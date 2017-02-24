@@ -3,6 +3,7 @@
     h1#lot-name
       # #{@lot.lot_number} #{@lot.name}
     ul
+      li = link_to 'PDF', {format: :pdf}
       li = link_to 'Edit', edit_event_lot_path(@event, @lot)
 
   -if @lot.table_number.present?

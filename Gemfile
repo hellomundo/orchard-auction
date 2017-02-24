@@ -29,6 +29,9 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+# for PDF generation
+gem 'prawn', '~> 2.1'
+
 #gem 'foundation-icons-sass-rails'
 #gem 'foundation-rails', '~> 5.5.2.1'
 

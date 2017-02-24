@@ -2,6 +2,7 @@
   .panel-header
     h1 Auction Lots
     ul
+      li = link_to 'Bid Sheets PDF', {format: :pdf}
       li = link_to 'New Lot', new_event_lot_path(@event)
 
   = render "index"
