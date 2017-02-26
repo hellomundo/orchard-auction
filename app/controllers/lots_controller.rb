@@ -5,7 +5,12 @@ class LotsController < ApplicationController
   # GET /lots
   # GET /lots.json
   def index
-    @lots = Lot.where(event_id: @event.id).order(:id)
+    #@lots = Lot.where(event_id: @event.id).order(:id)
+    @lots = Lot.joins("JOIN items on lots.id = items.lot_id")
+               .select("lots.*, sum(items.fmv) as total_fmv")
+               .where(event_id: @event.id)
+               .group('lots.id')
+               .order('lots.id')
     respond_to do |format|
       format.html
       format.csv { render text: @lots.to_csv }
