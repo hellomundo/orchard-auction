@@ -42,15 +42,19 @@
         strong = number_to_currency(@total_value)
 
   .row
-    .third-left
+    .fourth-left
       .stat
         em Value of Won Items
         strong = number_to_currency(@total_won)
-    .third-middle
+    .fourth-middle
       .stat
         em Total Pledged
         strong = number_to_currency(@total_pledged)
-    .third-right
+    .fourth-middle
       .stat
         em Total Payments
         strong = number_to_currency(@total_payments)
+    .fourth-right
+      .stat
+        em Total Outstanding
+        strong = number_to_currency(@total_won + @total_pledged - @total_payments)

@@ -1,5 +1,6 @@
 class Pledge < ActiveRecord::Base
   belongs_to :buyer
+  validates :buyer_number, :amount, :presence => true
 
   def self.event_total_for_buyer(event, buyer)
     where(event_id: event.id, buyer_id: buyer.id).sum(:amount)

@@ -20,6 +20,8 @@ class BuyersController < ApplicationController
       elsif @buyers.length == 1
         redirect_to event_buyer_path(@event, @buyers.first)
       end
+    elsif params[:slackers]
+      @buyers = Buyer.joins(:wins, :pledges, :payments).group('buyers.id').sum('wins.price + pledges.amount - payments.amount')
     else
       @buyers = Buyer.where(event_id: @event.id).order(:last_name)
     end

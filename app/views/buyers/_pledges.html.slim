@@ -13,9 +13,9 @@
           td.numeric = number_to_currency(pledge.amount)
           td.icon = icon_delete_link event_pledge_path(@event, pledge), 'Are you sure? This remove this pledge for this buyer.'
 
-        tr.summation
-          td Total:
-          td.numeric = number_to_currency(@pledge_total)
-          td
+      tr.summation
+        td Total:
+        td.numeric = number_to_currency(@pledge_total)
+        td
 - else
   p No pledges entered yet for this buyer

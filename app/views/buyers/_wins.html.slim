@@ -11,9 +11,9 @@
           td = link_to win.lot.name, event_lot_path(@event, win.lot)
           td.numeric = number_to_currency(win.price)
           td.icon = icon_delete_link event_win_path(@event, win), 'Are you sure? This remove this win for this buyer.'
-        tr.summation
-          td Total:
-          td.numeric = number_to_currency(@win_total)
-          td
+      tr.summation
+        td Total:
+        td.numeric = number_to_currency(@win_total)
+        td
 - else
   p No wins entered yet for this buyer</p>
