@@ -2,6 +2,7 @@ class Win < ActiveRecord::Base
   belongs_to :buyer
   belongs_to :lot
   # belongs_to :winnable, polymorphic: true
+  validates :buyer_id, :lot_id, :price, :presence => true
 
   before_save :validate_single_owner, :validate_lot, :validate_buyer
 
