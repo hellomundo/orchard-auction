@@ -12,14 +12,14 @@ class BuyersController < ApplicationController
         bid = query.to_i - 100
         @buyers = Buyer.where(id: bid, event_id: @event.id)
       else
-        #@buyers = Buyer.where('event_id = :eid AND (lower(last_name) LIKE :search OR lower(first_name) LIKE :search)', search: "%#{query.downcase}%", eid: @event.id)
-        @buyers = Buyer.joins("LEFT OUTER JOIN wins on buyers.id = wins.buyer_id")
-                       .joins("LEFT OUTER JOIN pledges on buyers.id = pledges.buyer_id")
-                       .joins("LEFT OUTER JOIN payments on buyers.id = payments.buyer_id")
-                       .where('buyers.event_id = :eid AND (lower(buyers.last_name) LIKE :search OR lower(buyers.first_name) LIKE :search)', search: "%#{query.downcase}%", eid: @event.id)
-                       .select("buyers.*, sum(wins.price + pledges.amount - payments.amount) as balance")
-                       .group('buyers.id')
-                       .order('buyers.last_name')
+        @buyers = Buyer.where('event_id = :eid AND (lower(last_name) LIKE :search OR lower(first_name) LIKE :search)', search: "%#{query.downcase}%", eid: @event.id)
+        # @buyers = Buyer.joins("LEFT OUTER JOIN wins on buyers.id = wins.buyer_id")
+        #                .joins("LEFT OUTER JOIN pledges on buyers.id = pledges.buyer_id")
+        #                .joins("LEFT OUTER JOIN payments on buyers.id = payments.buyer_id")
+        #                .where('buyers.event_id = :eid AND (lower(buyers.last_name) LIKE :search OR lower(buyers.first_name) LIKE :search)', search: "%#{query.downcase}%", eid: @event.id)
+        #                .select("buyers.*, sum(wins.price) as wins_total, sum(pledges.amount) as pledges_total, sum(payments.amount) as payments_total")
+        #                .group('buyers.id')
+        #                .order('buyers.last_name')
       end
 
       if @buyers.blank?
@@ -28,13 +28,7 @@ class BuyersController < ApplicationController
         redirect_to event_buyer_path(@event, @buyers.first)
       end
     else
-      @buyers = Buyer.joins("LEFT OUTER JOIN wins on buyers.id = wins.buyer_id")
-                     .joins("LEFT OUTER JOIN pledges on buyers.id = pledges.buyer_id")
-                     .joins("LEFT OUTER JOIN payments on buyers.id = payments.buyer_id")
-                     .where(event_id: @event.id)
-                     .select("buyers.*, sum(wins.price + pledges.amount - payments.amount) as balance")
-                     .group('buyers.id')
-                     .order('buyers.last_name')
+      @buyers = Buyer.where(event_id: @event.id).order('buyers.last_name')
     end
   end
 

@@ -37,6 +37,10 @@ class Buyer < ActiveRecord::Base
     self.event_total_wins(event) + self.event_total_pledges(event)
   end
 
+  def event_balance(event)
+    (Pledge.where(event_id: event.id, buyer_id: id).sum(:amount) || 0) + (Win.where(event_id: event.id, buyer_id: id).sum(:price) || 0) - (Payment.where(event_id: event.id, buyer_id: id).sum(:amount) || 0)
+  end
+
   def full_name
     self.first_name + " " + self.last_name
   end
