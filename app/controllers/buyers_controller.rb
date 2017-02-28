@@ -14,9 +14,9 @@ class BuyersController < ApplicationController
       else
         #@buyers = Buyer.where('event_id = :eid AND (lower(last_name) LIKE :search OR lower(first_name) LIKE :search)', search: "%#{query.downcase}%", eid: @event.id)
         @buyers = Buyer.where('buyers.event_id = :eid AND (lower(buyers.last_name) LIKE :search OR lower(buyers.first_name) LIKE :search)', search: "%#{query.downcase}%", eid: @event.id)
-                       .select('buyers.*, (SELECT SUM(wins.price) FROM wins WHERE wins.buyer_id = buyers.id) +
-                           (SELECT SUM(pledges.amount) FROM pledges WHERE pledges.buyer_id = buyers.id) -
-                           (SELECT SUM(payments.amount) FROM payments WHERE payments.buyer_id = buyers.id) AS balance')
+                       .select('buyers.*, (SELECT SUM(wins.price) FROM wins WHERE wins.buyer_id = buyers.id) as wins_total,
+                           (SELECT SUM(pledges.amount) FROM pledges WHERE pledges.buyer_id = buyers.id) as pledges_total,
+                           (SELECT SUM(payments.amount) FROM payments WHERE payments.buyer_id = buyers.id) as payments_total')
                        .group('buyers.id')
                        .order('buyers.last_name')
       end
@@ -28,7 +28,9 @@ class BuyersController < ApplicationController
       end
     else
       @buyers = Buyer.where(event_id: @event.id)
-                     .select('buyers.*, (SELECT SUM(wins.price) FROM wins WHERE wins.buyer_id = buyers.id) + (SELECT SUM(pledges.amount) FROM pledges WHERE pledges.buyer_id = buyers.id) - (SELECT SUM(payments.amount) FROM payments WHERE payments.buyer_id = buyers.id) AS balance')
+                     .select('buyers.*, (SELECT SUM(wins.price) FROM wins WHERE wins.buyer_id = buyers.id) as wins_total,
+                                        (SELECT SUM(pledges.amount) FROM pledges WHERE pledges.buyer_id = buyers.id) as pledges_total,
+                                        (SELECT SUM(payments.amount) FROM payments WHERE payments.buyer_id = buyers.id) as payments_total')
                      .group('buyers.id')
                      .order("#{sort_column} #{sort_direction}")
     end
