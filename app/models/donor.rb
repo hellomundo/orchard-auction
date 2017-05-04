@@ -44,12 +44,12 @@ class Donor < ActiveRecord::Base
   end
 
   def self.to_csv
-    attributes = %w{company first_name last_name phone address1 address2 city state zip stage has_donated}
+    attributes = %w{company first_name last_name address1 address2 city state zip }
     donators = joins(:statuses).where("statuses.stage = 4")
     CSV.generate do |csv|
       csv << attributes
-      donators.each do |donor|
-        csv << donor.attributes.values_at(*attributes)
+      donators.each do |d|
+        csv << [d.company, d.first_name, d.last_name, d.address1, d.address2, d.city, d.state, d.zip]
       end
     end
   end

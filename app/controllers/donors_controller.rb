@@ -24,7 +24,7 @@ class DonorsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.csv { render text: @donors.to_csv }
+      format.csv { render text: Donor.to_csv }
     end
   end
 
