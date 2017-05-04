@@ -33,11 +33,22 @@ class Donor < ActiveRecord::Base
     #joins(:stage).where('lower(donors.company) LIKE ? AND statuses.event_id = ? AND statuses.stage = ?', "%#{name.downcase}%", event_id, stage)
   end
 
-  def self.to_csv
+  def self.to_csvx
     attributes = %w{company first_name last_name phone address1 address2 city state zip status has_donated}
     CSV.generate do |csv|
       csv << attributes
       all.each do |donor|
+        csv << donor.attributes.values_at(*attributes)
+      end
+    end
+  end
+
+  def self.to_csv
+    attributes = %w{company first_name last_name phone address1 address2 city state zip stage has_donated}
+    donators = joins(:statuses).where("statuses.stage = 4")
+    CSV.generate do |csv|
+      csv << attributes
+      donators.each do |donor|
         csv << donor.attributes.values_at(*attributes)
       end
     end

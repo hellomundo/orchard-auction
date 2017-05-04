@@ -32,6 +32,9 @@ class ItemsController < ApplicationController
   # POST /donor/1/items/1
   def create
     @donor = Donor.find(item_params[:donor_id])
+    # CHANGE
+    # update donor status to "donated"
+    # or somehow refactor this into the donor model
     @item = @event.items.create(item_params)
     @items = @event.items.where(donor_id: @donor.id)
     respond_to do |format|
@@ -60,6 +63,9 @@ class ItemsController < ApplicationController
   def destroy
     donor = @item.donor
     @item.destroy
+
+    # CHANGE
+    # if this is the last time, change the status away from "donated"
 
     @items = donor.items.where(event_id: params[:event_id])
     #@items = donor.items
