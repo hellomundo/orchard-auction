@@ -1,0 +1,12 @@
+nav
+  div.navigation
+    = link_to "Orchard Auction", root_path, class: "home"
+    label for="show-menu" class="show-menu" Menu
+
+    input type="checkbox" id="show-menu" role="button"
+    ul#menu
+      - if user_signed_in?
+        li = link_to current_user.first_name, edit_user_password_path
+        li = link_to "Log out", destroy_user_session_path, :method => :delete
+      - else
+        li = link_to "Login", new_user_session_path
