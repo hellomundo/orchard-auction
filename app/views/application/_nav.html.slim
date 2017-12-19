@@ -7,12 +7,13 @@ nav
     ul#menu
       - if user_signed_in?
         -if @event.present?
-          li = link_to "Donors", event_donors_path(@event)
-          li = link_to "Items", event_items_path(@event)
-          li = link_to "Lots", event_lots_path(@event)
-          li = link_to "Wins", event_wins_path(@event)
-          li = link_to "Pledges", event_pledges_path(@event)
-          li = link_to "Buyers", event_buyers_path(@event)
+          -if @event.id.present?
+            li = link_to "Donors", event_donors_path(@event)
+            li = link_to "Items", event_items_path(@event)
+            li = link_to "Lots", event_lots_path(@event)
+            li = link_to "Wins", event_wins_path(@event)
+            li = link_to "Pledges", event_pledges_path(@event)
+            li = link_to "Buyers", event_buyers_path(@event)
         li = link_to current_user.first_name, edit_user_password_path
         li = link_to "Log out", destroy_user_session_path, :method => :delete
       - else
