@@ -81,8 +81,15 @@ class Donor < ActiveRecord::Base
     end
   end
 
+  def full_name
+    fullname = ""
+    fullname += first_name + " " unless first_name.blank?
+    fullname += last_name unless last_name.blank?
+    return fullname
+  end
+
   def display_name
-    company.blank? ? first_name + " " + last_name : company
+    company.blank? ? full_name : company
   end
 
   def items_for_event(event)
