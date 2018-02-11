@@ -20,7 +20,7 @@
     .third-right
       .stat
         em Donor
-        strong = @item.donor.company
+        strong = link_to @item.donor.display_name, event_donor_path(@item.event, @item.donor)
 
   .row
     .half-left

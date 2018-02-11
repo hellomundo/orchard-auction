@@ -85,7 +85,7 @@
             - unless @lot.has_been_won
               = icon_link(toggle_event_lot_path(@event, @lot, item_id: item), "arrow-down", true)
           td = link_to item.name, event_item_path(@event, item)
-          td = link_to item.donor.company, event_donor_path(@event, item.donor)
+          td = link_to item.donor.display_name, event_donor_path(@event, item.donor)
           td.numeric = number_to_currency(item.fmv)
 
 .orchard-panel
@@ -111,5 +111,5 @@
           tr id='item-#{item.id}'
             td.icon = icon_link(toggle_event_lot_path(@event, @lot, item_id: item), "arrow-up", true)
             td = link_to item.name, event_item_path(@event, item)
-            td = link_to item.donor.company, event_donor_path(@event, item.donor)
+            td = link_to item.donor.display_name, event_donor_path(@event, item.donor)
             td.numeric = number_to_currency(item.fmv)

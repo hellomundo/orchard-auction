@@ -18,7 +18,7 @@
         tr class=(item.is_available? ? 'available' : 'unavailable')
           td.icon = icon_link edit_event_item_path(item.event, item), "cog"
           td = link_to item.name, event_item_path(item.event, item)
-          td = link_to item.donor.company, event_donor_path(item.event, item.donor)
+          td = link_to item.donor.display_name, event_donor_path(item.event, item.donor)
           td = item.category
           td = item.format
           td = link_to item.lot.lot_number, event_lot_path(item.event, item.lot) unless item.lot.blank?

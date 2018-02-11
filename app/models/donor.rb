@@ -81,6 +81,10 @@ class Donor < ActiveRecord::Base
     end
   end
 
+  def display_name
+    company.blank? ? first_name + " " + last_name : company
+  end
+
   def items_for_event(event)
     self.items.where(event_id: event.id)
   end
