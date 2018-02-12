@@ -35,11 +35,12 @@ class Item < ActiveRecord::Base
   #                 "Toys/Games/Books for Family" => 16 }
 
   def self.to_csv
-    attributes = %w{name description fmv donor_id format opening_price category restrictions}
+    attributes = %w{name description fmv donor format opening_price category restrictions}
     CSV.generate do |csv|
       csv << attributes
       all.each do |item|
-        csv << item.attributes.values_at(*attributes)
+        #csv << item.attributes.values_at(*attributes)
+        csv << [item.name,item.description,item.fmv,item.donor.display_name,item.format,item.opening_price,item.category,item.restrictions]
       end
     end
   end
