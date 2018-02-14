@@ -30,7 +30,7 @@ class BidSheet < Prawn::Document
     text "#{lot.calculated_description}", align: :left, size: 10
     # valued at
     move_down 6
-    text "Valued at $#{@view.number_to_currency(lot.calculated_fmv)}", align: :left, size: 10, style: :bold
+    text "Valued at #{@view.number_to_currency(lot.calculated_fmv)}", align: :left, size: 10, style: :bold
   end
 
   def donor(lot)
